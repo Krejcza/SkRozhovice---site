@@ -1,0 +1,36 @@
+.old-submenu, .dropdown-youth{
+   width: 15rem;
+   position: absolute;
+   top: 80px;
+   list-style: none;
+   text-align: center;
+}
+
+.old-submenu li, .dropdown-youth li{
+   background: #FEDF25;
+   cursor: pointer;
+}
+
+.old-submenu li a:hover, .dropdown-youth li a :hover{
+   color: #fff;
+}
+
+.old-submenu.clicked{
+   display: none;
+}
+
+.dropdown-youth.clicked{
+   display: none;
+}
+
+.submenu-item{
+   display: block;
+   width: 100%;
+   height: 100%;
+   text-decoration: none;
+   color: #181818;
+   font-weight: 600;
+   font-size: 1rem;
+   padding: 1rem;
+   transition: 0.3s ease-out;
+}

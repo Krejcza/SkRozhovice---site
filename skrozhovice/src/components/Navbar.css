@@ -1,0 +1,43 @@
+.navbar{
+   height: 80px;
+   background-color: #FEDF25;
+   border-bottom: 10px solid #fff;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.navbar-logo{
+   margin-left: 2rem;
+}
+
+.bee-logo-nav{
+   height: 65px;
+}
+
+.nav-items{
+   display: flex;
+   list-style: none;
+   text-align: center;
+   justify-content: center;
+   margin-right: 2rem;
+}
+
+.nav-item{
+   display: flex;
+   align-items: center;
+   height: 90px;
+}
+
+.nav-item a{
+   text-decoration: none;
+   color: #181818;
+   font-size: 1.1rem;
+   font-weight: 600;
+   margin-right: 2rem;
+   transition: 0.3s ease-out;
+}
+
+.nav-item a:hover{
+   color: #fff;
+}
