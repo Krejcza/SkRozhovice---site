@@ -1,14 +1,33 @@
-.navbar{
+.navbar {
+   position: relative;
    height: 80px;
    background-color: #FEDF25;
    border-bottom: 10px solid #fff;
    display: flex;
    justify-content: space-between;
    align-items: center;
+   box-shadow: 0px 5px 20px #00000075;
 }
+
+.navbar::after {
+   content: "";
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background-image: url(./images/hive-pattern.png);
+   background-size: 50%;
+   background-position: left;
+   background-repeat: no-repeat;
+   opacity: 0.2;
+   z-index: 1;
+}
+
 
 .navbar-logo{
    margin-left: 2rem;
+   z-index: 2;
 }
 
 .bee-logo-nav{
@@ -21,6 +40,7 @@
    text-align: center;
    justify-content: center;
    margin-right: 2rem;
+   z-index: 2;
 }
 
 .nav-item{

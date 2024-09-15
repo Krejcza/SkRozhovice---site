@@ -1,0 +1,33 @@
+.main-video {
+   width: 100%;
+   height: 100vh;
+   position: relative;
+   border-bottom: 10px solid #fff;
+}
+
+video {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+
+.video-text {
+   position: absolute;
+   bottom: 30%;
+   right: 10%;
+   transform: translate(50%, 50%);
+}
+
+.video-text img {
+   width: 50%;
+}
+
+.overlay-video{
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.5);
+}

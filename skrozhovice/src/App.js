@@ -2,6 +2,8 @@ import React from 'react'
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+import Domů from './pages/Domů';
 
 const App = () => {
   return (
@@ -9,8 +11,9 @@ const App = () => {
       <BrowserRouter>
           <Navbar />
           <Routes>
-            <Route></Route>
+            <Route path='/' element={<Domů />} />
           </Routes>
+          <Footer />
       </BrowserRouter>
     </>
   )
