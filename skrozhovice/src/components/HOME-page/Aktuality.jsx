@@ -1,6 +1,8 @@
 import React from 'react';
 import OneAktualita from './OneAktualita';
 import { useState, useEffect } from 'react';
+import './Aktuality.css'
+import '../../App.css'
 
 const Aktuality = () => {
   const [aktuality, setAktuality] = useState([]);
@@ -8,7 +10,7 @@ const Aktuality = () => {
   useEffect(() => {
     const fetchAktuality = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/aktuality');
+        const response = await fetch('http://localhost:5000/api/aktuality/main');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -24,16 +26,20 @@ const Aktuality = () => {
   }, []);
 
   return (
-    <div>
-      {aktuality.map((item) => (
-        <OneAktualita
-          key={item._id}
-          date={new Date(item.date).toLocaleDateString()}
-          headline={item.headline}
-          image={item.image}
-          text={item.text}
-        />
-      ))}
+    <div className='background-black'>
+      <h2 className='main-topic-small'>Poslední Aktuality</h2>
+      <div className='all-aktuality'>
+
+        {aktuality.map((item) => (
+          <OneAktualita
+            key={item._id}
+            date={new Date(item.date).toLocaleDateString()}
+            headline={item.headline}
+            image={item.image}
+            text={item.text}
+          />
+        ))}
+      </div>
     </div>
   );
 };

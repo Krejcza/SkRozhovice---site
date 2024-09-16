@@ -1,0 +1,50 @@
+.section-pickme {
+   background-color: #FEDF25;
+   margin-top: 10rem;
+   margin-bottom: 10rem;
+   padding: 5rem 0;
+   display: flex;
+   justify-content: center; 
+   border-top: 10px solid #fff;
+   border-bottom: 10px solid #fff;
+ }
+ 
+ .pickme-both {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   transition: 0.3s ease-out;
+   width: fit-content; 
+   margin: 0 auto; 
+   text-decoration: none;
+ }
+ 
+ 
+ .pickme-both img {
+   width: 200px;
+   height: 200px;
+   object-fit: cover;
+   border: 5px solid #181818;
+   border-radius: 15px;
+   transition: 0.3s ease-out;
+ }
+ 
+ .pickme-both h2 {
+   margin-top: 2rem;
+   color: #181818;
+   transition: 0.3s ease-out;
+ }
+ 
+ .pickme-both:hover {
+   transform: scale(1.05);
+ }
+ 
+ .pickme-both:hover img {
+   border: 10px solid #fff;
+ }
+ 
+ .pickme-both:hover h2 {
+   color: #fff;
+ }
+ 

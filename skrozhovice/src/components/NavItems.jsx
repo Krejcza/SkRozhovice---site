@@ -8,31 +8,31 @@ export const navItems = [
    {
       id:2,
       title: 'Aktuality',
-      path: './',
+      path: '/Aktuality',
       cName: 'nav-item'
    },
    {
       id:3,
       title: 'Týmy dospělí',
-      path: './',
+      path: '/TýmyDospělí',
       cName: 'nav-item'
    },
    {
       id:4,
       title: 'Týmy mládež',
-      path: './',
+      path: './TýmyMládež',
       cName: 'nav-item'
    },
    {
       id:5,
       title: 'O klubu',
-      path: './',
+      path: '/O-klubu',
       cName: 'nav-item'
    },
    {
       id:6,
       title: 'Kontakt',
-      path: './',
+      path: '/Kontakt',
       cName: 'nav-item'
    },
 ]
@@ -41,7 +41,7 @@ export const oldDropdown = [
    {
       id:7,
       title: 'A-tým',
-      path:'./',
+      path:'/A-team',
       cName: 'submenu-item'
    }
 ]
@@ -50,25 +50,25 @@ export const youthDropdown = [
    {
       id:8,
       title: 'Mladší přípravka',
-      path:'./',
+      path:'/MladsiPriprava',
       cName: 'submenu-item'
    },
    {
       id:9,
       title: 'Starší přípravka',
-      path:'./',
+      path:'/StarsiPriprava',
       cName: 'submenu-item'
    },
    {
       id:10,
       title: 'Mladší žáci',
-      path:'./',
+      path:'/MladsiZaci',
       cName: 'submenu-item'
    },
    {
       id:11,
       title: 'Starší žáci',
-      path:'./',
+      path:'/StarsiZaci',
       cName: 'submenu-item'
    },
 ]

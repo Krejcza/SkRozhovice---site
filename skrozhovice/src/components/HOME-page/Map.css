@@ -1,0 +1,31 @@
+.map-container {
+   height: 400px;
+   width: 50%;
+   margin: 0 auto;
+   border-radius: 15px;
+   box-shadow: 0 5px 20px #00000075;
+ }
+
+ .adress-main{
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   justify-content: center;
+ }
+
+ .adress-main p{
+   font-size: 1rem;
+   color: #181818;
+   font-weight: 500;
+   text-align: center;
+   margin-top: 2rem;
+ }
+
+ .adress-smaller-text{
+   margin-top: 5rem;
+   margin-bottom: 5rem;
+ }
+
+ .adress-smaller-text p{
+   font-weight: 600;
+ }
