@@ -64,6 +64,10 @@ body{
    background-repeat: no-repeat;
 }
 
+.background-black.nb::before{
+   display: none;
+}
+
 .bl{
    color: #181818;
 }
@@ -92,6 +96,11 @@ body{
    opacity: 0.1;
    background-repeat: no-repeat;
 }
+
+.background-yellow.wyc::before{
+   display: none;
+}
+
 
 .background-linear-deff{
    background: linear-gradient(-45deg, #F5F5F5, #D2D2D2);

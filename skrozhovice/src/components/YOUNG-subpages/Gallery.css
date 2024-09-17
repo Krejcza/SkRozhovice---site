@@ -1,0 +1,66 @@
+
+.gallery-container {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   position: relative;
+   width: 500px;
+   height: 300px;
+ }
+ 
+ .gallery-image {
+   width: 500px;
+   height: auto;
+   border-radius: 10px;
+   box-shadow: 0px 5px 20px #00000075;
+   object-fit: center;
+ }
+ 
+ .gallery-nav {
+   background-color: #181818;
+   color: #fff;
+   border: none;
+   outline: none;
+   cursor: pointer;
+   border-radius: 5px;
+   font-size: 1.5rem;
+   height: 50px;
+   width: 25px;
+   transition: 0.3s ease-out;
+ }
+ 
+ .gallery-nav:hover {
+   background-color: #FFDB01;
+   color: #181818;
+ }
+ 
+ .gallery-nav-left {
+   position: absolute;
+   left: 5px;
+ }
+ 
+ .gallery-nav-right {
+   position: absolute;
+   right: 5px;
+ }
+ 
+ .gallery-dots {
+   position: absolute;
+   bottom: 10px;
+   left: 50%;
+   transform: translateX(-50%);
+   display: flex;
+   gap: 5px;
+ }
+ 
+ .gallery-dot {
+   width: 10px;
+   height: 10px;
+   background-color: #bbb;
+   border-radius: 50%;
+   cursor: pointer;
+ }
+ 
+ .gallery-dot.active {
+   background-color: #181818;
+ }

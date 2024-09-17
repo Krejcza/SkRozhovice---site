@@ -14,19 +14,19 @@ export const navItems = [
    {
       id:3,
       title: 'Týmy dospělí',
-      path: '/TýmyDospělí',
+      path: '/TymyDospeli',
       cName: 'nav-item'
    },
    {
       id:4,
       title: 'Týmy mládež',
-      path: './TýmyMládež',
+      path: '/TymyMladez',
       cName: 'nav-item'
    },
    {
       id:5,
       title: 'O klubu',
-      path: '/O-klubu',
+      path: '/OKlubu',
       cName: 'nav-item'
    },
    {
@@ -41,7 +41,7 @@ export const oldDropdown = [
    {
       id:7,
       title: 'A-tým',
-      path:'/A-team',
+      path:'/Ateam',
       cName: 'submenu-item'
    }
 ]

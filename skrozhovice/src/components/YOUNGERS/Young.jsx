@@ -3,12 +3,7 @@ import { Link } from 'react-router-dom';
 import blankpic from '../images/blank-profile-pic.webp';
 import './Young.css'
 
-const teams = [
-  { path: '/Mladsi-priprava', name: 'Mladší přípravka' },
-  { path: '/Starsipriprava', name: 'Starší přípravka' },
-  { path: '/Mladsi-zaci', name: 'Mladší žáci' },
-  { path: '/Starsizaci', name: 'Starší žáci' }
-];
+
 
 const Young = () => {
   return (
@@ -17,13 +12,25 @@ const Young = () => {
         <h1>TÝMY MLÁDEŽ</h1>
       </div>
       <div className="background-linear-deff mappp">
-        <div className="section-pickme">
-          {teams.map((team, index) => (
-            <Link key={index} to={team.path} className="pickme-both">
-              <img src={blankpic} alt={team.name} />
-              <h2>{team.name.toUpperCase()}</h2>
+        <div className="section-pickme-all">
+          <div className="section-pickme-all-backgr">
+            <Link to="/MladsiPriprava" className="pickme-both">
+              <img src={blankpic} alt="Mladší přípravka" />
+              <h2>Mladší přípravka</h2>
             </Link>
-          ))}
+            <Link to="/StarsiPriprava" className="pickme-both">
+              <img src={blankpic} alt="Starší přípravka" />
+              <h2>Starší přípravka</h2>
+            </Link>
+            <Link to="/MladsiZaci" className="pickme-both">
+              <img src={blankpic} alt="Mladší žáci" />
+              <h2>Mladší žáci</h2>
+            </Link>
+            <Link to="/StarsiZaci" className="pickme-both">
+              <img src={blankpic} alt="Starší žáci" />
+              <h2>Starší žáci</h2>
+            </Link>
+          </div>
         </div>
       </div>
     </>

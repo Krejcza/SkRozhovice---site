@@ -13,7 +13,7 @@ const Adult = () => {
       </div>
       <div className="background-linear-deff mappp">
         <div className="section-pickme">
-          <Link to="/A-team" className="pickme-both">
+          <Link to="/Ateam" className="pickme-both">
             <img src={blankpic} alt="BEE Logo" />
             <h2>A-TÝM</h2>
           </Link>

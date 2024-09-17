@@ -1,3 +1,23 @@
-.teams-container{
+.section-pickme-all{
+   background-color: #FEDF25;
+   margin-top: 10rem;
+   margin-bottom: 10rem;
+   padding: 5rem 0;
    display: flex;
+   justify-content: center; 
+   align-items: center;
+   border-top: 10px solid #fff;
+   border-bottom: 10px solid #fff;
+}
+
+
+.section-pickme-all-backgr{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+   row-gap: 2rem;
+   column-gap: 2rem;
+   max-width: 1600px;
+   flex-wrap: wrap;
 }

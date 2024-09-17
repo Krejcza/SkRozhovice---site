@@ -1,0 +1,101 @@
+.history-cl{
+   max-width: 1600px;
+   margin: 0 auto;
+}
+
+.text-passage{
+   font-size: 1rem;
+   color: #181818;
+   font-weight: 500;
+   margin-bottom: 2rem;
+}
+
+.tripple-pic{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-evenly;
+   flex-wrap: wrap;
+   margin-bottom: 6rem;
+   margin-top: 4rem;
+}
+
+.tripple-pic img{
+   width: 300px;
+   height: auto;
+   border-radius: 10px;
+   box-shadow: 0px 5px 20px #00000075;
+   filter: grayscale(100%);
+   transition: 0.3s ease-out;
+}
+
+.tripple-pic img:hover{
+   filter: grayscale(0%);
+   transform: scale(1.1);
+}
+
+.stadion-wrap{
+   max-width: 1600px;
+   margin: 0 auto;
+}
+
+
+
+
+.organization-main{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   width: 100%;
+   row-gap: 2rem;
+   margin-bottom: 2rem;
+   margin-top: 2rem;
+}
+
+.organization-item{
+   width: 80%;
+   max-width: 1600px;
+   margin: 0 auto;
+}
+ 
+ .positionorg {
+   color: #181818;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   text-transform: uppercase;
+   font-weight: 600;
+   font-size: 1.1rem;
+   position: relative;
+   overflow: hidden;
+   padding: 1rem;
+   background-color: #fff; 
+   border-radius: 15px;
+   margin-bottom: 1rem;
+ }
+ 
+ .namingorg {
+   color: #181818;
+   background-color: #FEDF25;
+   border-radius: 15px;
+   width: 100%;
+   text-align: center;
+   padding: 15px;
+   font-weight: 600;
+   text-transform: uppercase;
+   font-size: 1.25rem;
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   transition: top 0.3s ease-out;
+ }
+ 
+ .positionorg:hover .namingorg {
+   top: 100%;
+ }
+
+.mascot-wrap{
+   max-width: 1600px;
+   margin: 0 auto;
+}

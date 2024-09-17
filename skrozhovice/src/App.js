@@ -12,6 +12,8 @@ import MladsiPriprava from './pages/MladsiPriprava';
 import StarsiPriprava from './pages/StarsiPriprava';
 import MladsiZaci from './pages/MladsiZaci';
 import StarsiZaci from './pages/StarsiZaci';
+import OKlubu from './pages/OKlubu';
+import Kontakt from './pages/Kontakt';
 
 const App = () => {
   return (
@@ -21,13 +23,15 @@ const App = () => {
           <Routes>
             <Route path='/' element={<Domů />} />
             <Route path='/Aktuality' element={<Aktuality />} />
-            <Route path='/TýmyDospělí' element={<TýmyDospělí />} />
+            <Route path='/TymyDospeli' element={<TýmyDospělí />} />
             <Route path='/A-team' element={<Ateam />} />
-            <Route path='/TýmyMládež' element={<TýmyMládež />} />
+            <Route path='/TymyMladez' element={<TýmyMládež />} />
             <Route path='/MladsiPriprava' element={<MladsiPriprava />} />
             <Route path='/StarsiPriprava' element={<StarsiPriprava />} />
             <Route path='/MladsiZaci' element={<MladsiZaci />} />
             <Route path='/StarsiZaci' element={<StarsiZaci />} />
+            <Route path='/OKlubu' element={<OKlubu />} />
+            <Route path='/Kontakt' element={<Kontakt />} />
           </Routes>
           <Footer />
       </BrowserRouter>

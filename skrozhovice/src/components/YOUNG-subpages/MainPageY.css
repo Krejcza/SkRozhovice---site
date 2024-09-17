@@ -1,0 +1,85 @@
+.content-container{
+   display: flex;
+   min-height: 60vh;
+   width: 100%;
+   justify-content: center;
+   align-items: center;
+   column-gap: 10rem;
+}
+
+.buttons-team-y {
+   display: flex;
+   flex-direction: column;
+   row-gap: 5rem;
+   justify-content: center;
+}
+
+.button-zapasy, .button-tabulka, .button-statistiky {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background-color: #181818;
+   padding: 1rem;
+   width: 400px;
+   border-radius: 10px;
+   box-shadow: 0px 5px 20px #00000075;
+   text-decoration: none;
+   font-size: 1.2rem;
+   color: #fff;
+   font-weight: 600;
+   text-transform: uppercase;
+}
+
+.button-statistiky {
+   background-color: #FEDF25;
+   color: #181818;
+}
+
+.trenery-sekce{
+   display: flex;
+   align-items: center;
+   justify-content: space-evenly;
+   max-width: 1600px;
+   margin: 0 auto;
+}
+
+.trener-box{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+
+
+.trener-box h3{
+   font-size: 1.1rem;
+   color: #181818;
+   margin-bottom: 1rem;
+   font-weight: 500;
+}
+
+.trener-box p{
+   color: #fff;
+   font: 1rem;
+   margin-bottom: 1rem;
+   font-weight: 300;
+}
+
+.trener-box h5{
+   font-size: 1.1rem;
+   color: #181818;
+   margin-bottom: 1rem;
+   font-weight: 500;
+}
+
+.trener-box img{
+   width: 150px;
+   height: auto;
+   border-radius: 10px;
+   margin-bottom: 2rem;
+   transition: 0.3s ease-out;
+}
+
+.trener-box img:hover{
+   transform: scale(1.05);
+ }
