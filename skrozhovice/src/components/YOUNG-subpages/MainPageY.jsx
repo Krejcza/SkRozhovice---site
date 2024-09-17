@@ -23,7 +23,7 @@ const MainPageY = ({ title, zapasy, statistiky, tabulka, trener, galleryImages }
               Tabulka
             </a>
           </div>
-          {/* Přidání galerie s obrázky pro aktuální stránku */}
+          
           <Gallery images={galleryImages} />
         </div>
       </div>

@@ -14,6 +14,7 @@ import MladsiZaci from './pages/MladsiZaci';
 import StarsiZaci from './pages/StarsiZaci';
 import OKlubu from './pages/OKlubu';
 import Kontakt from './pages/Kontakt';
+import ErrorPage from './pages/ErrorPage';
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
             <Route path='/StarsiZaci' element={<StarsiZaci />} />
             <Route path='/OKlubu' element={<OKlubu />} />
             <Route path='/Kontakt' element={<Kontakt />} />
+            <Route path='*' element={<ErrorPage />} />
           </Routes>
           <Footer />
       </BrowserRouter>
