@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import footerLogo from './images/foter.png';
+import skrozLogo from './images/rozhovice-club-logo.png';
 import './Footer.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faSquareFacebook } from '@fortawesome/free-brands-svg-icons';
@@ -10,6 +11,7 @@ const Footer = () => {
       <footer className='footer'>
          <div className='footer-container'>
             <img src={footerLogo} alt='Bee Logo' className='footer-logo' />
+            <img src={skrozLogo} alt='Bee Logo' className='footer-logo-two' />
             <div className='socials-logos'>
                <a href='https://www.instagram.com/skrozhovice' target='_blank' rel='noopener noreferrer'>
                   <FontAwesomeIcon icon={faInstagram} />

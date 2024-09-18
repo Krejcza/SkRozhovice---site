@@ -130,3 +130,9 @@ body{
    color: #fff;
    font-weight: 600;
 }
+
+@media (max-width: 1000px) {
+   .main-banner-ep{
+      margin-top: 60px;
+   }
+}

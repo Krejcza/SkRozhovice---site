@@ -3,6 +3,7 @@
    height: 95vh;
    position: relative;
    border-bottom: 10px solid #fff;
+   overflow: hidden;
 }
 
 video {
@@ -12,10 +13,12 @@ video {
 }
 
 .video-text {
+   width: 100%;
    position: absolute;
    bottom: 30%;
    right: 10%;
    transform: translate(50%, 50%);
+   
 }
 
 .video-text img {
