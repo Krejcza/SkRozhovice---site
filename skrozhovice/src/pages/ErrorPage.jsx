@@ -1,4 +1,5 @@
-// src/pages/ErrorPage.js
+import Transition from '../Transition'
+
 import React from 'react';
 
 const ErrorPage = () => {

@@ -14,16 +14,15 @@ const AktualityMain = () => {
       try {
         const response = await fetch(`http://localhost:5000/api/aktuality/all?page=${currentPage}&limit=${itemsPerPage}`);
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
         console.log('Fetched aktuality:', data);
         
-        
         setNews(data.aktuality || []);
         setTotal(data.total || 0);
       } catch (error) {
-        console.error('Error fetching aktuality:', error);
+        console.error('Error fetching aktuality:', error.message);
       }
     };
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import AktualityMain from '../components/AKTUALITY/AktualityMain'
+import Transition from '../Transition'
 
 const Aktuality = () => {
   return (
@@ -9,4 +10,4 @@ const Aktuality = () => {
   )
 }
 
-export default Aktuality
+export default Transition(Aktuality)

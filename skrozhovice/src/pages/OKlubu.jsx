@@ -1,5 +1,6 @@
 import React from 'react'
 import AboutClub from '../components/OKlubu/AboutClub'
+import Transition from '../Transition'
 
 const OKlubu = () => {
   return (
@@ -9,4 +10,4 @@ const OKlubu = () => {
   )
 }
 
-export default OKlubu
+export default Transition(OKlubu)

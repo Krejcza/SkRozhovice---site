@@ -3,6 +3,7 @@ import MainPageY from '../components/YOUNG-subpages/MainPageY';
 import trenerImg from '../components/images/blank-profile-pic.webp';
 import img1 from '../components/images/hive-pattern-gold.png';
 import img2 from '../components/images/hive-pattern.png';
+import Transition from '../Transition'
 
 const MladsiPriprava = () => {
   const treneri = [
@@ -23,4 +24,4 @@ const MladsiPriprava = () => {
   );
 };
 
-export default MladsiPriprava;
+export default Transition(MladsiPriprava)

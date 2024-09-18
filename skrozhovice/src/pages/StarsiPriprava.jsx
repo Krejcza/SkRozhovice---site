@@ -6,6 +6,7 @@ import img2 from '../components/images/hive-pattern.png';
 import img3 from '../components/images/hive-pattern.png';
 import img4 from '../components/images/hive-pattern.png';
 import img5 from '../components/images/hive-pattern.png';
+import Transition from '../Transition'
 
 const StarsiPriprava = () => {
   const treneri = [
@@ -27,4 +28,4 @@ const StarsiPriprava = () => {
   );
 };
 
-export default StarsiPriprava;
+export default Transition(StarsiPriprava)

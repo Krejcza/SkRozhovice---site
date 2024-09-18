@@ -1,5 +1,6 @@
 import React from 'react'
 import Youngers from '../components/YOUNGERS/Young'
+import Transition from '../Transition'
 
 const TýmyMládež = () => {
   return (
@@ -9,4 +10,4 @@ const TýmyMládež = () => {
   )
 }
 
-export default TýmyMládež
+export default Transition(TýmyMládež)

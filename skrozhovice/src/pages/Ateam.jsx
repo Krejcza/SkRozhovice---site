@@ -1,4 +1,4 @@
-
+import Transition from '../Transition'
 
 const Ateam = () => {
   return (

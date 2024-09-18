@@ -131,6 +131,29 @@ body{
    font-weight: 600;
 }
 
+.slider-in,
+.slider-out {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #FEDF25;
+  transform-origin: bottom;
+  z-index: 9000;
+  transform: scaleY(0);
+}
+
+.slider-out {
+  transform-origin: top;
+}
+
+
+
+
+
+
+
 @media (max-width: 1000px) {
    .main-banner-ep{
       margin-top: 60px;
