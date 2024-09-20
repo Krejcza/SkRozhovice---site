@@ -8,6 +8,7 @@ const AktualityMain = () => {
    const [currentPage, setCurrentPage] = useState(1);
    const [total, setTotal] = useState(0);
    const itemsPerPage = 5;
+   const pagesToShow = 3;
 
    useEffect(() => {
     const fetchAktuality = async () => {
@@ -28,6 +29,18 @@ const AktualityMain = () => {
 
     fetchAktuality();
   }, [currentPage]);
+
+  const totalPages = Math.ceil(total / itemsPerPage);
+
+  const getPageNumbers = () => {
+    const startPage = Math.max(1, currentPage - Math.floor(pagesToShow / 2));
+    const endPage = Math.min(totalPages, startPage + pagesToShow - 1);
+    const pages = [];
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+    return pages;
+  };
 
   return (
     <>
@@ -60,9 +73,19 @@ const AktualityMain = () => {
           >
             Předchozí
           </button>
-          <span>Stránka {currentPage} z {Math.ceil(total / itemsPerPage)}</span>
+
+          {getPageNumbers().map(page => (
+            <button
+              key={page}
+              className={page === currentPage ? 'active' : ''}
+              onClick={() => setCurrentPage(page)}
+            >
+              {page}
+            </button>
+          ))}
+
           <button 
-            disabled={currentPage === Math.ceil(total / itemsPerPage)} 
+            disabled={currentPage === totalPages} 
             onClick={() => setCurrentPage(currentPage + 1)}
           >
             Další

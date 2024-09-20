@@ -6,10 +6,12 @@ const Gallery = ({ images }) => {
 
   const openImage = (image) => {
     setSelectedImage(image);
+    document.body.classList.add('no-scroll');
   };
 
   const closeModal = () => {
     setSelectedImage(null);
+    document.body.classList.remove('no-scroll');
   };
 
   return (
@@ -28,8 +30,10 @@ const Gallery = ({ images }) => {
 
       {selectedImage && (
         <div className="modal" onClick={closeModal}>
-          <span className="close">&times;</span>
-          <img className="modal-content" src={selectedImage} alt="Selected" />
+          <div className="modal-content">
+            <span className="close" onClick={closeModal}>&times;</span>
+            <img src={selectedImage} alt="Selected" />
+          </div>
         </div>
       )}
     </>

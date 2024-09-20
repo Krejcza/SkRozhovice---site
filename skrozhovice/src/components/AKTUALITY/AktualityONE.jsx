@@ -17,14 +17,18 @@ const OneAktualita = ({ date, headline, image, text, category, lineup }) => {
         </div>
         <img src={imageUrl} alt={headline} className="aktualita-image" />
         <div className="aktualita-insider">
-          <h2 className='headline-akt'>{headline}</h2>
-          {lineup && (
-            <div className='lineup-container'>
-              <p className='lineup-label'>Sestava:</p>
-              <p className='lineup-text'>{lineup}</p>
-            </div>
-          )}
-          <p className="text-akt">{text}</p>
+          <div className="headline-headerr">
+            <h2 className='headline-akt'>{headline}</h2>
+          </div>
+          <div className='aktualita-filling'>
+            {lineup && (
+              <div className='lineup-container'>
+                <p className='lineup-label'>Sestava:</p>
+                <p className='lineup-text'>{lineup}</p>
+              </div>
+            )}
+            <p className="text-akt">{text}</p>
+          </div>
         </div>
         
      </div>

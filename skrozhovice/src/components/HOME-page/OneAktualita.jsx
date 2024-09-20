@@ -9,7 +9,9 @@ const OneAktualita = ({ date, headline, image, text }) => {
 
   return (
     <div className="aktualita-item">
-      <img src={imageUrl} alt={headline} />
+      <div className="aktualita-image-one">
+        <img src={imageUrl} alt={headline} />
+      </div>
       <h2>{headline}</h2>
       <p className='text-date-akt'>{date}</p>
       <p className='text-text-akt'>{text}</p>

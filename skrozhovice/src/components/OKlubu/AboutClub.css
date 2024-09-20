@@ -1,6 +1,7 @@
 .history-cl{
    max-width: 1600px;
    margin: 0 auto;
+   padding: 0 1rem;
 }
 
 .text-passage{
@@ -14,10 +15,12 @@
    display: flex;
    flex-direction: row;
    align-items: center;
-   justify-content: space-evenly;
+   justify-content: center;
    flex-wrap: wrap;
    margin-bottom: 6rem;
    margin-top: 4rem;
+   row-gap: 2rem;
+   column-gap: 4rem;
 }
 
 .tripple-pic img{
@@ -37,6 +40,7 @@
 .stadion-wrap{
    max-width: 1600px;
    margin: 0 auto;
+   padding: 0 1rem;
 }
 
 
@@ -98,4 +102,10 @@
 .mascot-wrap{
    max-width: 1600px;
    margin: 0 auto;
+   padding: 0 1rem;
+}
+
+
+@media (max-width: 1000px){
+
 }

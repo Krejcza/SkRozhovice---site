@@ -1,6 +1,7 @@
 .map-container {
    height: 400px;
-   width: 50%;
+   width: 80%;
+   max-width: 1600px;
    margin: 0 auto;
    border-radius: 15px;
    box-shadow: 0 5px 20px #00000075;

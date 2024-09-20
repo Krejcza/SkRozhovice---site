@@ -3,25 +3,28 @@
    flex-direction: row;
    justify-content: center;
    align-items: center;
+   margin: 0 auto;
    column-gap: 2rem;
    margin-top: 2rem;
    margin-bottom: 2rem;
+   max-width: 1200px;
+   padding: 0 2rem;
 }
 
 .aktualita-item {
-   border: 5px solid #ffffff;
    border-radius: 15px;
    background-color: #FEDF25;
    display: flex;
    flex-direction: column;
    align-items: center;
-   flex: 1;
+   justify-content: center;
+   flex: 2;
    min-height: 500px;
-   max-width: 350px;
    box-shadow: 0px 5px 20px #00000075;
    transition: 0.3s ease-out;
    position: relative;
    z-index: 2;
+   padding: 1rem 0;
  }
 
  .aktualita-item::before{
@@ -41,13 +44,32 @@
 
  .aktualita-item:hover{
    transform: scale(1.05);
+   flex: 4;
+   background-color: #fff;
+   transition: 0.3s ease-out;
  }
  
+
+ .aktualita-item:hover.aktualita-item::before{
+  background-image: url('../images/hive-pattern-gold.png');
+  opacity: 0.3;
+ }
+ 
+ .aktualita-image-one{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  max-width: 300px;
+  transition: 0.3s ease-out;
+ }
+
  .aktualita-item img {
+   height: auto;
    width: 100%;
-   margin-top: 1rem;
    margin-bottom: 0.5rem;
-   max-width: 300px;
    aspect-ratio: 4/3;
    border-radius: 12px;
    object-fit: cover;
@@ -55,33 +77,31 @@
  }
  
  .aktualita-item h2 {
-   font-size: 1.5em;
-   margin: 8px 0;
+   font-size: 1.1rem;
    color: #fff;
    text-align: center;
    padding: 0.5rem;
    background-color: #181818;
    width: 100%;
-   box-shadow: 0px 5px 10px #00000075;
  }
 
  .text-date-akt{
-   font-size: 1rem;
+   font-size: 0.9rem;
    color: #181818;
    font-weight: 500;
-   margin-top: 0.5rem;
    background-color: #fff;
    width: 100%;
    text-align: center;
-   padding: 0.5rem;
+   padding: 0.2rem 0.5rem;
    box-shadow: 0px 5px 10px #00000075;
  }
  
  .text-text-akt {
+   max-width: 300px;
    font-size: 1rem;
    color: #181818;
    font-weight: 500;
-   margin-top: 1rem;
+   margin-top: 2rem;
    overflow: hidden;
    text-overflow: ellipsis;
    display: -webkit-box;
@@ -89,3 +109,35 @@
    -webkit-line-clamp: 4;
    padding: 0 1rem;
  }
+
+ .aktualita-item:hover .text-text-akt{
+    max-width: 400px;
+ }
+
+
+
+
+
+@media (max-width: 1100px){
+    
+  .aktualita-item {
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 1000px){
+
+  .all-aktuality{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    row-gap: 2rem;
+    max-width: 1000px;
+    padding: 0 1rem;
+  }
+
+}
+
+

@@ -205,8 +205,6 @@
 
 
 
-
-/* Mobile Menu Styles */
 .mobile-menu-button {
    display: none;
    background: none;
@@ -227,14 +225,14 @@
 .mobile-menu {
    position: fixed;
    top: 0;
-   left: -80%; /* Initially off-screen */
+   left: -80%;
    width: 80%;
    height: 100%;
    background-color: #fff;
    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-   transition: left 0.3s ease; /* Slide effect */
-   z-index: 1005; /* Ensure it is on top */
-   overflow-y: auto; /* Scroll if content overflows */
+   transition: left 0.3s ease; 
+   z-index: 1005; 
+   overflow-y: auto; 
 }
 
 .mobile-menu p{
