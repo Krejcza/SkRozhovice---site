@@ -149,6 +149,47 @@ body{
 
 
 
+.error-pager{
+   min-height: 80vh;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   row-gap: 2rem;
+   margin: 5rem 0;
+   padding: 0 1rem;
+}
+
+.error-pager h1{
+   text-transform: uppercase;
+   text-align: center;
+   font-size: 1.25rem;
+   font-weight: 600;
+   margin-bottom: 1rem;
+   color: #181818;
+}
+
+.sorry-error{
+   text-align: center;
+   font-size: 1rem;
+   color: #181818;
+}
+
+.image-hive{
+   max-width: 100%;
+   width: 1000px;
+   margin-bottom: 2rem;
+}
+
+.sorry-hive{
+   text-align: center;
+   font-size: clamp(1rem, 10vw, 2rem); 
+   text-transform: uppercase;
+   font-weight: 600;
+   color: #181818;
+}
+
+
+
 
 
 
