@@ -1,4 +1,4 @@
-import { div } from 'framer-motion/client'
+
 import Transition from '../Transition'
 import BeePic from '../components/images/beehive.png'
 

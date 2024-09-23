@@ -7,7 +7,7 @@ const MainVideo = () => {
   return (
     <div className='main-video'>
       <div className="overlay-video"></div>
-      <video src={videoBg} autoPlay loop muted></video>
+      <video src={videoBg} autoPlay loop muted playsInline></video>
       <div className="video-text">
         <img src={skRozText} alt="" />
       </div>

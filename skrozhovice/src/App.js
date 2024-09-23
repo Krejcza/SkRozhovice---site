@@ -30,7 +30,7 @@ const App = () => {
               <Route index path='/' element={<Domů />} />
               <Route path='/Aktuality' element={<Aktuality />} />
               <Route path='/TymyDospeli' element={<TýmyDospělí />} />
-              <Route path='/A-team' element={<Ateam />} />
+              <Route path='/Ateam' element={<Ateam />} />
               <Route path='/TymyMladez' element={<TýmyMládež />} />
               <Route path='/MladsiPriprava' element={<MladsiPriprava />} />
               <Route path='/StarsiPriprava' element={<StarsiPriprava />} />
