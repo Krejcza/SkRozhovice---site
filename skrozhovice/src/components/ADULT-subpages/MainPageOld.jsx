@@ -1,6 +1,10 @@
 import React from 'react';
 import './MainPageOld.css';
 import fifacard from '../images/fifa-card.png';
+import MatchesTable from './MatchesTable';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+
 
 const MainPageOld = () => {
 
@@ -97,6 +101,16 @@ const MainPageOld = () => {
           ))}
         </div>
 
+        <div className="background-black nb">
+          <MatchesTable />
+          <div className="actual-score">
+            <FontAwesomeIcon icon={faChevronRight} className='icon-chev icon-chev-right' />
+            <a target='_blank' href="https://www.fotbal.cz/souteze/turnaje/zapas/c7134079-5837-4579-8cf6-a01d7a14176b">
+              AKTUÁLNÍ TABULKA AGRO CS 1.A PARDUBICKÝ KRAJ
+            </a>
+            <FontAwesomeIcon icon={faChevronLeft} className='icon-chev icon-chev-left' />
+          </div>
+        </div>
       </div>
     </>
   );

@@ -58,6 +58,59 @@
 }
 
 
+.actual-score{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.actual-score a{
+   text-decoration: none;
+   color: #fff;
+}
+
+.icon-chev {
+   color: #fff;
+   font-size: 2rem;
+   padding: 0 1rem;
+ }
+ 
+ .icon-chev-right {
+   animation: pinging-right 2s infinite ease-out;
+ }
+ 
+ .icon-chev-left {
+   animation: pinging-left 2s infinite ease-out;
+ }
+
+
+
+
+ @keyframes pinging-right {
+   0% {
+     transform: translateX(-10%);
+   }
+   50% {
+     transform: translateX(10%);
+   }
+   100% {
+     transform: translateX(-10%);
+   }
+ }
+ 
+ @keyframes pinging-left {
+   0% {
+     transform: translateX(10%);
+   }
+   50% {
+     transform: translateX(-10%);
+   }
+   100% {
+     transform: translateX(10%);
+   }
+ }
+
+
 @keyframes rotateY {
    0% {
       transform: rotateY(0deg) scale(1);

@@ -27,7 +27,18 @@ const aktualitaSchema = new mongoose.Schema({
   lineup: String
 }, { collection: 'Aktuality' });
 
+
+const matchSchema = new mongoose.Schema({
+  round: Number,
+  date: Date,
+  kickoffTime: String,
+  teamDomaci: String,
+  teamHoste: String,
+  score: String,     
+}, { collection: 'Matches' });
+
 const Aktualita = mongoose.model('Aktualita', aktualitaSchema);
+const Match = mongoose.model('Match', matchSchema);
 
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
@@ -66,6 +77,19 @@ app.get('/api/aktuality/all', async (req, res) => {
 });
 
 
+
+app.get('/api/matches', async (req, res) => {
+  if (mongoose.connection.readyState !== 1) {
+    return res.status(500).json({ message: 'MongoDB not connected' });
+  }
+
+  try {
+    const matches = await Match.find().sort({ date: 1 });
+    res.json(matches);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 
 
