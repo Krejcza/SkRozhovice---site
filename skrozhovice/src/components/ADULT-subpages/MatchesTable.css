@@ -2,11 +2,12 @@
    overflow-x: auto;
    max-width: 1200px;
    margin: 0 auto;
+   padding: 0 2rem;
  }
  
  .matches-table table {
    width: 100%;
-   min-width: 600px; 
+   min-width: 800px; 
    border-collapse: collapse;
    background-color: #FEDF25;
    border-radius: 15px;

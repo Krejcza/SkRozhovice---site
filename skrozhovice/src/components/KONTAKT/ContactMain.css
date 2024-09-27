@@ -25,6 +25,7 @@
    border-radius: 10px;
    margin-bottom: 2rem;
    transition: 0.3s ease-out;
+   box-shadow: 0px 5px 20px #00000075;
  }
 
  .trainer-image:hover{
@@ -104,6 +105,8 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .video-background {
@@ -112,4 +115,5 @@
   height: auto; 
   display: block; 
   box-shadow: 0px 5px 20px #00000075;
+  pointer-events: auto;
 }

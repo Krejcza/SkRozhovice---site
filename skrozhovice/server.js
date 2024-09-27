@@ -37,8 +37,18 @@ const matchSchema = new mongoose.Schema({
   score: String,     
 }, { collection: 'Matches' });
 
+const playerSchema = new mongoose.Schema({
+  name: String,
+  birthyear: Number,
+  height: Number,
+  weight: Number,
+  clubyear: Number,
+  beercount: Number,
+}, { collection: 'Players' });
+
 const Aktualita = mongoose.model('Aktualita', aktualitaSchema);
 const Match = mongoose.model('Match', matchSchema);
+const Player = mongoose.model('Player', playerSchema);
 
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
@@ -91,6 +101,23 @@ app.get('/api/matches', async (req, res) => {
   }
 });
 
+
+
+app.get('/api/player/:name', async (req, res) => {
+  if (mongoose.connection.readyState !== 1) {
+    return res.status(500).json({ message: 'MongoDB not connected' });
+  }
+
+  try {
+    const player = await Player.findOne({ name: req.params.name });
+    if (!player) {
+      return res.status(404).json({ message: 'Player not found' });
+    }
+    res.json(player);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 
 

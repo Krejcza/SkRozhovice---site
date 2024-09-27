@@ -33,7 +33,7 @@
   height: 100%; 
 }
  
-.modal {
+.modalGal {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,7 +46,7 @@
   z-index: 1200;
 }
 
-.modal-content {
+.modal-contentGal {
   position: relative;
   display: flex;
   align-items: center;
@@ -54,7 +54,7 @@
   z-index: 1200;
 }
 
-.close {
+.closeGal {
   position: absolute;
   background-color: #181818;
   padding: 1px 12px;
@@ -67,7 +67,7 @@
   z-index: 1205;
 }
 
-.modal-content img {
+.modal-contentGal img {
   max-width: 90%;
   max-height: 90%;
   z-index: 1200;

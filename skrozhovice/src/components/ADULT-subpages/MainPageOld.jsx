@@ -1,49 +1,131 @@
-import React from 'react';
+import {useState} from 'react';
 import './MainPageOld.css';
 import fifacard from '../images/fifa-card.png';
 import MatchesTable from './MatchesTable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import refpic from '../images/blank-profile-pic.webp'
+import onePlayer from '../images/onePlayer.png'
 
 
 const MainPageOld = () => {
 
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
+
   const goalkeepers = [
-    { name: 'Denis Dvořák', image: fifacard },
-    { name: 'Jan Novák', image: fifacard },
-    { name: 'Petr Čech', image: fifacard },
-    { name: 'Lukáš Krejčí', image: fifacard },
+    { name: 'Barva Michal', image: fifacard, },
+    { name: 'Kudláček Lukáš', image: fifacard },
+    { name: 'Pleskot Matěj', image: fifacard },
+    { name: 'Málek Patrik', image: fifacard },
   ];
 
   const defenders = [
-   { name: 'Denis Dvořák', image: fifacard },
-   { name: 'Jan Novák', image: fifacard },
-   { name: 'Petr Čech', image: fifacard },
-   { name: 'Lukáš Krejčí', image: fifacard },
-   { name: 'Jakub Krejčí', image: fifacard },
+   { name: 'Pieies Sehrhii', image: fifacard },
+   { name: 'Vaško Jakub', image: fifacard },
+   { name: 'Fedor Viacheslav', image: fifacard },
+   { name: 'Dvořák Denis', image: fifacard },
+   { name: 'Zhyhariev Mykola', image: fifacard },
  ];
 
  const midfielders = [
-   { name: 'Denis Dvořák', image: fifacard },
-   { name: 'Jan Novák', image: fifacard },
-   { name: 'Petr Čech', image: fifacard },
-   { name: 'Lukáš Krejčí', image: fifacard },
-   { name: 'Jakub Krejčí', image: fifacard },
-   { name: 'Jakub Krejčí', image: fifacard },
-   { name: 'Jakub Krejčí', image: fifacard },
-   { name: 'Jakub Krejčí', image: fifacard },
-   { name: 'Jakub Krejčí', image: fifacard },
-   { name: 'Jakub Krejčí', image: fifacard },
+   { name: 'Holub Martin', image: fifacard },
+   { name: 'Mudruňka Josef', image: fifacard },
+   { name: 'Kopp Zdeněk', image: fifacard },
+   { name: 'Bačkovský Petr', image: fifacard },
+   { name: 'Stejskal David', image: fifacard },
+   { name: 'Holeček Filip', image: fifacard },
+   { name: 'Pekař Jiří', image: fifacard },
+   { name: 'Novák Filip', image: fifacard },
+   { name: 'Kostinec Jakub', image: fifacard },
+   { name: 'Holub Marek', image: fifacard },
  ];
 
 
  const attackers = [
-   { name: 'Denis Dvořák', image: fifacard },
-   { name: 'Jan Novák', image: fifacard },
-   { name: 'Petr Čech', image: fifacard },
-   { name: 'Lukáš Krejčí', image: fifacard },
-   { name: 'Jakub Krejčí', image: fifacard }
+   { name: 'Bednarz Jakub', image: fifacard },
+   { name: 'Voženílek Jakub', image: fifacard },
+   { name: 'Žalud Daniel', image: fifacard },
+   { name: 'Zhyhariev Oleksandr', image: fifacard },
+   { name: 'Holý Jakub', image: fifacard }
  ];
+
+ const realizeTeam = [
+  {
+    image: refpic,
+    name: 'Stejskal David',
+    position: 'Hlavní trenér',
+    phone: '+420 723 739 151'
+  },
+  {
+    image: refpic,
+    name: 'Holub Martin',
+    position: 'Asistent trenéra',
+    phone: '+420 776 020 468'
+  },
+  {
+    image: refpic,
+    name: 'Kopp Zdeněk',
+    position: 'Asistent trenéra',
+    phone: '+420 602 464 595'
+  },
+  {
+    image: refpic,
+    name: 'Dušek Petr',
+    position: 'Vedoucí týmu',
+    phone: '+420 723 024 430'
+  },
+];
+
+
+const fetchPlayerDetails = async (name) => {
+  try {
+    const response = await fetch(`http://localhost:5000/api/player/${name}`);
+    
+    if (!response.ok) {
+     
+      setSelectedPlayer({
+        name: "Neznámý hráč",
+        birthyear: "N/A",
+        height: "N/A",
+        weight: "N/A",
+        clubyear: "N/A",
+        beercount: "N/A",
+        image: fifacard 
+      });
+      setModalVisible(true);
+      return;
+    }
+
+    const data = await response.json();
+    setSelectedPlayer(data);
+    setModalVisible(true);
+
+  } catch (error) {
+    console.error('Error fetching player details:', error);
+    
+    setSelectedPlayer({
+      name: "Neznámý hráč",
+      birthyear: "N/A",
+      height: "N/A",
+      weight: "N/A",
+      clubyear: "N/A",
+      beercount: "N/A",
+      image: fifacard 
+    });
+    setModalVisible(true);
+  }
+};
+
+
+const getPlayerImage = (playerName) => {
+  try {
+    return require(`../images/players/${playerName}.png`);
+  } catch (err) {
+    return onePlayer;
+  }
+};
 
   return (
     <>
@@ -59,7 +141,7 @@ const MainPageOld = () => {
         <div className="fifa-cards">
           {goalkeepers.map((player, index) => (
             <div key={index} className="fifa-card">
-              <img src={player.image} alt={player.name} />
+              <img src={player.image} alt={player.name} onClick={() => fetchPlayerDetails(player.name)} />
               <p>{player.name}</p>
             </div>
           ))}
@@ -71,7 +153,7 @@ const MainPageOld = () => {
         <div className="fifa-cards">
           {defenders.map((player, index) => (
             <div key={index} className="fifa-card">
-              <img src={player.image} alt={player.name} />
+              <img src={player.image} alt={player.name} onClick={() => fetchPlayerDetails(player.name)} />
               <p>{player.name}</p>
             </div>
           ))}
@@ -83,7 +165,7 @@ const MainPageOld = () => {
         <div className="fifa-cards">
           {midfielders.map((player, index) => (
             <div key={index} className="fifa-card">
-              <img src={player.image} alt={player.name} />
+              <img src={player.image} alt={player.name} onClick={() => fetchPlayerDetails(player.name)} />
               <p>{player.name}</p>
             </div>
           ))}
@@ -95,7 +177,7 @@ const MainPageOld = () => {
         <div className="fifa-cards">
           {attackers.map((player, index) => (
             <div key={index} className="fifa-card">
-              <img src={player.image} alt={player.name} />
+              <img src={player.image} alt={player.name} onClick={() => fetchPlayerDetails(player.name)} />
               <p>{player.name}</p>
             </div>
           ))}
@@ -111,6 +193,66 @@ const MainPageOld = () => {
             <FontAwesomeIcon icon={faChevronLeft} className='icon-chev icon-chev-left' />
           </div>
         </div>
+        <h2 className='main-topic-small bl'>Realizační tým</h2>
+        <div className="realization-team">
+          {realizeTeam.map((oneMember, index) => (
+            <div key={index} className="team-member">
+              <img src={oneMember.image} alt={oneMember.name} className="trainer-image" />
+              <div className="trainer-info">
+                <h3>{oneMember.name}</h3>
+                <p className="trainer-position">{oneMember.position}</p>
+                <p>{oneMember.phone}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {modalVisible && selectedPlayer && (
+  <div className="modal">
+    <div className="modal-content">
+      <span className="close-button" onClick={() => setModalVisible(false)}>&times;</span>
+
+      {loading && <div className="loading-spinner">Načítání...</div>}
+
+      <img
+        src={getPlayerImage(selectedPlayer.name)}
+        alt={selectedPlayer.name}
+        onLoad={() => setLoading(false)}
+        onError={() => setLoading(false)}
+        style={{ display: loading ? 'none' : 'block' }}
+      />
+
+      {!loading && (
+        <div className="modal-info-pl">
+          <div className="one-modal-pl">
+            <h5>Jméno:</h5>
+            <p>{selectedPlayer.name}</p>
+          </div>
+          <div className="one-modal-pl">
+            <h5>Rok narození:</h5>
+            <p>{selectedPlayer.birthyear}</p>
+          </div>
+          <div className="one-modal-pl">
+            <h5>Výška:</h5>
+            <p>{selectedPlayer.height} cm</p>
+          </div>
+          <div className="one-modal-pl">
+            <h5>Váha:</h5>
+            <p>{selectedPlayer.weight} kg</p>
+          </div>
+          <div className="one-modal-pl">
+            <h5>V klubu od roku:</h5>
+            <p>{selectedPlayer.clubyear}</p>
+          </div>
+          <div className="one-modal-pl">
+            <h5>Počet piv před kolapsem:</h5>
+            <p>{selectedPlayer.beercount}</p>
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+)}
       </div>
     </>
   );

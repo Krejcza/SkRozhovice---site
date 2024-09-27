@@ -29,9 +29,9 @@ const Gallery = ({ images }) => {
       </div>
 
       {selectedImage && (
-        <div className="modal" onClick={closeModal}>
-          <div className="modal-content">
-            <span className="close" onClick={closeModal}>&times;</span>
+        <div className="modalGal" onClick={closeModal}>
+          <div className="modal-contentGal">
+            <span className="closeGal" onClick={closeModal}>&times;</span>
             <img src={selectedImage} alt="Selected" />
           </div>
         </div>
