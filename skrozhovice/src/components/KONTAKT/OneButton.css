@@ -18,6 +18,10 @@
 .button-container {
    position: relative;
    width: 300px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
  }
  
  .toggle-button {
@@ -50,18 +54,27 @@
    position: absolute;
    font-size: 1rem;
    font-weight: 500;
-   width: 100%;
-   bottom: 20px; 
+   width: 95%;
+   bottom: -60px; 
+   min-height: 100%;
+   height: 120px;
    color: #181818;
-   transition: bottom 0.3s ease-out, opacity 0.3s ease-out; 
+   background-color: #fff;
+   border-radius: 0 0 5px 5px;
+   transition: bottom 0.3s ease-out, opacity 0.1s ease-out; 
    opacity: 0; 
    z-index: 1;
    text-align: center;
    pointer-events: none;
  }
+
+ .slide-content p{
+  margin-top: 1rem;
+ }
  
  .slide-content.open {
-   bottom: -80px;
+   bottom: -110px;
    opacity: 1;
+   z-index: 1;
  }
  

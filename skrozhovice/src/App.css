@@ -7,6 +7,7 @@
    padding: 0;
    box-sizing: border-box;
    font-family: 'Roboto', sans-serif;
+   scroll-behavior: smooth;
 }
 
 *::selection {
@@ -103,15 +104,18 @@ body{
 }
 
 
-.background-linear-deff{
-   background: linear-gradient(-45deg, #F5F5F5, #D2D2D2);
+.background-linear-deff {
+   background: linear-gradient(-45deg, #F5F5F5, #fffcdf);
    padding-top: 2rem;
    padding-bottom: 2rem;
    position: relative;
    overflow: hidden;
    border-bottom: 10px solid #fff;
    z-index: 1;
-}
+ }
+
+
+
 
 .background-linear-deff.mappp{
    border-bottom: 0px solid #fff;
@@ -190,6 +194,18 @@ body{
    color: #181818;
 }
 
+.imagination-background {
+   position: absolute;
+   top: -200%;
+   left: 50%;
+   width: 100%;
+   transform: translateX(-50%);
+   z-index: -1; 
+   opacity: 0.05;
+   pointer-events: none;
+   background-repeat: repeat-y;
+   background-size: cover;
+ }
 
 
 
