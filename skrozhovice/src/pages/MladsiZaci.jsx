@@ -7,9 +7,9 @@ import Transition from '../Transition'
 
 const MladsiZaci = () => {
 
+  // Data jsou správná
   const treneri = [
-    { jmeno: 'Martin Král', pozice: 'Hlavní trenér', obrazek: trenerImg },
-    { jmeno: 'Josef Růžička', pozice: 'Asistent trenéra', obrazek: trenerImg },
+    { jmeno: 'Volejník Martin', pozice: 'Trenér', obrazek: trenerImg, telefon: '+420 736 434 004'},
   ];
 
   const images = [img1, img2];
@@ -17,11 +17,12 @@ const MladsiZaci = () => {
   return (
     <MainPageY
       title="MLADŠÍ ŽÁCI"
-      zapasy='https://www.fotbal.cz/souteze/turnaje/zapas/example-url'
-      statistiky="https://www.fotbal.cz/souteze/turnaje/stats/example-url"
-      tabulka="https://www.fotbal.cz/souteze/turnaje/table/example-url"
+      zapasy='https://www.fotbal.cz/souteze/turnaje/hlavni/d4c8e41c-face-48d6-b3b1-6af356c379a9'
+      statistiky="https://www.fotbal.cz/souteze/turnaje/stats/d4c8e41c-face-48d6-b3b1-6af356c379a9"
+      tabulka="https://www.fotbal.cz/souteze/turnaje/table/d4c8e41c-face-48d6-b3b1-6af356c379a9"
       trener={treneri}
       galleryImages={images} 
+      chainedTeams='Tým je složen z klubu SK Rozhovice a Jiskra Heřmanův Městec.'
     />
   );
 };

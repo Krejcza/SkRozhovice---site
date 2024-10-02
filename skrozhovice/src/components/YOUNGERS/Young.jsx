@@ -30,6 +30,10 @@ const Young = () => {
               <img src={blankpic} alt="Starší žáci" />
               <h2>Starší žáci</h2>
             </Link>
+            <Link to="/Dorost" className="pickme-both">
+              <img src={blankpic} alt="Dorost" />
+              <h2>Dorost</h2>
+            </Link>
           </div>
         </div>
       </div>

@@ -12,10 +12,12 @@ import BackgroundImageLines from '../BackgroundImageLines';
 
 const ContactMain = () => {
 
+  // Data jsou správná
+
   const buttonData = [
     { label: 'Adresa', contactInfo: ['SK Rozhovice', 'Rozhovice 90', '538 03 Rozhovice'] },
-    { label: 'Telefon', contactInfo: ['+123456789'] },
-    { label: 'Email', contactInfo: ['info@skrozhovice.cz'] },
+    { label: 'Telefon', contactInfo: ['Sekretář klubu', 'Valenta Radek', '+420 721 029 700'] },
+    { label: 'Email', contactInfo: ['skrozhovice@seznam.cz'] },
   ];
 
   const socials = [
@@ -26,27 +28,27 @@ const ContactMain = () => {
   const trainers = [
    {
      image: refpic,
-     name: 'Jan Novák',
+     name: 'Stejskal David',
      position: 'Hlavní trenér',
-     phone: '+420 123 456 789'
+     phone: '+420 723 739 151'
    },
    {
      image: refpic,
-     name: 'Petr Svoboda',
+     name: 'Holub Martin',
      position: 'Asistent trenéra',
-     phone: '+420 987 654 321'
+     phone: '+420 776 020 468'
    },
    {
      image: refpic,
-     name: 'Petr Svoboda',
+     name: 'Kopp Zdeněk',
      position: 'Asistent trenéra',
-     phone: '+420 987 654 321'
+     phone: '+420 602 464 595'
    },
    {
      image: refpic,
-     name: 'Petr Svoboda',
-     position: 'Asistent trenéra',
-     phone: '+420 987 654 321'
+     name: 'Dušek Petr',
+     position: 'Vedoucí týmu',
+     phone: '+420 723 024 430'
    },
  ];
 
@@ -54,51 +56,39 @@ const ContactMain = () => {
  const trainersYoung = [
    {
      image: refpic,
-     name: 'Jan Novák',
-     position: 'Hlavní trenér',
-     phone: '+420 123 456 789'
+     name: 'Volejník Martin',
+     position: 'Trenér Ml. žáci',
+     phone: '+420 606 602 249'
    },
    {
      image: refpic,
-     name: 'Petr Svoboda',
-     position: 'Asistent trenéra',
-     phone: '+420 987 654 321'
+     name: 'Utterdorfský Jakub',
+     position: 'Trenér St. přípravka',
+     phone: '+420 606 602 249'
    },
    {
      image: refpic,
-     name: 'Petr Svoboda',
-     position: 'Asistent trenéra',
-     phone: '+420 987 654 321'
+     name: 'Stejskal David',
+     position: 'Trenér Ml. přípravka',
+     phone: '+420 723 739 151'
    },
    {
      image: refpic,
-     name: 'Petr Svoboda',
-     position: 'Asistent trenéra',
-     phone: '+420 987 654 321'
+     name: 'Denisa Žáková',
+     position: 'Hlavní vedoucí přípravky',
+     phone: '+420 728 415 383'
    },
    {
      image: refpic,
-     name: 'Petr Svoboda',
-     position: 'Asistent trenéra',
-     phone: '+420 987 654 321'
+     name: 'Uhlíř Jan',
+     position: 'Trenér Dorost',
+     phone: '+420 733 192 667'
    },
    {
      image: refpic,
-     name: 'Petr Svoboda',
-     position: 'Asistent trenéra',
-     phone: '+420 987 654 321'
-   },
-   {
-     image: refpic,
-     name: 'Petr Svoboda',
-     position: 'Asistent trenéra',
-     phone: '+420 987 654 321'
-   },
-   {
-     image: refpic,
-     name: 'Petr Svoboda',
-     position: 'Asistent trenéra',
-     phone: '+420 987 654 321'
+     name: 'Tomčík Michal',
+     position: 'Trenér St. žáci',
+     phone: '+420 775 869 281'
    }
  ];
 

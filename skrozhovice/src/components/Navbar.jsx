@@ -121,10 +121,10 @@ const Navbar = () => {
                     <li><Link to='/Kontakt'>Kontakt</Link></li>
                 </ul>
                 <div className="socials-icons">
-                    <a href="https://www.instagram.com/your-page" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.instagram.com/skrozhovice/" target="_blank" rel="noopener noreferrer">
                         <FontAwesomeIcon icon={faInstagram} className='social-logo' />
                     </a>
-                    <a href="https://www.facebook.com/your-page" target="_blank" rel="noopener noreferrer">
+                    <a href="https://www.facebook.com/skrozhovice" target="_blank" rel="noopener noreferrer">
                         <FontAwesomeIcon icon={faFacebook} className='social-logo' />
                     </a>
                 </div>

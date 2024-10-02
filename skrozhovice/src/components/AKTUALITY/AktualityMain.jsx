@@ -48,7 +48,7 @@ const AktualityMain = () => {
         <h1>AKTUALITY</h1>
       </div>
   
-      <div className='background-linear-deff mappp'>
+      <div className='background-linear-deff mappp minhei'>
         <div className="aktuality-all">
           {news.length > 0 ? (
             news.map((item) => (

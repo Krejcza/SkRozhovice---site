@@ -115,10 +115,12 @@ body{
  }
 
 
-
-
 .background-linear-deff.mappp{
    border-bottom: 0px solid #fff;
+}
+
+.background-linear-deff.mappp.minhei{
+   min-height: 100vh;
 }
 
 .main-banner-ep{
@@ -200,11 +202,12 @@ body{
    left: 50%;
    width: 100%;
    transform: translateX(-50%);
-   z-index: -1; 
-   opacity: 0.05;
+   z-index: -1;
+   opacity: 0.03;
    pointer-events: none;
-   background-repeat: repeat-y;
-   background-size: cover;
+   background-repeat: repeat;
+   height: 300%;
+   background-size: 70%;
  }
 
 

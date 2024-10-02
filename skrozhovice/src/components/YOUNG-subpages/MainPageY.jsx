@@ -3,7 +3,7 @@ import './MainPageY.css'
 import Gallery from './Gallery';
 
 
-const MainPageY = ({ title, zapasy, statistiky, tabulka, trener, galleryImages }) => {
+const MainPageY = ({ title, zapasy, statistiky, tabulka, trener, galleryImages, chainedTeams }) => {
 
   return (
     <>
@@ -11,6 +11,7 @@ const MainPageY = ({ title, zapasy, statistiky, tabulka, trener, galleryImages }
         <h1>{title}</h1>
       </div>
       <div className='background-linear-deff'>
+        <p>{chainedTeams}</p>
         <div className='content-container'>
           <div className='buttons-team-y'>
             <a href={zapasy} target="_blank" rel="noopener noreferrer" className="button-zapasy">

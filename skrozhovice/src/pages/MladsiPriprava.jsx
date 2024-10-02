@@ -6,8 +6,10 @@ import img2 from '../components/images/hive-pattern.png';
 import Transition from '../Transition'
 
 const MladsiPriprava = () => {
+
+  // Data jsou správná
   const treneri = [
-    { jmeno: 'Jan Novák', pozice: 'Hlavní trenér', obrazek: trenerImg, telefon: '+420 123 456 789' }, { jmeno: 'Denis Dvořák', pozice: 'Hlavní trenér', obrazek: trenerImg, telefon: '+420 123 456 789' },
+      { jmeno: 'Stejskal David', pozice: 'Trenér', obrazek: trenerImg, telefon: '+420 723 739 151' }, { jmeno: 'Žáková Denisa', pozice: 'Hlavní vedoucí', obrazek: trenerImg, telefon: '+420 728 415 383' }
   ];
 
   const images = [img1, img2];
@@ -15,9 +17,9 @@ const MladsiPriprava = () => {
   return (
     <MainPageY
       title="MLADŠÍ PŘÍPRAVKA"
-      zapasy='https://www.fotbal.cz/souteze/turnaje/zapas/example-url'
-      statistiky="https://www.fotbal.cz/souteze/turnaje/stats/example-url"
-      tabulka="https://www.fotbal.cz/souteze/turnaje/table/example-url"
+      zapasy='https://www.fotbal.cz/souteze/turnaje/hlavni/7913eabf-e52b-4114-861a-2c0300203c0a'
+      statistiky="https://www.fotbal.cz/souteze/turnaje/stats/7913eabf-e52b-4114-861a-2c0300203c0a"
+      tabulka="https://www.fotbal.cz/souteze/turnaje/table/7913eabf-e52b-4114-861a-2c0300203c0a"
       trener={treneri}
       galleryImages={images}
     />

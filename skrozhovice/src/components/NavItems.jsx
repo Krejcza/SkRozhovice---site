@@ -71,4 +71,10 @@ export const youthDropdown = [
       path:'/StarsiZaci',
       cName: 'submenu-item'
    },
+   {
+      id:12,
+      title: 'Dorost',
+      path:'/Dorost',
+      cName: 'submenu-item'
+   },
 ]
