@@ -8,14 +8,14 @@ const contacts = [
      id: 1,
      name: 'Stejskal Milan',
      position: 'Předseda',
-     phone: '+602 741 200',
+     phone: '602 741 200',
      photo: blankPic
    },
    {
      id: 2,
      name: 'Ježek Robert',
      position: 'Místopředseda',
-     phone: '+606 620 230',
+     phone: '606 620 230',
      photo: blankPic
    },
    {
@@ -29,7 +29,7 @@ const contacts = [
      id: 4,
      name: 'Valenta Radek',
      position: 'Sekretář klubu',
-     phone: '+721 029 700',
+     phone: '721 029 700',
      photo: blankPic
    }
  ];

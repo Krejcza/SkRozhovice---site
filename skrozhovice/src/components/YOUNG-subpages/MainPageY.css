@@ -5,6 +5,13 @@
    justify-content: center;
    align-items: center;
    column-gap: 10rem;
+   padding: 0 2rem;
+}
+
+.chained-teams{
+   text-align: center;
+   font-size: 1rem;
+   font-weight: 500;
 }
 
 .buttons-team-y {
@@ -28,6 +35,12 @@
    color: #fff;
    font-weight: 600;
    text-transform: uppercase;
+   transition: 0.3s ease-out;
+}
+
+.button-zapasy:hover, .button-tabulka:hover, .button-statistiky:hover{
+   background-color: #fff;
+   color: #181818;
 }
 
 .button-statistiky {
@@ -55,31 +68,58 @@
    font-size: 1.1rem;
    color: #181818;
    margin-bottom: 1rem;
-   font-weight: 500;
+   font-weight: 600;
 }
 
 .trener-box p{
-   color: #fff;
+   color: #5d5d5d;
    font: 1rem;
    margin-bottom: 1rem;
-   font-weight: 300;
+   font-weight: 400;
 }
 
 .trener-box h5{
    font-size: 1.1rem;
    color: #181818;
    margin-bottom: 1rem;
-   font-weight: 500;
+   font-weight: 600;
 }
 
 .trener-box img{
    width: 150px;
-   height: auto;
+   height: 150px;
    border-radius: 10px;
+   object-fit: cover;
    margin-bottom: 2rem;
    transition: 0.3s ease-out;
+   box-shadow: 0px 5px 20px #00000075;
 }
 
 .trener-box img:hover{
    transform: scale(1.05);
  }
+
+
+@media (max-width: 1000px){
+   .content-container{
+      flex-direction: column;
+      min-height: none;
+   }
+
+   .buttons-team-y {
+      display: flex;
+      flex-direction: column;
+      row-gap: 2rem;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+   }
+
+   .button-zapasy, .button-tabulka, .button-statistiky {
+      width: 90%;
+   }
+
+   .chained-teams{
+      padding: 2rem 0;
+   }
+}

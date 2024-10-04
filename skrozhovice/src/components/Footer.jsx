@@ -22,19 +22,19 @@ const Footer = () => {
             </div>
             <ul className='footer-links'>
                <li>
-                  <Link to='/aktuality'>Aktuality</Link>
+                  <Link to='/Aktuality'>Aktuality</Link>
                </li>
                <li>
-                  <Link to='/tymy-dospeli'>Týmy dospělí</Link>
+                  <Link to='/TymyDospeli'>Týmy dospělí</Link>
                </li>
                <li>
-                  <Link to='/tymy-mladez'>Týmy mládež</Link>
+                  <Link to='/TymyMladez'>Týmy mládež</Link>
                </li>
                <li>
-                  <Link to='/o-klubu'>O klubu</Link>
+                  <Link to='/OKlubu'>O klubu</Link>
                </li>
                <li>
-                  <Link to='/kontakt'>Kontakt</Link>
+                  <Link to='/Kontakt'>Kontakt</Link>
                </li>
                <li>
                   <Link to='/LoginUser'>Pro členy</Link>

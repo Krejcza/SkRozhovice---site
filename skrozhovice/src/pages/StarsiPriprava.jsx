@@ -12,7 +12,7 @@ const StarsiPriprava = () => {
 
   // Data jsou správná
   const treneri = [
-    { jmeno: 'Utterdorský Jakub', pozice: 'Trenér', obrazek: trenerImg, telefon: '+420 606 602 249'}, { jmeno: 'Žáková Denisa', pozice: 'Hlavní vedoucí', obrazek: trenerImg, telefon: '+420 728 415 383' }
+    { jmeno: 'Uttendorský Jakub', pozice: 'Trenér', obrazek: trenerImg, telefon: '+420 606 602 249'}, { jmeno: 'Žáková Denisa', pozice: 'Hlavní vedoucí', obrazek: trenerImg, telefon: '+420 728 415 383' }
   ];
 
   const images = [img1, img2, img3, img4, img5];

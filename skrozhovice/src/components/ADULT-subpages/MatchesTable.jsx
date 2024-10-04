@@ -13,7 +13,10 @@ const MatchesTable = () => {
         }
         const data = await response.json();
         console.log('Fetched matches:', data);
-        setMatches(data);
+        
+        // Sort matches by round number
+        const sortedMatches = data.sort((a, b) => a.round - b.round);
+        setMatches(sortedMatches);
       } catch (error) {
         console.error('Error fetching matches:', error.message);
       }
@@ -39,11 +42,12 @@ const MatchesTable = () => {
           {matches.map((match) => (
             <tr key={match._id}>
               <td>{match.round}</td>
-              <td>{new Date(match.date).toLocaleDateString()}</td>
+              <td>{match.date ? new Date(match.date).toLocaleDateString() : ''}</td>
               <td>{match.kickoffTime}</td>
-              <td>{match.teamDomaci} vs {match.teamHoste}</td>
+              <td>{match.teamDomaci} || {match.teamHoste}</td>
               <td>{match.score}</td>
             </tr>
+            
           ))}
         </tbody>
       </table>

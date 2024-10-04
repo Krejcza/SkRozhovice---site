@@ -15,7 +15,7 @@ const Adult = () => {
         <div className="section-pickme">
           <Link to="/Ateam" className="pickme-both">
             <img src={blankpic} alt="BEE Logo" />
-            <h2>A-TÝM</h2>
+            <h2>A-tým</h2>
           </Link>
         </div>
       </div>

@@ -103,6 +103,9 @@ body{
    display: none;
 }
 
+.background-yellow.nb{
+   border-bottom: 0px solid #fff;
+}
 
 .background-linear-deff {
    background: linear-gradient(-45deg, #F5F5F5, #fffcdf);

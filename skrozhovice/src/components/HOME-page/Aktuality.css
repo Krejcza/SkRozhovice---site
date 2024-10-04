@@ -17,14 +17,13 @@
    display: flex;
    flex-direction: column;
    align-items: center;
-   justify-content: center;
-   flex: 2;
+   justify-content: space-between;
+   width: 350px;
    min-height: 500px;
    box-shadow: 0px 5px 20px #00000075;
    transition: 0.3s ease-out;
    position: relative;
    z-index: 2;
-   padding: 1rem 0;
  }
 
  .aktualita-item::before{
@@ -40,13 +39,12 @@
    z-index: -1;
    opacity: 0.1;
    background-repeat: no-repeat;
+   border-radius: 15px;
  }
 
  .aktualita-item:hover{
-   transform: scale(1.05);
-   flex: 4;
    background-color: #fff;
-   transition: 0.3s ease-out;
+   box-shadow: 0px 5px 20px #ffffff75;
  }
  
 
@@ -54,35 +52,50 @@
   background-image: url('../images/hive-pattern-gold.png');
   opacity: 0.3;
  }
- 
- .aktualita-image-one{
+
+ .aktualita-and-about{
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
+  align-items: center;
+ }
+ 
+ .aktualita-image-one {
+  width: 100%; /* Obrázek bude zabírat celou dostupnou šířku */
+  height: auto; /* Automaticky se přizpůsobí výška */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 1rem;
-  max-width: 300px;
   transition: 0.3s ease-out;
+}
+
+ .aktualita-about{
+  width: 100%;
+  height: 100%;
  }
 
  .aktualita-item img {
-   height: auto;
-   width: 100%;
-   margin-bottom: 0.5rem;
-   aspect-ratio: 4/3;
-   border-radius: 12px;
-   object-fit: cover;
-   box-shadow: 0px 5px 10px #00000075;
- }
+  width: 100%;
+  max-width: 350px; 
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  box-shadow: 0px 5px 10px #00000075;
+  transition: 0.3s ease-out;
+}
  
  .aktualita-item h2 {
+  position: relative;
    font-size: 1.1rem;
    color: #fff;
    text-align: center;
-   padding: 0.5rem;
+   padding: 1rem 0.5rem;
    background-color: #181818;
-   width: 100%;
+   width:100%;
+   height: 50px;
  }
 
  .text-date-akt{
@@ -101,7 +114,6 @@
    font-size: 1rem;
    color: #181818;
    font-weight: 500;
-   margin-top: 2rem;
    overflow: hidden;
    text-overflow: ellipsis;
    display: -webkit-box;
@@ -110,20 +122,24 @@
    padding: 0 1rem;
  }
 
- .aktualita-item:hover .text-text-akt{
-    max-width: 400px;
+ .aktualita-aktualita {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #181818;
+  width: 100%;
+  max-height: 100%;
+  height: 30px;
+  border-radius: 0 0 10px 10px;
+  text-align: center;
  }
 
-
-
-
-
-@media (max-width: 1100px){
-    
-  .aktualita-item {
-    min-height: 400px;
-  }
-}
+ .aktualita-aktualita a{
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.75rem;
+ }
 
 @media (max-width: 1000px){
 
@@ -135,6 +151,55 @@
     margin: 0 auto;
     row-gap: 2rem;
     max-width: 1000px;
+    padding: 0 1rem;
+  }
+
+  .aktualita-item {
+    border-radius: 15px;
+    background-color: #FEDF25;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    min-height: 400px;
+    box-shadow: 0px 5px 20px #00000075;
+    transition: 0.3s ease-out;
+    position: relative;
+    z-index: 2;
+  }
+
+  .aktualita-image-one {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease-out;
+  }
+  
+  
+   .aktualita-item img {
+    max-width: 100%;
+    height: 200px; 
+    aspect-ratio: 4 / 3;
+    object-fit: cover; 
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0px 5px 10px #00000075;
+    transition: 0.3s ease-out;
+  }
+
+  .text-text-akt {
+    max-width: 100%;
+    font-size: 1rem;
+    color: #181818;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
     padding: 0 1rem;
   }
 

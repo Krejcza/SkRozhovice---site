@@ -187,21 +187,21 @@ const getPlayerImage = (playerName) => {
           <MatchesTable />
           <div className="actual-score">
             <FontAwesomeIcon icon={faChevronRight} className='icon-chev icon-chev-right' />
-            <a target='_blank' href="https://www.fotbal.cz/souteze/turnaje/zapas/c7134079-5837-4579-8cf6-a01d7a14176b">
+            <a target='_blank' href="https://www.fotbal.cz/souteze/turnaje/table/3754394e-7ec1-4d2d-93f9-443e9621e358">
               AKTUÁLNÍ TABULKA AGRO CS 1.A PARDUBICKÝ KRAJ
             </a>
             <FontAwesomeIcon icon={faChevronLeft} className='icon-chev icon-chev-left' />
           </div>
         </div>
         <h2 className='main-topic-small bl'>Realizační tým</h2>
-        <div className="realization-team">
+        <div className="trainers-list">
           {realizeTeam.map((oneMember, index) => (
-            <div key={index} className="team-member">
+            <div key={index} className='trainer-container'>
               <img src={oneMember.image} alt={oneMember.name} className="trainer-image" />
               <div className="trainer-info">
-                <h3>{oneMember.name}</h3>
+                <h3 className='trainer-name inv'>{oneMember.name}</h3>
                 <p className="trainer-position">{oneMember.position}</p>
-                <p>{oneMember.phone}</p>
+                <p className='trainer-phone inv'>{oneMember.phone}</p>
               </div>
             </div>
           ))}

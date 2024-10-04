@@ -30,25 +30,25 @@ const ContactMain = () => {
      image: refpic,
      name: 'Stejskal David',
      position: 'Hlavní trenér',
-     phone: '+420 723 739 151'
+     phone: '723 739 151'
    },
    {
      image: refpic,
      name: 'Holub Martin',
      position: 'Asistent trenéra',
-     phone: '+420 776 020 468'
+     phone: '776 020 468'
    },
    {
      image: refpic,
      name: 'Kopp Zdeněk',
      position: 'Asistent trenéra',
-     phone: '+420 602 464 595'
+     phone: '602 464 595'
    },
    {
      image: refpic,
      name: 'Dušek Petr',
      position: 'Vedoucí týmu',
-     phone: '+420 723 024 430'
+     phone: '723 024 430'
    },
  ];
 
@@ -58,37 +58,37 @@ const ContactMain = () => {
      image: refpic,
      name: 'Volejník Martin',
      position: 'Trenér Ml. žáci',
-     phone: '+420 606 602 249'
+     phone: '736 434 004'
    },
    {
      image: refpic,
-     name: 'Utterdorfský Jakub',
+     name: 'Uttendorský Jakub',
      position: 'Trenér St. přípravka',
-     phone: '+420 606 602 249'
+     phone: '606 602 249'
    },
    {
      image: refpic,
      name: 'Stejskal David',
      position: 'Trenér Ml. přípravka',
-     phone: '+420 723 739 151'
+     phone: '723 739 151'
    },
    {
      image: refpic,
      name: 'Denisa Žáková',
      position: 'Hlavní vedoucí přípravky',
-     phone: '+420 728 415 383'
+     phone: '728 415 383'
    },
    {
      image: refpic,
      name: 'Uhlíř Jan',
      position: 'Trenér Dorost',
-     phone: '+420 733 192 667'
+     phone: '733 192 667'
    },
    {
      image: refpic,
      name: 'Tomčík Michal',
      position: 'Trenér St. žáci',
-     phone: '+420 775 869 281'
+     phone: '775 869 281'
    }
  ];
 

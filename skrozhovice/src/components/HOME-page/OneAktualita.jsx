@@ -1,4 +1,5 @@
 import './Aktuality.css'
+import { Link } from 'react-router-dom';
 
 
 const OneAktualita = ({ date, headline, image, text }) => {
@@ -9,12 +10,19 @@ const OneAktualita = ({ date, headline, image, text }) => {
 
   return (
     <div className="aktualita-item">
-      <div className="aktualita-image-one">
-        <img src={imageUrl} alt={headline} />
+      <div className="aktualita-and-about">
+        <div className="aktualita-image-one">
+          <img src={imageUrl} alt={headline} />
+        </div>
+        <div className='aktualita-about'>
+          <h2>{headline}</h2>
+          <p className='text-date-akt'>{date}</p>
+        </div>
       </div>
-      <h2>{headline}</h2>
-      <p className='text-date-akt'>{date}</p>
       <p className='text-text-akt'>{text}</p>
+      <div className="aktualita-aktualita">
+        <Link to='/Aktuality'>Číst zde</Link>
+      </div>
     </div>
   );
 };

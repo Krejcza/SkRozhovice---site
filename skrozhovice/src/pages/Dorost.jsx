@@ -22,6 +22,7 @@ const Dorost = () => {
      tabulka="https://www.fotbal.cz/souteze/turnaje/table/9cfc6de5-cadf-4ae9-a7d7-6a62df9b9eaf"
      trener={treneri}
      galleryImages={images} 
+     chainedTeams='Tým je složen z klubu SK Rozhovice a Jiskra Heřmanův Městec.'
    />
  );
 };

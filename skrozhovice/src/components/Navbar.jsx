@@ -48,6 +48,9 @@ const Navbar = () => {
 
     return (
         <>
+
+            <Overlay isOpen={mobileMenuOpen} onClick={handleMenuClick} />
+
             <nav className='navbar'>
                 <Link to='/' className='navbar-logo'>
                     <img src={beelogo} alt='Bee Logo' className='bee-logo-nav' />
@@ -107,8 +110,6 @@ const Navbar = () => {
                     <li><Link to='/Kontakt'>Kontakt</Link></li>
                 </ul>
             </div>
-
-            <Overlay isOpen={mobileMenuOpen} onClick={handleMenuClick} />
 
             <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
                 <img src={RozhoviceFooter} className='mobile-image' alt="" />
