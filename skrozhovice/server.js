@@ -2,14 +2,26 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
+require('dotenv').config({ path: './code.env' });
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb://localhost:27017/SKRozhoviceDB', {
-})
+const FIXED_USERNAME = process.env.ADMIN_USERNAME;
+const FIXED_PASSWORD = process.env.ADMIN_PASSWORD;
+const JWT_SECRET = process.env.JWT_SECRET;
+
+// Připravte hash hesla při spuštění serveru, pokud ještě nebyl hashe
+let hashedPassword;
+bcrypt.hash(FIXED_PASSWORD, 10).then(hash => {
+  hashedPassword = hash;
+}).catch(err => console.error('Error hashing password', err));
+
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('Connected to MongoDB');
     app.listen(5000, () => {
@@ -18,6 +30,37 @@ mongoose.connect('mongodb://localhost:27017/SKRozhoviceDB', {
   })
   .catch(err => console.error('Error connecting to MongoDB', err));
 
+app.post('/api/login', async (req, res) => {
+  const { username, password } = req.body;
+
+  // Porovnejte uživatelské jméno a heslo
+  if (username === FIXED_USERNAME) {
+    const passwordMatch = await bcrypt.compare(password, hashedPassword);
+    if (passwordMatch) {
+      const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '1h' });
+      return res.json({ token });
+    }
+  }
+
+  return res.status(401).json({ message: 'Invalid username or password' });
+});
+
+app.get('/api/protected', (req, res) => {
+  const token = req.headers['authorization'];
+
+  if (!token) {
+    return res.status(401).json({ message: 'Access denied, no token provided' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    return res.json({ message: 'Access granted', user: decoded.username });
+  } catch (error) {
+    return res.status(400).json({ message: 'Invalid token' });
+  }
+});
+
+// Modely pro MongoDB
 const aktualitaSchema = new mongoose.Schema({
   date: Date,
   headline: String,
@@ -26,7 +69,6 @@ const aktualitaSchema = new mongoose.Schema({
   category: String,
   lineup: String
 }, { collection: 'Aktuality' });
-
 
 const matchSchema = new mongoose.Schema({
   round: Number,
@@ -52,10 +94,7 @@ const Player = mongoose.model('Player', playerSchema);
 
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
-
-
-
-
+// Endpointy pro API
 app.get('/api/aktuality/main', async (req, res) => {
   if (mongoose.connection.readyState !== 1) {
     return res.status(500).json({ message: 'MongoDB not connected' });
@@ -68,8 +107,6 @@ app.get('/api/aktuality/main', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
-
 
 app.get('/api/aktuality/all', async (req, res) => {
   try {
@@ -86,8 +123,6 @@ app.get('/api/aktuality/all', async (req, res) => {
   }
 });
 
-
-
 app.get('/api/matches', async (req, res) => {
   if (mongoose.connection.readyState !== 1) {
     return res.status(500).json({ message: 'MongoDB not connected' });
@@ -100,8 +135,6 @@ app.get('/api/matches', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
-
 
 app.get('/api/player/:name', async (req, res) => {
   if (mongoose.connection.readyState !== 1) {
@@ -118,11 +151,3 @@ app.get('/api/player/:name', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
-
-
-
-
-
-
-
