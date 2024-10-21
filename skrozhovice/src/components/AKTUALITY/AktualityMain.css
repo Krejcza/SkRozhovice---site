@@ -2,17 +2,16 @@
    width: 100%;
    display: flex;
    flex-direction: column;
-   align-items: center;
    justify-content: center;
    row-gap: 2rem;
    padding: 0 2rem;
-   
+   align-items: center;
 }
 
 .aktualita-container {
   border-radius: 15px;
-  max-width: 100%;
-  width: 1200px;
+  width: 100%;
+  min-width: 1200px;
   min-height: 200px;
   height: auto;
   background-color: #FEDF25;
@@ -25,6 +24,8 @@
   align-items: stretch;
   transition: 0.3s ease-out;
 }
+
+
 
 .aktualita-container:hover {
   transform: scale(1.05);
@@ -169,7 +170,17 @@
 }
 
 
+@media (max-width: 1300px){
 
+  .aktuality-all{
+    align-items: normal;
+ }
+
+  .aktualita-container {
+    width: 100%;
+    min-width: 100%;
+  }
+}
 
 
 

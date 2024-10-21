@@ -7,11 +7,14 @@ const LoginPage = () => {
   const [error, setError] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
       setIsLoggedIn(true);
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      setUserInfo(payload.username); 
     }
   }, []);
 
@@ -28,6 +31,8 @@ const LoginPage = () => {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
+        const payload = JSON.parse(atob(data.token.split('.')[1]));
+        setUserInfo(payload.username);
         setError('');
         setIsLoggedIn(true);
         alert('Přihlášení úspěšné');
@@ -46,10 +51,9 @@ const LoginPage = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
-
+    setUserInfo(null);
     setUsername('');
     setPassword('');
-    
     alert('Byl(a) jste odhlášen(a)');
   };
 
@@ -77,7 +81,7 @@ const LoginPage = () => {
             <label htmlFor="password">Heslo:</label>
             <div className="password-container">
               <input
-                type={showPassword ? 'text' : 'password'} 
+                type={showPassword ? 'text' : 'password'}
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -92,7 +96,7 @@ const LoginPage = () => {
         </form>
       ) : (
         <div className="logout-container">
-          <h2>Uživatel přihlášen {username}</h2>
+          <h2>Přihlášen uživatel: {userInfo}</h2>
           <button onClick={handleLogout} className="logout-button">Odhlásit</button>
         </div>
       )}
