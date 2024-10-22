@@ -1,0 +1,36 @@
+.scrolly-to-top {
+   position: fixed;
+   bottom: 20px;
+   right: 20px;
+   z-index: 8000;
+   opacity: 0;
+   visibility: hidden;
+   transform: translateY(100px);
+   transition: opacity 0.5s ease, transform 0.5s ease;
+ }
+ 
+ .scrolly-to-top.visible {
+   opacity: 1;
+   visibility: visible;
+   transform: translateY(0);
+ }
+ 
+ .scroll-button {
+   background-color: #ffffff;
+   color: #181818;
+   border: 3px solid #181818;
+   border-radius: 25px;
+   padding: 10px 20px;
+   cursor: pointer;
+   transition: 0.2s ease-out;
+ }
+ 
+ .scroll-button:hover {
+   background-color: #FEDF25;
+   color: #fff;
+ }
+ 
+ .scroll-button:focus {
+   outline: none;
+ }
+ 

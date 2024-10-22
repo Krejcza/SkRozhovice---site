@@ -187,7 +187,7 @@ const getPlayerImage = (playerName) => {
           <MatchesTable />
           <div className="actual-score">
             <FontAwesomeIcon icon={faChevronRight} className='icon-chev icon-chev-right' />
-            <a target='_blank' href="https://www.fotbal.cz/souteze/turnaje/table/3754394e-7ec1-4d2d-93f9-443e9621e358">
+            <a href="https://www.fotbal.cz/souteze/turnaje/table/3754394e-7ec1-4d2d-93f9-443e9621e358" target="_blank">
               AKTUÁLNÍ TABULKA AGRO CS 1.A PARDUBICKÝ KRAJ
             </a>
             <FontAwesomeIcon icon={faChevronLeft} className='icon-chev icon-chev-left' />

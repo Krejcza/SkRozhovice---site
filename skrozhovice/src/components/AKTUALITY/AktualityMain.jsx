@@ -40,12 +40,6 @@ const AktualityMain = () => {
   const handleAddOrEditAktualita = async (e) => {
     e.preventDefault();
   
-    // Ensure all required fields are populated
-    if (!newAktualita.headline || !newAktualita.text || !newAktualita.category || !newAktualita.date) {
-      alert('Please fill in all required fields.');
-      return;
-    }
-  
     const formData = new FormData();
     formData.append('headline', newAktualita.headline);
     formData.append('text', newAktualita.text);
@@ -276,8 +270,7 @@ const AktualityMain = () => {
                   onChange={(e) => setNewAktualita({ ...newAktualita, category: e.target.value })}
                 >
                   <option value="INFO">INFO</option>
-                  <option value="EVENT">UDÁLOST</option>
-                  <option value="OTHER">JINÉ</option>
+                  <option value="ZAPAS">ZÁPAS</option>
                 </select>
               </div>
               <div className="input-group">

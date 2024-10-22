@@ -128,6 +128,9 @@ const Aktualita = mongoose.model('Aktualita', aktualitaSchema);
 const Match = mongoose.model('Match', matchSchema);
 const Player = mongoose.model('Player', playerSchema);
 
+
+
+
 // API endpoints
 app.get('/api/aktuality/main', async (req, res) => {
   if (mongoose.connection.readyState !== 1) {

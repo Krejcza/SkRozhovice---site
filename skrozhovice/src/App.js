@@ -18,6 +18,7 @@ import OKlubu from './pages/OKlubu';
 import Kontakt from './pages/Kontakt';
 import ErrorPage from './pages/ErrorPage';
 import LoginUser from './pages/LoginUser';
+import BottomToTop from './components/BottomToTop';
 import { AnimatePresence } from 'framer-motion'
 
 const App = () => {
@@ -47,6 +48,7 @@ const App = () => {
             </Routes>
         </AnimatePresence>
         <Footer />
+        <BottomToTop />
     </>
   )
 }

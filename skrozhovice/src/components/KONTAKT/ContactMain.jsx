@@ -6,7 +6,6 @@ import MapContact from './MapContact';
 import SocialButton from './SocialButton';
 import videoBg from '../videos/dg.mp4';
 import React, { useEffect, useState } from 'react';
-import Lines from '../images/lines.png'
 import BackgroundImageLines from '../BackgroundImageLines';
 
 
