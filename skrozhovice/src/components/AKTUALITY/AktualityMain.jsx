@@ -101,7 +101,7 @@ const AktualityMain = () => {
     setNewAktualita({
       headline: aktualita.headline,
       text: aktualita.text,
-      image: '', // Reset the image for editing
+      image: '',
       category: aktualita.category,
       lineup: aktualita.lineup,
       date: new Date(aktualita.date),

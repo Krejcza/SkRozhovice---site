@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
 import './LoginPage.css';
 
 const LoginPage = () => {
@@ -8,15 +9,37 @@ const LoginPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
+  const [tokenExpiration, setTokenExpiration] = useState(null);
+  const [remainingTime, setRemainingTime] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      setIsLoggedIn(true);
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      setUserInfo(payload.username); 
+      const decodedToken = jwtDecode(token);
+      const currentTime = Math.floor(Date.now() / 1000);
+      const remainingTime = decodedToken.exp - currentTime;
+      
+      if (remainingTime > 0) {
+        setIsLoggedIn(true);
+        setUserInfo(decodedToken.username);
+        setTokenExpiration(decodedToken.exp);
+        setRemainingTime(remainingTime);
+      } else {
+        handleLogout();
+      }
     }
   }, []);
+
+  useEffect(() => {
+    if (tokenExpiration) {
+      const interval = setInterval(() => {
+        const currentTime = Math.floor(Date.now() / 1000);
+        setRemainingTime(tokenExpiration - currentTime);
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [tokenExpiration]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,10 +54,15 @@ const LoginPage = () => {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
-        const payload = JSON.parse(atob(data.token.split('.')[1]));
-        setUserInfo(payload.username);
+        const decodedToken = jwtDecode(data.token);
+        const currentTime = Math.floor(Date.now() / 1000);
+        const remainingTime = decodedToken.exp - currentTime;
+
+        setUserInfo(decodedToken.username);
         setError('');
         setIsLoggedIn(true);
+        setTokenExpiration(decodedToken.exp);
+        setRemainingTime(remainingTime);
         alert('Přihlášení úspěšné');
         setUsername('');
         setPassword('');
@@ -54,6 +82,8 @@ const LoginPage = () => {
     setUserInfo(null);
     setUsername('');
     setPassword('');
+    setTokenExpiration(null);
+    setRemainingTime(null);
     alert('Byl(a) jste odhlášen(a)');
   };
 
@@ -97,6 +127,7 @@ const LoginPage = () => {
       ) : (
         <div className="logout-container">
           <h2>Přihlášen uživatel: {userInfo}</h2>
+          <p>Zbývající čas tokenu: {remainingTime > 0 ? `${Math.floor(remainingTime / 60)} min ${remainingTime % 60} s` : 'Token vypršel'}</p>
           <button onClick={handleLogout} className="logout-button">Odhlásit</button>
         </div>
       )}

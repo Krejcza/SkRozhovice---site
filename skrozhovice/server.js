@@ -107,12 +107,12 @@ const aktualitaSchema = new mongoose.Schema({
 }, { collection: 'Aktuality' });
 
 const matchSchema = new mongoose.Schema({
-  round: { type: Number, required: true },
-  date: { type: Date, required: true },
-  kickoffTime: { type: String, required: true },
-  teamDomaci: { type: String, required: true },
-  teamHoste: { type: String, required: true },
-  score: { type: String, required: true },
+  round: { type: String, required: true },
+    date: { type: Date, required: false }, 
+    kickoffTime: { type: String, required: false },
+    teamDomaci: { type: String, required: true },
+    teamHoste: { type: String, required: true },
+    score: { type: String, required: false }, 
 }, { collection: 'Matches' });
 
 const playerSchema = new mongoose.Schema({
@@ -127,9 +127,6 @@ const playerSchema = new mongoose.Schema({
 const Aktualita = mongoose.model('Aktualita', aktualitaSchema);
 const Match = mongoose.model('Match', matchSchema);
 const Player = mongoose.model('Player', playerSchema);
-
-
-
 
 // API endpoints
 app.get('/api/aktuality/main', async (req, res) => {
@@ -203,6 +200,7 @@ app.post('/api/aktuality/add', verifyToken, async (req, res) => {
   }
 });
 
+// Edit aktualita by ID
 app.put('/api/aktuality/edit/:id', verifyToken, async (req, res) => {
   try {
     const updatedAktualita = await Aktualita.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -215,6 +213,7 @@ app.put('/api/aktuality/edit/:id', verifyToken, async (req, res) => {
   }
 });
 
+// Delete aktualita by ID
 app.delete('/api/aktuality/delete/:id', verifyToken, async (req, res) => {
   try {
     const deletedAktualita = await Aktualita.findByIdAndDelete(req.params.id);
@@ -223,6 +222,76 @@ app.delete('/api/aktuality/delete/:id', verifyToken, async (req, res) => {
     }
     res.json({ message: 'Aktualita deleted' });
   } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
+
+app.post('/api/matches', verifyToken, async (req, res) => {
+  const newMatch = new Match(req.body);
+  try {
+    const savedMatch = await newMatch.save();
+    res.status(201).json(savedMatch);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
+app.put('/api/matches/:id', async (req, res) => {
+  const { id } = req.params;
+  const updatedData = req.body;
+
+  try {
+      const updatedMatch = await Match.findByIdAndUpdate(id, updatedData, { new: true });
+      if (!updatedMatch) {
+          return res.status(404).json({ message: 'Match not found' });
+      }
+      res.json(updatedMatch);
+  } catch (error) {
+      res.status(400).json({ message: 'Error updating match', error });
+  }
+});
+
+
+app.get('/api/matches/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const match = await Match.findById(id);
+    if (!match) {
+      return res.status(404).json({ message: 'Match not found' });
+    }
+    res.json(match);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.delete('/api/matches/:id', verifyToken, async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedMatch = await Match.findByIdAndDelete(id);
+    if (!deletedMatch) {
+      return res.status(404).json({ message: 'Match not found' });
+    }
+    res.json({ message: 'Match deleted' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.post('/api/matches', verifyToken, async (req, res) => {
+  const { homeTeam, awayTeam, date, score } = req.body;
+
+  try {
+    const newMatch = new Match({ homeTeam, awayTeam, date, score });
+    const savedMatch = await newMatch.save();
+    res.status(201).json(savedMatch);
+  } catch (error) {
+    console.error('Error adding match:', error);
     res.status(500).json({ message: error.message });
   }
 });
