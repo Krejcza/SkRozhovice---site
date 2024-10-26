@@ -3,11 +3,12 @@ import './AktualityMain.css'
 
 const OneAktualita = ({ date, headline, image, text, category, lineup }) => {
 
-   const imageUrl = image && image !== '' ? `http://localhost:5000${image}` : 'http://localhost:5000/images/default.webp';
+   const imageUrl = image && image !== '' ? `http://localhost:3000${image}` : 'http://localhost:3000/images/default.webp';
 
 
    const categoryTextClass = category === 'INFO' ? 'cat-info' : 
                          category === 'ZÁPAS' ? 'cat-zapas' : '';
+
 
    return (
      <div className="aktualita-container">

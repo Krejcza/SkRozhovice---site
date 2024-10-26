@@ -182,6 +182,7 @@ const getPlayerImage = (playerName) => {
             </div>
           ))}
         </div>
+      </div>
 
         <div className="background-black nb">
           <MatchesTable />
@@ -193,18 +194,20 @@ const getPlayerImage = (playerName) => {
             <FontAwesomeIcon icon={faChevronLeft} className='icon-chev icon-chev-left' />
           </div>
         </div>
-        <h2 className='main-topic-small bl'>Realizační tým</h2>
-        <div className="trainers-list">
-          {realizeTeam.map((oneMember, index) => (
-            <div key={index} className='trainer-container'>
-              <img src={oneMember.image} alt={oneMember.name} className="trainer-image" />
-              <div className="trainer-info">
-                <h3 className='trainer-name inv'>{oneMember.name}</h3>
-                <p className="trainer-position">{oneMember.position}</p>
-                <p className='trainer-phone inv'>{oneMember.phone}</p>
+        <div className="background-linear-deff mappp">
+          <h2 className='main-topic-small bl'>Realizační tým</h2>
+          <div className="trainers-list">
+            {realizeTeam.map((oneMember, index) => (
+              <div key={index} className='trainer-container'>
+                <img src={oneMember.image} alt={oneMember.name} className="trainer-image"/>
+                <div className="trainer-info">
+                  <h3 className='trainer-name inv'>{oneMember.name}</h3>
+                  <p className="trainer-position inv">{oneMember.position}</p>
+                  <p className='trainer-phone inv'>{oneMember.phone}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {modalVisible && selectedPlayer && (
@@ -250,10 +253,9 @@ const getPlayerImage = (playerName) => {
           </div>
         </div>
       )}
-    </div>
-  </div>
-)}
       </div>
+    </div>
+)}
     </>
   );
 };

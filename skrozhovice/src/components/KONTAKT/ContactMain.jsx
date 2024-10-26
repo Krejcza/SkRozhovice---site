@@ -5,8 +5,6 @@ import refpic from '../images/blank-profile-pic.webp'
 import MapContact from './MapContact';
 import SocialButton from './SocialButton';
 import videoBg from '../videos/dg.mp4';
-import React, { useEffect, useState } from 'react';
-import BackgroundImageLines from '../BackgroundImageLines';
 
 
 const ContactMain = () => {
@@ -92,26 +90,12 @@ const ContactMain = () => {
  ];
 
 
- const [offsetY, setOffsetY] = useState(0);
-
-  const handleScroll = () => {
-    setOffsetY(window.scrollY);
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
   return (
     <>
       <div className='main-banner-ep'>
         <h1>KONTAKT</h1>
       </div>
       <div className="background-linear-deff">
-      <BackgroundImageLines offsetY={offsetY} />
          <div className="button-group">
          {buttonData.map((data, index) => (
             <OneButton key={index} label={data.label} contactInfo={data.contactInfo} />
@@ -134,7 +118,6 @@ const ContactMain = () => {
          </div>
       </div>
       <div className="background-linear-deff">
-      <BackgroundImageLines offsetY={offsetY} />
          <h2 className='main-topic-small bl'>Trenéři týmu mládež</h2>
          <div className="trainers-list">
           {trainersYoung.map((trainer, index) => (
@@ -154,7 +137,6 @@ const ContactMain = () => {
          <MapContact />
       </div>
       <div className="background-linear-deff mappp">
-      <BackgroundImageLines offsetY={offsetY} />
          <h2 className='main-topic-small bl'>Kde nás můžete sledovat?</h2>
          <div className="button-group diff">
          {socials.map((social, index) => (

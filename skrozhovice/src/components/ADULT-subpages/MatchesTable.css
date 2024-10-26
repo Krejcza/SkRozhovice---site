@@ -65,6 +65,61 @@
 
 
 
+ .add-match-form, .edit-match-form {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgb(101, 175, 255);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-match-form h3, .edit-match-form h3 {
+  margin-bottom: 15px;
+  color: #181818;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.add-match-form input, .edit-match-form input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.add-match-form button, .edit-match-form button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #181818;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-out;
+}
+
+.add-match-form button:hover, .edit-match-form button:hover {
+  background-color: #FEDF25;
+  color: #181818;
+}
+
+.edit-match-form button:last-child {
+  background-color: #ff5c5c;
+}
+
+.edit-match-form button:last-child:hover {
+  background-color: #ff8282;
+}
+
+
 
  .matches-table th:nth-child(1) { 
    width: 10%; 
@@ -86,3 +141,23 @@
    width: 20%; 
  }
  
+
+
+ @media (max-width: 600px) {
+  .add-match-form, .edit-match-form {
+    padding: 15px;
+  }
+
+  .add-match-form input, .edit-match-form input {
+    font-size: 0.9rem;
+  }
+
+  .add-match-form h3, .edit-match-form h3 {
+    font-size: 1.25rem;
+  }
+
+  .add-match-form button, .edit-match-form button {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+}
