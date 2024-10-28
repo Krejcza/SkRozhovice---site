@@ -170,6 +170,112 @@
 }
 
 
+/* AddAktualita.css */
+
+form {
+  background-color: rgb(101, 175, 255); /* White background for the form */
+  padding: 20px; /* Spacing inside the form */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin: 20px 0; /* Spacing above and below the form */
+  max-width: 600px; /* Limit the form width */
+  margin-left: auto; /* Center the form horizontally */
+  margin-right: auto; /* Center the form horizontally */
+}
+
+form h2 {
+  margin-bottom: 15px; /* Space below the heading */
+  font-size: 24px; /* Heading size */
+  color: #333; /* Dark gray color for the heading */
+}
+
+form p {
+  margin: 10px 0; /* Spacing for error and success messages */
+  font-size: 14px; /* Text size for messages */
+}
+
+form label {
+  display: block; /* Block layout for labels */
+  margin-bottom: 5px; /* Space below the label */
+  font-weight: bold; /* Bold font for labels */
+}
+
+form input[type="text"],
+form input[type="date"],
+form select,
+form textarea {
+  width: 100%; /* Full width inputs */
+  padding: 10px; /* Padding for comfort */
+  border: 1px solid #ced4da; /* Light gray border */
+  border-radius: 5px; /* Slightly rounded corners */
+  box-sizing: border-box; /* Include padding and border in element's total width */
+  margin-bottom: 15px; /* Space below each input */
+  transition: border-color 0.3s; /* Smooth transition for focus */
+}
+
+form input[type="text"]:focus,
+form input[type="date"]:focus,
+form select:focus,
+form textarea:focus {
+  border-color: #4a90e2; /* Border color on focus */
+  outline: none; /* Remove default outline */
+}
+
+form textarea {
+  height: 100px; /* Set a fixed height for the textarea */
+  resize: vertical; /* Allow vertical resizing */
+}
+
+form button {
+  background-color: #28a745; /* Green background color */
+  color: white; /* White text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 15px; /* Padding for button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition for hover */
+}
+
+form button:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+
+/* AktualityMain.css */
+
+.delete-button {
+  background-color: #dc3545; /* Red background color */
+  color: white; /* White text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Slightly rounded corners */
+  padding: 10px 15px; /* Padding for comfort */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+  font-size: 16px; /* Font size */
+}
+
+.delete-button:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+.delete-button:disabled {
+  background-color: #ccc; /* Gray background when disabled */
+  color: #666; /* Darker gray text when disabled */
+  cursor: not-allowed; /* Not allowed cursor when disabled */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media (max-width: 1300px){
 
   .aktuality-all{

@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import OneAktualita from './AktualityONE';
 import AddAktualita from './AddAktualita';
 import './AktualityMain.css';
+import DeleteAktualita from './DeleteAktualita';
 
 const AktualityMain = () => {
   const [news, setNews] = useState([]);
@@ -48,9 +49,15 @@ const AktualityMain = () => {
   };
 
   const isLoggedIn = !!localStorage.getItem('token');
+
   const handleAddAktualita = (newAktualita) => {
     setNews((prevNews) => [newAktualita, ...prevNews]);
     setTotal((prevTotal) => prevTotal + 1); 
+  };
+
+  const handleDeleteAktualita = (id) => {
+    setNews((prevNews) => prevNews.filter((item) => item._id !== id));
+    setTotal((prevTotal) => prevTotal - 1);
   };
 
   return (
@@ -76,6 +83,7 @@ const AktualityMain = () => {
                   category={item.category}
                   lineup={item.lineup}
                 />
+                 {isLoggedIn && <DeleteAktualita id={item._id} onDelete={handleDeleteAktualita} />}
               </div>
             ))
           ) : (

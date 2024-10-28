@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 require('dotenv').config({ path: './code.env' });
 
 const app = express();
@@ -38,6 +41,115 @@ const checkMongoDBConnection = (req, res, next) => {
   next();
 };
 
+
+
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
+  // Add headers to help with debugging
+  setHeaders: (res, path) => {
+    res.set('X-Content-Type-Options', 'nosniff');
+    // Log when files are requested
+    console.log('Static file requested:', path);
+  }
+}));
+
+// Add a test endpoint to check if the server can access the files
+app.get('/test-image/:filename', (req, res) => {
+  const filePath = path.join(__dirname, 'uploads', req.params.filename);
+  if (fs.existsSync(filePath)) {
+    res.sendFile(filePath);
+  } else {
+    res.status(404).send('File not found');
+  }
+});
+
+
+const uploadDir = path.join(__dirname, 'uploads');
+const defaultImagePath = path.join(uploadDir, 'default.webp');
+
+const initializeUploads = async () => {
+  try {
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+      console.log('Upload directory created at:', uploadDir);
+    }
+
+    if (!fs.existsSync(defaultImagePath)) {
+      const sourceDefaultImage = path.join(__dirname, 'assets', 'default.webp');
+      fs.copyFileSync(sourceDefaultImage, defaultImagePath);
+      console.log('Default image copied to uploads directory');
+    }
+  } catch (err) {
+    console.error('Error in initialization:', err);
+  }
+};
+
+// Initialize uploads directory and default image
+initializeUploads();
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    console.log('Saving file to:', uploadDir);
+    cb(null, uploadDir);
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const filename = uniqueSuffix + path.extname(file.originalname);
+    console.log('Generated filename:', filename);
+    cb(null, filename);
+  }
+});
+
+const upload = multer({ 
+  storage: storage,
+  limits: {
+    fileSize: 5 * 1024 * 1024 // 5MB limit
+  },
+  fileFilter: (req, file, cb) => {
+    console.log('Received file:', file.originalname, 'Type:', file.mimetype);
+    if (file.mimetype.startsWith('image/')) {
+      cb(null, true);
+    } else {
+      cb(new Error('Only image files are allowed!'));
+    }
+  }
+}).single('image');
+
+
+app.post('/api/upload', (req, res) => {
+  upload(req, res, function (err) {
+    if (err instanceof multer.MulterError) {
+      console.error('Multer error:', err);
+      return res.status(400).json({
+        message: 'File upload error',
+        error: err.message
+      });
+    } else if (err) {
+      console.error('Unknown upload error:', err);
+      return res.status(500).json({
+        message: 'Unknown upload error',
+        error: err.message
+      });
+    }
+
+    // If no file is uploaded, return default image path
+    if (!req.file) {
+      return res.status(400).json({
+        message: 'No file uploaded, using default image',
+        imagePath: '/uploads/default.webp'
+      });
+    }
+
+    console.log('File successfully uploaded:', req.file);
+    const imagePath = `/uploads/${req.file.filename}`;
+    res.json({
+      message: 'File uploaded successfully',
+      imagePath: imagePath
+    });
+  });
+});
+
+
 // JWT Middleware
 const verifyToken = (req, res, next) => {
   const token = req.headers['authorization'];
@@ -67,13 +179,16 @@ app.post('/api/login', async (req, res) => {
 });
 
 const aktualitaSchema = new mongoose.Schema({
-  headline: { type: String},
-  text: { type: String},     
-  image: { type: String },                    
-  category: { type: String },                  
-  lineup: { type: String },                 
-  date: { type: Date, default: Date.now }, 
-}, { collection: 'Aktuality' });
+  headline: { type: String, required: true },
+  text: { type: String, required: true },     
+  image: { type: String, default: "" },                    
+  category: { type: String, required: true },                  
+  lineup: { type: String, default: "" },                 
+  date: { type: Date, required: true }, 
+}, {
+  collection: 'Aktuality',
+  versionKey: false
+});
 
 const matchSchema = new mongoose.Schema({
   round: { type: String, required: true },
@@ -122,14 +237,17 @@ app.get('/api/aktuality/all', checkMongoDBConnection, async (req, res) => {
 });
 
 app.post('/api/aktuality', verifyToken, async (req, res) => {
-  const { headline, text, category, lineup } = req.body;
+  const { date,headline, image, text, category, lineup } = req.body;
 
-  const newAktualita = new Aktualita({ 
-    headline, 
-    text, 
-    category, 
-    lineup 
+  const newAktualita = new Aktualita({
+    date,
+    headline,
+    image,
+    text,
+    category,
+    lineup,
   });
+
 
   try {
     const savedAktualita = await newAktualita.save();
@@ -139,23 +257,18 @@ app.post('/api/aktuality', verifyToken, async (req, res) => {
   }
 });
 
-app.put('/api/aktuality/:id', verifyToken, async (req, res) => {
-  const { headline, text, category, lineup } = req.body;
 
+app.delete('/api/aktuality/:id', async (req, res) => {
+  const { id } = req.params;
   try {
-    const updatedAktualita = await Aktualita.findByIdAndUpdate(
-      req.params.id,
-      { headline, text, category, lineup },
-      { new: true }
-    );
-
-    if (!updatedAktualita) {
-      return res.status(404).json({ message: 'Aktualita not found' });
+    const deletedAktualita = await Aktualita.findByIdAndDelete(id);
+    if (!deletedAktualita) {
+      return res.status(404).send({ message: 'Aktualita not found' });
     }
-
-    res.json(updatedAktualita);
+    res.status(204).send(); // No Content on successful deletion
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error(error);
+    res.status(500).send({ message: 'Error deleting aktualita' });
   }
 });
 
