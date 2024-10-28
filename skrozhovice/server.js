@@ -258,6 +258,29 @@ app.post('/api/aktuality', verifyToken, async (req, res) => {
 });
 
 
+app.put('/api/aktuality/:id', verifyToken, async (req, res) => {
+  const { id } = req.params;
+  const { date, headline, image, text, category, lineup } = req.body;
+
+  try {
+    const updatedAktualita = await Aktualita.findByIdAndUpdate(
+      id,
+      { date, headline, image, text, category, lineup },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedAktualita) {
+      return res.status(404).json({ message: 'Aktualita not found' });
+    }
+
+    res.json(updatedAktualita);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error updating aktualita' });
+  }
+});
+
+
 app.delete('/api/aktuality/:id', async (req, res) => {
   const { id } = req.params;
   try {
@@ -336,12 +359,42 @@ app.post('/api/matches', verifyToken, async (req, res) => {
 
 
 
-app.get('/api/player/:name', async (req, res) => {
-  if (mongoose.connection.readyState !== 1) return res.status(500).json({ message: 'MongoDB not connected' });
+
+
+app.get('/api/players', checkMongoDBConnection, async (req, res) => {
   try {
-    const player = await Player.findOne({ name: req.params.name });
+    const players = await Player.find().sort({ name: 1 });
+    res.json(players);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.get('/api/players/:id', checkMongoDBConnection, async (req, res) => {
+  try {
+    const player = await Player.findById(req.params.id);
     if (!player) return res.status(404).json({ message: 'Player not found' });
     res.json(player);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.put('/api/players/:id', verifyToken, async (req, res) => {
+  try {
+    const updatedPlayer = await Player.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!updatedPlayer) return res.status(404).json({ message: 'Player not found' });
+    res.json(updatedPlayer);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.delete('/api/players/:id', verifyToken, async (req, res) => {
+  try {
+    const deletedPlayer = await Player.findByIdAndDelete(req.params.id);
+    if (!deletedPlayer) return res.status(404).json({ message: 'Player not found' });
+    res.status(204).send();
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

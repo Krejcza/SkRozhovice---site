@@ -3,6 +3,7 @@ import OneAktualita from './AktualityONE';
 import AddAktualita from './AddAktualita';
 import './AktualityMain.css';
 import DeleteAktualita from './DeleteAktualita';
+import EditAktualita from './EditAktualita'
 
 const AktualityMain = () => {
   const [news, setNews] = useState([]);
@@ -10,6 +11,7 @@ const AktualityMain = () => {
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [editingAktualita, setEditingAktualita] = useState(null);
   const itemsPerPage = 5;
   const pagesToShow = 3;
 
@@ -60,6 +62,13 @@ const AktualityMain = () => {
     setTotal((prevTotal) => prevTotal - 1);
   };
 
+  const handleEditAktualita = (updatedAktualita) => {
+    setNews((prevNews) =>
+      prevNews.map((item) => (item._id === updatedAktualita._id ? updatedAktualita : item))
+    );
+    setEditingAktualita(null);
+  };
+
   return (
     <>
       <div className='main-banner-ep'>
@@ -83,7 +92,12 @@ const AktualityMain = () => {
                   category={item.category}
                   lineup={item.lineup}
                 />
-                 {isLoggedIn && <DeleteAktualita id={item._id} onDelete={handleDeleteAktualita} />}
+                {isLoggedIn && (
+                  <>
+                    <button className='edit-button' onClick={() => setEditingAktualita(item)}>Edit</button>
+                    <DeleteAktualita id={item._id} onDelete={handleDeleteAktualita} />
+                  </>
+                )}
               </div>
             ))
           ) : (
@@ -92,6 +106,9 @@ const AktualityMain = () => {
         </div>
 
         {isLoggedIn && <AddAktualita onAdd={handleAddAktualita} />}
+        {editingAktualita && (
+          <EditAktualita aktualita={editingAktualita} onUpdate={handleEditAktualita} />
+        )}
 
         <div className='pagination'>
           <button
