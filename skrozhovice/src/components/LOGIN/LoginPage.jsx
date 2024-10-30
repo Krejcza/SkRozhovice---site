@@ -92,6 +92,7 @@ const LoginPage = () => {
   };
 
   return (
+    <div className="background-linear-deff mappp">
     <div className="login-container">
       {!isLoggedIn ? (
         <form onSubmit={handleSubmit} className="login-form">
@@ -131,6 +132,7 @@ const LoginPage = () => {
           <button onClick={handleLogout} className="logout-button">Odhlásit</button>
         </div>
       )}
+    </div>
     </div>
   );
 };

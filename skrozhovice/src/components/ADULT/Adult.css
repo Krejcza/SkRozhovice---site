@@ -34,6 +34,7 @@
  .pickme-both h2 {
    margin-top: 2rem;
    color: #181818;
+   font-size: 1.5rem;
    transition: 0.3s ease-out;
  }
  
@@ -75,4 +76,10 @@
     text-decoration: none;
   }
   
+}
+
+@media (max-width: 450px){
+  .pickme-both h2 {
+    font-size: 1.25rem;
+  }
 }

@@ -55,7 +55,7 @@ const AboutClub = () => {
       </div>
       <div className="background-linear-deff">
          <div className="stadion-wrap">
-            <h2 className='main-topic-small bl'>STADION</h2>
+            <h2 className='main-topic-small bl'>Hřiště</h2>
             <div className='text-passage'>
                <p>
                   Při příjezdu do Rozhovic se nachází naše hřiště, které je srdcem sportovního dění v obci. Je to místo, kde se scházejí malí i velcí sportovci, rodiny, přátelé a všichni, kdo mají rádi pohyb a zábavu. Rozhovické hřiště má rozměry 105 m na délku a 55 m na šířku. Na hřišti se nachází přírodní trávník, který je vždy řádně upraven a posekán. Hřiště disponuje kapacitou 200 stojících a 50 sedících diváků. V areálu se nachází také Rozhovická hospoda, kde se podává točené pivo a klobásy.

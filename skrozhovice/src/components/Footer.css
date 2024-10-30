@@ -106,3 +106,10 @@
       width: 20%;
    }
 }
+
+@media (max-width: 450px){
+   .footer-copyright {
+      font-size: 0.75rem;
+      color: #3f3f3f;
+   }
+}

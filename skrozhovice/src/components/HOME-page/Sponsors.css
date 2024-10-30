@@ -54,3 +54,9 @@
     height: 70px;
   }
 }
+
+@media (max-width: 450px){
+  .sponsor-item{
+    width: 100%;
+  }
+}

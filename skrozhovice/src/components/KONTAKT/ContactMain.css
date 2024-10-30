@@ -54,7 +54,7 @@
  .trainer-position {
     text-align: center;
     color: #FEDF25;
-    font: 1rem;
+    font-size: 1rem;
     margin-bottom: 1rem;
     font-weight: 300;
  }
@@ -158,4 +158,34 @@
   justify-content: center;
 }
 
+}
+
+@media (max-width: 1000px){
+  .trainer-name {
+    text-align: center;
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    font-weight: 500;
+ }
+
+ .trainer-phone {
+  text-align: center;
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.social-button {
+  font-size: 1rem;
+}
+
+.trainer-position {
+  text-align: center;
+  color: #FEDF25;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  font-weight: 300;
+}
 }

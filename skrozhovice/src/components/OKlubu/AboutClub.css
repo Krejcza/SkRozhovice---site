@@ -107,6 +107,17 @@
 }
 
 
-@media (max-width: 1000px){
+@media (max-width: 450px){
+   .text-passage{
+      font-size: 0.9rem;
+   }
 
+   .positionorg {
+      font-size: 1.1rem;
+    }
+
+    .namingorg {
+      font-size: 1.1rem;
+      padding: 18px;
+    }
 }

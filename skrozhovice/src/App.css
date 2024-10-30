@@ -52,21 +52,6 @@ body{
    border-bottom: 10px solid #fff;
 }
 
-.background-black::before{
-   content: '';
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   background-image: url('./components/images/hive-pattern-gold.png');
-   background-size: 50%;
-   background-position: right;
-   transform: translateX(20%);
-   opacity: 0.1;
-   background-repeat: no-repeat;
-}
-
 .background-black.nb::before{
    display: none;
 }
@@ -139,6 +124,7 @@ body{
 .main-banner-ep h1{
    color: #fff;
    font-weight: 600;
+   font-size: 2rem;
 }
 
 .slider-in,
@@ -222,4 +208,25 @@ body{
    .main-banner-ep{
       margin-top: 60px;
    }
+
+   .background-yellow::before{
+      display: none;
+   }
+
+   .main-banner-ep h1{
+      font-size: 1.5rem;
+   }
 }
+
+@media (max-width: 450px) {
+   .main-topic-small{
+      font-size: 1.25rem;
+   }
+
+   .main-banner-ep h1{
+      font-size: 1.25rem;
+   }
+}
+
+
+

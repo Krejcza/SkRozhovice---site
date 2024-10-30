@@ -10,8 +10,7 @@
 
 .aktualita-container {
   border-radius: 15px;
-  width: 100%;
-  min-width: 1200px;
+  width: 1400px;
   min-height: 200px;
   height: auto;
   background-color: #FEDF25;
@@ -21,11 +20,9 @@
   column-gap: 1rem;
   position: relative;
   padding-left: 100px;
-  align-items: stretch;
+  align-items: center;
   transition: 0.3s ease-out;
 }
-
-
 
 .aktualita-container:hover {
   transform: scale(1.05);
@@ -99,8 +96,7 @@
 .aktualita-image {
   width: 100%;
   max-width: 400px;
-  height: auto;
-  max-height: 350px;
+  height: 300px;
   border-radius: 10px;
   object-fit: cover;
 }
@@ -109,6 +105,7 @@
   display: flex;
   flex-direction: column;
   row-gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .lineup-label {
@@ -170,7 +167,6 @@
 }
 
 
-/* AddAktualita.css */
 
 form {
   background-color: rgb(101, 175, 255); /* White background for the form */
@@ -291,7 +287,11 @@ form button:hover {
 
 
 
-
+@media (max-width: 1450px){
+  .aktualita-container {
+    width: 1250px;
+  }
+}
 
 
 
@@ -305,6 +305,8 @@ form button:hover {
     width: 100%;
     min-width: 100%;
   }
+
+  
 }
 
 
@@ -325,4 +327,39 @@ form button:hover {
     max-height: auto;
     height: 250px;
   }
+
+  .category-akt{
+    width: 60px;
+  }
 }
+
+@media (max-width: 450px){
+  .category-akt{
+    width: 50px;
+  }
+
+  .aktualita-container {
+    flex-direction: column;
+    padding-left: 70px;
+  }
+
+  .category-akt{
+    justify-content: flex-start;
+    row-gap: 5rem;
+  }
+
+  .category-text{
+   transform: rotate(-90deg);
+   margin-top: 2rem;
+  }
+
+  .headline-akt{
+    font-size: 1rem;
+  }
+
+  .text-akt{
+    font-size: 0.9rem;
+  }
+
+}
+
