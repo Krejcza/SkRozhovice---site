@@ -1,0 +1,25 @@
+[33mda438e0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m dodělány responzivní upravy na hl stránce, aktualitách, týmech obecně, o klubu a kontaktu
+[33me0ffa46[m úprava aktualit -- provedena aktualizace
+[33m94aa9a9[m nahrávání obrázků zprovozněno
+[33m5f8aa2e[m trochu předělány aktuality..potřebuje dodělat
+[33m81101d4[m změna a zapisování tabulky, reseter přihlášení
+[33m9d46ae8[m přidán to top button, změna hlavního loga a když je pomalý net tak se místo videa ukáže obrázek
+[33ma169f7d[m  přidána struktura pro upravu aktualit - dodělat nahrávání obrázků
+[33mb43e37f[m odstranění env
+[33mbab2ffe[m struktura pro příhlášení
+[33m4839b72[m přidána animace na atym
+[33maabe484[m opraven footer, dodělán A-tym a responzivita
+[33me38f69f[m menší upravy a přidán dorost
+[33me8ffcbb[m čudlíky a zkouška pozadí
+[33m669a64f[m základ modálního okna -styly
+[33m4d4a5dc[m přidána tabulka
+[33m51f306c[m přidán A-tým
+[33m0e36116[m přidán error page
+[33m7dac9f8[m responzivita na main, aktuality a o klubu
+[33mfe82b2f[m přidán framer motion na animace přechodu
+[33m3a02888[m přidána mobilní navigace
+[33m34d330a[m přidána kontakt page
+[33m4eb9a1d[m hambuerg s octem
+[33m83fb0a5[m přidány aktuality s pagination a rozděláno na rozdělení týmů
+[33m6a16145[m základní struktura stránky, footer, navbar + přidána databáze na aktuality
+[33m95ced3b[m základní struktura navbaru

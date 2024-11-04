@@ -1,9 +1,22 @@
 
 import Transition from '../Transition'
 import BeePic from '../components/images/beehive.png'
+import { Helmet } from 'react-helmet-async';
 
 const ErrorPage = () => {
   return (
+    <>
+    <Helmet>
+    <title>SK Rozhovice - Neexistující stránka</title>
+        <meta
+          name="description"
+          content="SK Rozhovice - stránka nenalezena."
+        />
+        <meta
+          name="keywords"
+          content="SK Rozhovice, fotbal, sportovní klub, aktuality, kontakty"
+        />
+    </Helmet>
     <div className='background-linear-deff mappp'>
       <div className='error-pager'>
         <div>
@@ -16,6 +29,7 @@ const ErrorPage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

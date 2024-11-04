@@ -10,7 +10,7 @@
 
  .gallery-image {
   width: 100%;
-  height: auto;
+  height: 300px;
   border-radius: 10px;
   box-shadow: 0px 5px 20px #00000075;
   object-fit: cover; 
@@ -70,13 +70,38 @@
 @media (max-width: 1000px){
   .gallery-container {
     flex-direction: column; 
-    width: 100%; 
     margin-bottom: 20px; 
     margin-top: 2rem;
+    width: 100%;
+    height: auto;
   }
 
   .gallery-nav {
     width: 25px;
     height: 35px;
+  }
+
+  .gallery-image {
+    height: 500px;
+  }
+}
+
+
+@media (max-width: 800px){
+  .gallery-image {
+    height: 400px;
+  }
+}
+
+
+@media (max-width: 650px){
+  .gallery-image {
+    height: 300px;
+  }
+}
+
+@media (max-width: 500px){
+  .gallery-image {
+    height: 250px;
   }
 }

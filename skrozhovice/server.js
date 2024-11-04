@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const router = express.Router();
 require('dotenv').config({ path: './code.env' });
 
 const app = express();
@@ -206,6 +207,7 @@ const playerSchema = new mongoose.Schema({
   weight: { type: Number, required: true },
   clubyear: { type: Number, required: true },
   beercount: { type: Number, required: true },
+  instagram: {type: String, required: false},
 }, { collection: 'Players' });
 
 const Aktualita = mongoose.model('Aktualita', aktualitaSchema);
@@ -357,11 +359,14 @@ app.post('/api/matches', verifyToken, async (req, res) => {
 
 
 
+const escapeRegExp = (string) => {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+};
 
 
 
 
-app.get('/api/players', checkMongoDBConnection, async (req, res) => {
+app.get('/api/players', async (req, res) => {
   try {
     const players = await Player.find().sort({ name: 1 });
     res.json(players);
@@ -370,17 +375,49 @@ app.get('/api/players', checkMongoDBConnection, async (req, res) => {
   }
 });
 
-app.get('/api/players/:id', checkMongoDBConnection, async (req, res) => {
+app.get('/api/players/:id', async (req, res) => {
   try {
     const player = await Player.findById(req.params.id);
-    if (!player) return res.status(404).json({ message: 'Player not found' });
+    if (!player) {
+      return res.status(404).json({ message: 'Player not found' });
+    }
     res.json(player);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Error fetching player details:', error);
+    res.status(500).json({ message: 'Error fetching player details' });
   }
 });
 
-app.put('/api/players/:id', verifyToken, async (req, res) => {
+app.get('/api/players/name/:name', async (req, res) => {
+  try {
+    const decodedName = decodeURIComponent(req.params.name);
+    console.log('Searching for player:', decodedName);
+    
+    const escapedName = escapeRegExp(decodedName);
+    const nameRegex = new RegExp(`^${escapedName}$`, 'i');
+    
+    const player = await Player.findOne({ name: nameRegex });
+    
+    if (!player) {
+      console.log('Player not found:', decodedName);
+      return res.status(404).json({ 
+        message: 'Player not found',
+        searchedName: decodedName 
+      });
+    }
+    
+    console.log('Found player:', player);
+    res.json(player);
+  } catch (error) {
+    console.error('Error fetching player by name:', error);
+    res.status(500).json({ 
+      message: 'Error fetching player details',
+      error: error.message 
+    });
+  }
+});
+
+app.put('/api/players/:id', async (req, res) => {
   try {
     const updatedPlayer = await Player.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!updatedPlayer) return res.status(404).json({ message: 'Player not found' });
@@ -390,7 +427,8 @@ app.put('/api/players/:id', verifyToken, async (req, res) => {
   }
 });
 
-app.delete('/api/players/:id', verifyToken, async (req, res) => {
+
+app.delete('/api/players/:id', async (req, res) => {
   try {
     const deletedPlayer = await Player.findByIdAndDelete(req.params.id);
     if (!deletedPlayer) return res.status(404).json({ message: 'Player not found' });
@@ -399,3 +437,4 @@ app.delete('/api/players/:id', verifyToken, async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
