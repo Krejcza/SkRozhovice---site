@@ -29,7 +29,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 // MongoDB Setup
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
-    console.log('Connected to MongoDB');
+    console.log('Connected to MongoDB Atlas');
     app.listen(5000, () => console.log('Server running on port 5000'));
   })
   .catch(err => console.error('Error connecting to MongoDB', err));
@@ -208,6 +208,7 @@ const playerSchema = new mongoose.Schema({
   clubyear: { type: Number, required: true },
   beercount: { type: Number, required: true },
   instagram: {type: String, required: false},
+  imagePath: {type: String, default: 'onePlayer'} 
 }, { collection: 'Players' });
 
 const Aktualita = mongoose.model('Aktualita', aktualitaSchema);

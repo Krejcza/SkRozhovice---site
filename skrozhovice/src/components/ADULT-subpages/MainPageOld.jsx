@@ -5,7 +5,8 @@ import MatchesTable from './MatchesTable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import refpic from '../images/blank-profile-pic.webp'
-import onePlayer from '../images/onePlayer.png'
+import { getPlayerImage } from './PlayerImages';
+import EditModalPlayer from './EditModalPlayer'
 
 
 const MainPageOld = () => {
@@ -77,7 +78,6 @@ const MainPageOld = () => {
     phone: '+420 723 024 430'
   },
 ];
-
 
 const fetchPlayerDetails = async (playerName) => {
   try {
@@ -156,6 +156,8 @@ const fetchPlayerDetails = async (playerName) => {
         <PlayerSection title="Útočníci" players={attackers} />
       </div>
 
+      <EditModalPlayer/>
+
       <div className="background-black nb">
         <MatchesTable />
         <div className="actual-score">
@@ -166,6 +168,7 @@ const fetchPlayerDetails = async (playerName) => {
           <FontAwesomeIcon icon={faChevronLeft} className='icon-chev icon-chev-left' />
         </div>
       </div>
+
 
       <div className="background-linear-deff mappp">
         <h2 className='main-topic-small bl'>Realizační tým</h2>
@@ -191,7 +194,7 @@ const fetchPlayerDetails = async (playerName) => {
             {loading && <div className="loading-spinner">Načítání...</div>}
 
             <img
-              src={onePlayer}
+              src={getPlayerImage(selectedPlayer.imagePath)}
               alt={selectedPlayer.name}
               onLoad={() => setLoading(false)}
               onError={() => setLoading(false)}
