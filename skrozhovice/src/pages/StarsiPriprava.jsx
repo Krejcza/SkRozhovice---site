@@ -7,6 +7,7 @@ import img3 from '../components/images/hive-pattern.png';
 import img4 from '../components/images/hive-pattern.png';
 import img5 from '../components/images/hive-pattern.png';
 import Transition from '../Transition'
+import { Helmet } from 'react-helmet-async';
 
 const StarsiPriprava = () => {
 
@@ -18,6 +19,18 @@ const StarsiPriprava = () => {
   const images = [img1, img2, img3, img4, img5];
 
   return (
+    <>
+    <Helmet>
+    <title>SK Rozhovice - Starší přípravka</title>
+        <meta
+          name="description"
+          content="Dorost SK Rozhovice - informace o týmu, trenérech, zápasech, statistikách a výsledcích.."
+        />
+        <meta
+          name="keywords"
+          content="SK Rozhovice, fotbal, sportovní klub, aktuality, kontakty"
+        />
+    </Helmet>
     <MainPageY
       title="STARŠÍ PŘÍPRAVKA"
       zapasy='https://www.fotbal.cz/souteze/turnaje/hlavni/c895a344-ff93-45e1-9b56-8e5d1be4633d'
@@ -26,6 +39,7 @@ const StarsiPriprava = () => {
       trener={treneri}
       galleryImages={images}
     />
+    </>
   );
 };
 

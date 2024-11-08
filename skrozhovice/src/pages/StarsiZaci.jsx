@@ -4,6 +4,7 @@ import trenerImg from '../components/images/blank-profile-pic.webp';
 import img1 from '../components/images/hive-pattern-gold.png';
 import img2 from '../components/images/hive-pattern.png';
 import Transition from '../Transition'
+import { Helmet } from 'react-helmet-async';
 
 const StarsiZaci = () => {
 
@@ -15,6 +16,18 @@ const StarsiZaci = () => {
   const images = [img1, img2];
 
   return (
+    <>
+    <Helmet>
+    <title>SK Rozhovice - Starší žáci</title>
+        <meta
+          name="description"
+          content="Dorost SK Rozhovice - informace o týmu, trenérech, zápasech, statistikách a výsledcích.."
+        />
+        <meta
+          name="keywords"
+          content="SK Rozhovice, fotbal, sportovní klub, aktuality, kontakty"
+        />
+    </Helmet>
     <MainPageY
       title="STARŠÍ ŽÁCI"
       zapasy='https://www.fotbal.cz/souteze/turnaje/hlavni/7f594d29-a244-4f24-9112-76df62c4c6b0'
@@ -24,6 +37,7 @@ const StarsiZaci = () => {
       galleryImages={images} 
       chainedTeams='Tým je složen z klubu SK Rozhovice a Jiskra Heřmanův Městec.'
     />
+    </>
   );
 };
 

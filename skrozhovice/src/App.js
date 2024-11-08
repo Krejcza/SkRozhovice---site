@@ -21,6 +21,7 @@ import LoginUser from './pages/LoginUser';
 import BottomToTop from './components/BottomToTop';
 import { AnimatePresence } from 'framer-motion';
 import { HelmetProvider } from 'react-helmet-async';
+import CookieConsentBanner from './components/CookieConsentBanner';
 
 const App = () => {
   const location = useLocation();
@@ -28,6 +29,7 @@ const App = () => {
   return (
     <HelmetProvider>
       <ScrollToTop />
+      <CookieConsentBanner />
       <Navbar />
       <AnimatePresence mode='wait'>
         <Routes location={location} key={location.pathname}>
