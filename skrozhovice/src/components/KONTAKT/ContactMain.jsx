@@ -4,7 +4,8 @@ import OneTrainer from './OneTrainer';
 import refpic from '../images/blank-profile-pic.webp'
 import MapContact from './MapContact';
 import SocialButton from './SocialButton';
-import videoBg from '../videos/dg.mp4';
+import videoBg from '../videos/fotbal-kontakt_prob3.mp4';
+import thumbnail from '../images/thumbnail-kontakt.png'
 
 
 const ContactMain = () => {
@@ -146,10 +147,13 @@ const ContactMain = () => {
          <div className="video-playing">
             <video 
             src={videoBg} 
-            controls 
+            playsInline 
+            controls
             className="video-background"
+            poster={thumbnail}
             ></video>
          </div>
+
       </div>
     </>
   );
