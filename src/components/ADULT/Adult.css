@@ -22,13 +22,14 @@
  
  
  .pickme-both img {
-   width: 200px;
-   height: 200px;
+   width: 175px;
+   height: 175px;
    object-fit: cover;
    border: 5px solid #181818;
    border-radius: 15px;
    transition: 0.3s ease-out;
    filter: grayscale(100%);
+   box-shadow: 0px 5px 10px #00000075;
  }
  
  .pickme-both h2 {
@@ -43,8 +44,9 @@
  }
  
  .pickme-both:hover img {
-   border: 10px solid #fff;
+   border: 5px solid #fff;
    filter: grayscale(0%);
+   box-shadow: 0px 5px 10px #fff;
  }
  
  .pickme-both:hover h2 {

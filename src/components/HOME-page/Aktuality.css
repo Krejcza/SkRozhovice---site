@@ -101,7 +101,7 @@
  
  .aktualita-item h2 {
    position: relative;
-   font-size: 1.1rem;
+   font-size: 1rem;
    color: #fff;
    text-align: center;
    padding: 1rem 1rem;
@@ -178,6 +178,7 @@
     padding: 0 1rem;
   }
 
+
   .aktualita-item {
     border-radius: 10px;
     display: flex;
@@ -190,6 +191,10 @@
     transition: 0.3s ease-out;
     position: relative;
     z-index: 2;
+  }
+
+  .aktualita-item h2 {
+    font-size: 1rem;
   }
 
   .aktualita-image-one {
@@ -230,7 +235,7 @@
 
 @media (max-width: 450px){
   .aktualita-item h2 {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .text-text-akt {

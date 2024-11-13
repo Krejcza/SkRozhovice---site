@@ -11,7 +11,7 @@
 .aktualita-container {
   border-radius: 15px;
   width: 1400px;
-  min-height: 200px;
+  min-height: 350px;
   height: auto;
   background-color: #FEDF25;
   display: flex;
@@ -22,12 +22,13 @@
   padding-left: 100px;
   align-items: center;
   transition: 0.3s ease-out;
+  overflow: hidden;
 }
 
 .aktualita-container:hover {
   transform: scale(1.05);
   transform: translateX(5px);
-  box-shadow: -10px 0px 10px #ffffffb1;
+  box-shadow: 0px 5px 10px #00000075;
 }
  
 .category-akt{
@@ -45,7 +46,12 @@
   top: 0;
   bottom: 0;
   left: 0;
-  box-shadow: 10px 0px 10px #ffffffb1;
+  box-shadow: 5px 0px 10px #ffffffb1;
+  transition: ease-out 0.3s;
+}
+
+.aktualita-container:hover .category-akt{
+  box-shadow: 10px 0px 10px #fff;
 }
 
 .category-text{
@@ -84,6 +90,8 @@
 .headline-akt{
   font-size: 1.25rem;
   font-weight: 600;
+  text-transform: uppercase;
+  border-bottom: 5px solid #fff;
 }
 
 
@@ -95,10 +103,40 @@
 
 .aktualita-image {
   width: 100%;
-  max-width: 400px;
-  height: 300px;
+  max-width: 50px;
+  height: 325px;
   border-radius: 10px;
   object-fit: cover;
+  box-shadow: 0px 2px 5px #00000075;
+  cursor: pointer;
+  z-index: 1;
+  position: relative;
+  outline: none;
+  transition: outline 0.3s ease-out;
+}
+
+.aktualita-image.expanded {
+  max-width: 450px; 
+  z-index: 2; 
+  position: absolute;
+  top: 10%; 
+  left: 10%;
+}
+
+.aktualita-container {
+  position: relative;
+}
+
+.aktualita-image.expanded {
+  max-width: 450px;
+  height: 325px;
+  z-index: 10;
+  margin: 0;
+  top: 50%;
+  left: 350px;
+  transform: translate(-50%,-50%);
+  box-shadow: 5px 5px 10px #00000075;
+  outline: 2px solid #fff;
 }
 
 .lineup-container{
@@ -111,11 +149,13 @@
 .lineup-label {
   font-weight: 500;
   font-size: 0.9rem;
+  color: #555555;
 }
 
 .lineup-text {
   font-weight: 400;
   font-size: 0.9rem;
+  color: #555555;
 }
 
 
@@ -315,6 +355,8 @@ form button:hover {
 
   .aktualita-container {
     flex-direction: column;
+    padding: 1rem;
+    padding-top: 75px;
   }
 
   .pagination button {
@@ -326,35 +368,49 @@ form button:hover {
     max-width: 100%;
     max-height: auto;
     height: 250px;
+    pointer-events: none;
   }
 
+
   .category-akt{
-    width: 60px;
+    background-color: #181818;
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 1rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: 0px 5px 10px #ffffffb1;
+    transition: ease-out 0.3s;
   }
+
+  .aktualita-container:hover .category-akt{
+    box-shadow: 0px 10px 10px #fff;
+  }
+
+  .category-date{
+    transform: rotate(0deg);
+    white-space: nowrap;
+  }
+
+  .headline-headerr{
+    margin-top: 1rem;
+  }
+
+
 }
 
 @media (max-width: 450px){
-  .category-akt{
-    width: 50px;
-  }
-
-  .aktualita-container {
-    flex-direction: column;
-    padding-left: 70px;
-  }
-
-  .category-akt{
-    justify-content: flex-start;
-    row-gap: 5rem;
-  }
-
-  .category-text{
-   transform: rotate(-90deg);
-   margin-top: 2rem;
-  }
 
   .headline-akt{
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   .text-akt{

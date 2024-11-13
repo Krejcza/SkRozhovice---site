@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import './AktualityMain.css';
 
-const OneAktualita = ({ date, headline, image, text, category, lineup }) => {
+const OneAktualita = ({ date, headline, image, text, category, lineup, onImageClick, expanded }) => {
   const [imageError, setImageError] = useState(false);
 
-  // Adjust default image path relative to the public folder
   const defaultImage = '/uploads/default.webp';
   const imageUrl = (!image || imageError) ? defaultImage : `http://localhost:5000${image}`;
 
@@ -22,12 +21,15 @@ const OneAktualita = ({ date, headline, image, text, category, lineup }) => {
         <p className={`category-text ${categoryTextClass}`}>{category}</p>
         <p className='category-date'>{date}</p>
       </div>
+
       <img 
         src={imageUrl}
         alt={headline} 
-        className="aktualita-image"
-        onError={handleImageError} // Fallback to default on error
+        className={`aktualita-image ${expanded ? 'expanded' : ''}`} // Apply 'expanded' class conditionally
+        onClick={onImageClick} // Trigger onImageClick on image click
+        onError={handleImageError} // Fallback on error
       />
+
       <div className="aktualita-insider">
         <div className="headline-headerr">
           <h2 className='headline-akt'>{headline}</h2>

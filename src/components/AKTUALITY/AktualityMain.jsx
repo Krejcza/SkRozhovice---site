@@ -12,6 +12,7 @@ const AktualityMain = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editingAktualita, setEditingAktualita] = useState(null);
+  const [expandedImage, setExpandedImage] = useState(null);
   const itemsPerPage = 5;
   const pagesToShow = 3;
 
@@ -69,6 +70,15 @@ const AktualityMain = () => {
     setEditingAktualita(null);
   };
 
+
+  const handleImageClick = (imageId) => {
+    if (expandedImage === imageId) {
+      setExpandedImage(null); // Pokud je obrázek už zvětšený, zmenšíme ho
+    } else {
+      setExpandedImage(imageId); // Pokud není zvětšený, zvětšíme ho
+    }
+  };
+
   return (
     <>
       <div className='main-banner-ep'>
@@ -91,6 +101,8 @@ const AktualityMain = () => {
                   text={item.text}
                   category={item.category}
                   lineup={item.lineup}
+                  onImageClick={() => handleImageClick(item._id)}
+                  expanded={expandedImage === item._id}
                 />
                 {isLoggedIn && (
                   <>

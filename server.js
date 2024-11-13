@@ -7,6 +7,8 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const router = express.Router();
+const cloudinary = require('cloudinary').v2;
+const multerCloudinary = require('multer-cloudinary').v2;
 require('dotenv').config({ path: './code.env' });
 
 const app = express();
@@ -44,8 +46,6 @@ const checkMongoDBConnection = (req, res, next) => {
 };
 
 
-
-
 app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
   // Add headers to help with debugging
   setHeaders: (res, path) => {
@@ -55,7 +55,6 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
   }
 }));
 
-// Add a test endpoint to check if the server can access the files
 app.get('/test-image/:filename', (req, res) => {
   const filePath = path.join(__dirname, 'uploads', req.params.filename);
   if (fs.existsSync(filePath)) {
@@ -86,7 +85,6 @@ const initializeUploads = async () => {
   }
 };
 
-// Initialize uploads directory and default image
 initializeUploads();
 
 const storage = multer.diskStorage({

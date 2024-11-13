@@ -16,6 +16,7 @@
  
  .matches-table thead {
    background-color: #FEDF25; 
+   border-bottom: 2px solid #181818;
  }
  
  .matches-table th {
@@ -47,12 +48,13 @@
  .matches-table tr{
    font-size: 1rem;
    font-weight: 500;
+   background-color: #ffef92;
  }
 
 
 
  .matches-table tr:nth-child(even) {
-   background-color: #ffffff;
+   background-color: #fffbe9;
  }
  
  .matches-table tr:hover {
@@ -143,21 +145,17 @@
  
 
 
- @media (max-width: 600px) {
-  .add-match-form, .edit-match-form {
-    padding: 15px;
+ @media (max-width: 1000px) {
+  .matches-table {
+    max-width: 900px;
   }
 
-  .add-match-form input, .edit-match-form input {
+  .matches-table td:nth-child(5){
+    font-size: 1.15rem;
+  }
+ 
+  .matches-table tr{
     font-size: 0.9rem;
-  }
 
-  .add-match-form h3, .edit-match-form h3 {
-    font-size: 1.25rem;
-  }
-
-  .add-match-form button, .edit-match-form button {
-    font-size: 0.9rem;
-    padding: 8px 15px;
   }
 }

@@ -121,6 +121,12 @@ const fetchPlayerDetails = async (playerName) => {
   }
 };
 
+const handleModalClose = (e) => {
+  if (e.target.classList.contains('modal')) {
+    setModalVisible(false);
+  }
+};
+
 
   const PlayerSection = ({ title, players }) => (
     <>
@@ -187,7 +193,7 @@ const fetchPlayerDetails = async (playerName) => {
       </div>
 
       {modalVisible && selectedPlayer && (
-        <div className="modal">
+        <div className="modal" onClick={handleModalClose}>
           <div className="modal-content">
             <span className="close-button" onClick={() => setModalVisible(false)}>&times;</span>
 
@@ -213,28 +219,24 @@ const fetchPlayerDetails = async (playerName) => {
                 </div>
                 <div className="one-modal-pl">
                   <h5>Výška:</h5>
-                  <p>{selectedPlayer.height} cm</p>
+                  <p>{selectedPlayer.height}</p>
                 </div>
                 <div className="one-modal-pl">
                   <h5>Váha:</h5>
-                  <p>{selectedPlayer.weight} kg</p>
+                  <p>{selectedPlayer.weight}</p>
                 </div>
                 <div className="one-modal-pl">
-                  <h5>V klubu od roku:</h5>
+                  <h5>Rok ve klubu:</h5>
                   <p>{selectedPlayer.clubyear}</p>
                 </div>
                 <div className="one-modal-pl">
-                  <h5>Počet piv před kolapsem:</h5>
+                  <h5>Počet piv:</h5>
                   <p>{selectedPlayer.beercount}</p>
                 </div>
-                {selectedPlayer.instagram && (
-                  <div className="one-modal-pl">
-                    <h5>Instagram:</h5>
-                    <a href={selectedPlayer.instagram} target="_blank" rel="noopener noreferrer">
-                      {selectedPlayer.instagram}
-                    </a>
-                  </div>
-                )}
+                <div className="one-modal-pl">
+                  <h5>Instagram:</h5>
+                  <p><a href={`https://${selectedPlayer.instagram}`} target="_blank" rel="noopener noreferrer">Odkaz</a></p>
+                </div>
               </div>
             )}
           </div>
