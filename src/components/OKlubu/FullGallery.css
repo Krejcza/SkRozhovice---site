@@ -69,7 +69,10 @@
 
 .modal-contentGal img {
   max-width: 90%;
+  width: 1500px;
   max-height: 90%;
+  height: 1000px;
+  object-fit: cover;
   z-index: 1200;
 }
 

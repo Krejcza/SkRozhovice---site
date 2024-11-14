@@ -230,7 +230,7 @@ const handleModalClose = (e) => {
                   <p>{selectedPlayer.clubyear}</p>
                 </div>
                 <div className="one-modal-pl">
-                  <h5>Počet piv:</h5>
+                  <h5>Počet piv před kolapsem:</h5>
                   <p>{selectedPlayer.beercount}</p>
                 </div>
                 <div className="one-modal-pl">

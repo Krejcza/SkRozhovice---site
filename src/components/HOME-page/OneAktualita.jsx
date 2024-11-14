@@ -6,7 +6,9 @@ const OneAktualita = ({ date, headline, image, text }) => {
   console.log('Image URL:', image);
   
 
-  const imageUrl = image && image !== '' ? `http://localhost:5000${image}` : 'http://localhost:3000/images/default.webp';
+  const imageUrl = image && image !== '' 
+    ? image 
+    : 'https://res.cloudinary.com/dirmiqkcn/image/upload/v1731591618/SkRozhovice/ooo6wxdqeuzyybxxcgbx.webp';
 
   return (
     <div className="aktualita-item">
