@@ -4,14 +4,14 @@ import './AktualityMain.css';
 const OneAktualita = ({ date, headline, image, text, category, lineup, onImageClick, expanded }) => {
   const [imageError, setImageError] = useState(false);
 
-  const defaultImage = '/uploads/default.webp';
-  const imageUrl = (!image || imageError) ? defaultImage : `http://localhost:5000${image}`;
+  const defaultImage = 'https://res.cloudinary.com/dirmiqkcn/image/upload/v1731591618/SkRozhovice/ooo6wxdqeuzyybxxcgbx.webp';
+  const imageUrl = imageError || !image ? defaultImage : image;
 
   const categoryTextClass = category === 'INFO' ? 'cat-info' : 
                             category === 'ZÁPAS' ? 'cat-zapas' : '';
 
   const handleImageError = () => {
-    setImageError(true);  // Triggers fallback to the default image
+    setImageError(true);
     console.log('Image failed to load, falling back to default');
   };
 

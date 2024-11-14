@@ -19,27 +19,33 @@ const EditAktualita = ({ aktualita, onUpdate }) => {
     e.preventDefault();
     setError('');
     setSuccessMessage('');
-
+  
+    let imagePath = "/uploads/default.webp";
     try {
-      let imagePath = aktualita.image; // Keep existing image if no new file is uploaded
-      if (selectedFile) {
-        const formData = new FormData();
-        formData.append('image', selectedFile);
 
-        const uploadResponse = await fetch('http://localhost:5000/api/upload', {
+      if (selectedFile) {
+        const response = await fetch('http://localhost:5000/api/get-upload-url', { method: 'POST' });
+        const data = await response.json();
+  
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+        formData.append('timestamp', data.timestamp);
+        formData.append('api_key', process.env.CLOUDINARY_API_KEY);
+        formData.append('upload_preset', 'viyusy7k');
+  
+        const cloudinaryResponse = await fetch(data.url, {
           method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          },
           body: formData,
         });
+  
+        const cloudinaryResult = await cloudinaryResponse.json();
 
-        if (!uploadResponse.ok) {
-          throw new Error('Failed to upload image');
-        }
-
-        const uploadData = await uploadResponse.json();
-        imagePath = uploadData.imagePath;
+          if (!cloudinaryResponse.ok) {
+            console.error('Cloudinary Error:', cloudinaryResult);
+            throw new Error(cloudinaryResult.message || 'Failed to upload image');
+          }
+        
+        imagePath = cloudinaryResult.secure_url; 
       }
 
       const formattedDate = new Date(date).toISOString();

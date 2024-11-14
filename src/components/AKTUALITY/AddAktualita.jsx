@@ -19,98 +19,75 @@ const AddAktualita = ({ onAdd }) => {
     e.preventDefault();
     setError('');
     setSuccessMessage('');
-
+  
+    let imagePath = "/uploads/default.webp";
     try {
-        let imagePath = "/uploads/default.webp"; 
-        if (selectedFile) {
-            const formData = new FormData();
-            formData.append('image', selectedFile);
 
-            console.log('Attempting to upload file:', selectedFile.name);
-
-            try {
-                const uploadResponse = await fetch('http://localhost:5000/api/upload', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                    },
-                    body: formData,
-                });
-
-                const responseText = await uploadResponse.text();
-                console.log('Raw upload response:', responseText);
-
-                if (!uploadResponse.ok) {
-                    try {
-                        const errorData = JSON.parse(responseText);
-                        throw new Error(errorData.message || 'Failed to upload image');
-                    } catch (parseError) {
-                        throw new Error('Server error: ' + responseText);
-                    }
-                }
-
-                try {
-                    const uploadData = JSON.parse(responseText);
-                    imagePath = uploadData.imagePath;
-                    console.log('Upload successful, image path:', imagePath);
-                } catch (parseError) {
-                    throw new Error('Invalid server response format');
-                }
-            } catch (uploadError) {
-                console.error('Upload error:', uploadError);
-                throw new Error(`File upload failed: ${uploadError.message}`);
-            }
-        }
-
-        const formattedDate = new Date(date).toISOString();
-        const aktualitaData = {
-            date: formattedDate,
-            headline,
-            image: imagePath,
-            text,
-            category,
-            lineup,
-        };
-
-        console.log('Submitting aktualita data:', aktualitaData);
-
-        const response = await fetch('http://localhost:5000/api/aktuality', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            },
-            body: JSON.stringify(aktualitaData),
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Failed to add aktualita');
-        }
-
+      if (selectedFile) {
+        const response = await fetch('http://localhost:5000/api/get-upload-url', { method: 'POST' });
         const data = await response.json();
-        console.log('Successfully added aktualita:', data);
-        setSuccessMessage('Aktualita added successfully!');
-        onAdd(data);
+  
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+        formData.append('timestamp', data.timestamp);
+        formData.append('api_key', process.env.CLOUDINARY_API_KEY);
+        formData.append('upload_preset', 'viyusy7k');
+  
+        const cloudinaryResponse = await fetch(data.url, {
+          method: 'POST',
+          body: formData,
+        });
+  
+        const cloudinaryResult = await cloudinaryResponse.json();
+
+          if (!cloudinaryResponse.ok) {
+            console.error('Cloudinary Error:', cloudinaryResult);
+            throw new Error(cloudinaryResult.message || 'Failed to upload image');
+          }
         
-        // Reset form
-        setHeadline('');
-        setText('');
-        setCategory('INFO');
-        setLineup('');
-        setDate('');
-        setSelectedFile(null);
-        
-        // Reset file input
-        const fileInput = document.querySelector('input[type="file"]');
-        if (fileInput) {
-            fileInput.value = '';
-        }
+        imagePath = cloudinaryResult.secure_url; 
+      }
+  
+  
+
+      const formattedDate = new Date(date).toISOString();
+      const aktualitaData = {
+        date: formattedDate,
+        headline,
+        image: imagePath, 
+        text,
+        category,
+        lineup,
+      };
+
+      const response = await fetch('http://localhost:5000/api/aktuality', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify(aktualitaData),
+      });
+
+      if (!response.ok) throw new Error((await response.json()).message || 'Failed to add aktualita');
+
+      const data = await response.json();
+      setSuccessMessage('Aktualita added successfully!');
+      onAdd(data);
+
+      // Reset form
+      setHeadline('');
+      setText('');
+      setCategory('INFO');
+      setLineup('');
+      setDate('');
+      setSelectedFile(null);
+      document.querySelector('input[type="file"]').value = '';
     } catch (error) {
-        console.error('Error:', error);
-        setError(error.message || 'An error occurred');
+      setError(error.message || 'An error occurred');
     }
-};
+  };
+
 
   return (
     <div className="add-aktualita-container">

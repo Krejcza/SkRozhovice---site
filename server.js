@@ -8,8 +8,9 @@ const path = require('path');
 const fs = require('fs');
 const router = express.Router();
 const cloudinary = require('cloudinary').v2;
-const multerCloudinary = require('multer-cloudinary').v2;
 require('dotenv').config({ path: './code.env' });
+
+const uploader = multer({ storage: multer.memoryStorage() }).single('image');
 
 const app = express();
 app.use(cors());
@@ -18,7 +19,7 @@ app.use(express.json());
 const port = process.env.PORT || 5000;
 
 // Environment Variables and Constants
-const requiredEnvVars = ['ADMIN_USERNAME', 'ADMIN_PASSWORD', 'JWT_SECRET', 'MONGODB_URI'];
+const requiredEnvVars = ['ADMIN_USERNAME', 'ADMIN_PASSWORD', 'JWT_SECRET', 'MONGODB_URI', 'CLOUDINARY_CLOUD_NAME', 'CLOUDINARY_API_KEY', 'CLOUDINARY_API_SECRET', "CLOUDINARY_UPLOAD_PRESET"];
 for (const varName of requiredEnvVars) {
   if (!process.env[varName]) {
     console.error(`Missing required environment variable: ${varName}`);
@@ -33,7 +34,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('Connected to MongoDB Atlas');
-    app.listen(5000, () => console.log('Server running on port 5000'));
+    app.listen(port, () => console.log(`Server running on port ${port}`));
   })
   .catch(err => console.error('Error connecting to MongoDB', err));
 
@@ -45,110 +46,29 @@ const checkMongoDBConnection = (req, res, next) => {
   next();
 };
 
-
-app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
-  // Add headers to help with debugging
-  setHeaders: (res, path) => {
-    res.set('X-Content-Type-Options', 'nosniff');
-    // Log when files are requested
-    console.log('Static file requested:', path);
-  }
-}));
-
-app.get('/test-image/:filename', (req, res) => {
-  const filePath = path.join(__dirname, 'uploads', req.params.filename);
-  if (fs.existsSync(filePath)) {
-    res.sendFile(filePath);
-  } else {
-    res.status(404).send('File not found');
-  }
+// Cloudinary Setup
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true,
 });
 
-
-const uploadDir = path.join(__dirname, 'uploads');
-const defaultImagePath = path.join(uploadDir, 'default.webp');
-
-const initializeUploads = async () => {
+app.post('/api/get-upload-url', (req, res) => {
   try {
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true });
-      console.log('Upload directory created at:', uploadDir);
-    }
+    // Získání timestamp pro nahrání
+    const timestamp = Math.floor(Date.now() / 1000);
 
-    if (!fs.existsSync(defaultImagePath)) {
-      const sourceDefaultImage = path.join(__dirname, 'assets', 'default.webp');
-      fs.copyFileSync(sourceDefaultImage, defaultImagePath);
-      console.log('Default image copied to uploads directory');
-    }
-  } catch (err) {
-    console.error('Error in initialization:', err);
-  }
-};
-
-initializeUploads();
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    console.log('Saving file to:', uploadDir);
-    cb(null, uploadDir);
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    const filename = uniqueSuffix + path.extname(file.originalname);
-    console.log('Generated filename:', filename);
-    cb(null, filename);
-  }
-});
-
-const upload = multer({ 
-  storage: storage,
-  limits: {
-    fileSize: 5 * 1024 * 1024 // 5MB limit
-  },
-  fileFilter: (req, file, cb) => {
-    console.log('Received file:', file.originalname, 'Type:', file.mimetype);
-    if (file.mimetype.startsWith('image/')) {
-      cb(null, true);
-    } else {
-      cb(new Error('Only image files are allowed!'));
-    }
-  }
-}).single('image');
-
-
-app.post('/api/upload', (req, res) => {
-  upload(req, res, function (err) {
-    if (err instanceof multer.MulterError) {
-      console.error('Multer error:', err);
-      return res.status(400).json({
-        message: 'File upload error',
-        error: err.message
-      });
-    } else if (err) {
-      console.error('Unknown upload error:', err);
-      return res.status(500).json({
-        message: 'Unknown upload error',
-        error: err.message
-      });
-    }
-
-    // If no file is uploaded, return default image path
-    if (!req.file) {
-      return res.status(400).json({
-        message: 'No file uploaded, using default image',
-        imagePath: '/uploads/default.webp'
-      });
-    }
-
-    console.log('File successfully uploaded:', req.file);
-    const imagePath = `/uploads/${req.file.filename}`;
+    // Odeslání odpovědi s URL pro unsigned upload
     res.json({
-      message: 'File uploaded successfully',
-      imagePath: imagePath
+      url: `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`,
+      timestamp: timestamp,
     });
-  });
+  } catch (err) {
+    console.error("Error generating Cloudinary upload URL:", err);  // Logování chyb
+    res.status(500).json({ message: 'Error generating Cloudinary upload URL', error: err.message });
+  }
 });
-
 
 // JWT Middleware
 const verifyToken = (req, res, next) => {
