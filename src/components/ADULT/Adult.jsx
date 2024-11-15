@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import blankpic from '../images/blank-profile-pic.webp';
+import ateamphoto from '../images/a-team-photo.webp';
 import './Adult.css'
 
 const Adult = () => {
@@ -14,7 +14,7 @@ const Adult = () => {
       <div className="background-linear-deff mappp">
         <div className="section-pickme">
           <Link to="/Ateam" className="pickme-both">
-            <img src={blankpic} alt="BEE Logo" />
+            <img src={ateamphoto} alt="BEE Logo" />
             <h2>A-tým</h2>
           </Link>
         </div>

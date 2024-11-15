@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import './AktualityMain.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
-const OneAktualita = ({ date, headline, image, text, category, lineup, onImageClick, expanded }) => {
+const OneAktualita = ({ date, headline, image, text, category, lineup, onImageClick }) => {
   const [imageError, setImageError] = useState(false);
+  const [expander, setExpander] = useState(false);
+  const [iconDirection, setIconDirection] = useState(faChevronRight);
 
   const defaultImage = 'https://res.cloudinary.com/dirmiqkcn/image/upload/v1731591618/SkRozhovice/ooo6wxdqeuzyybxxcgbx.webp';
   const imageUrl = imageError || !image ? defaultImage : image;
@@ -15,6 +19,11 @@ const OneAktualita = ({ date, headline, image, text, category, lineup, onImageCl
     console.log('Image failed to load, falling back to default');
   };
 
+  const toggleImageExpansion = () => {
+    setExpander(!expander); 
+    setIconDirection(expander ? faChevronRight : faChevronLeft); 
+  };
+
   return (
     <div className="aktualita-container">
       <div className='category-akt'>
@@ -22,13 +31,18 @@ const OneAktualita = ({ date, headline, image, text, category, lineup, onImageCl
         <p className='category-date'>{date}</p>
       </div>
 
-      <img 
-        src={imageUrl}
-        alt={headline} 
-        className={`aktualita-image ${expanded ? 'expanded' : ''}`} // Apply 'expanded' class conditionally
-        onClick={onImageClick} // Trigger onImageClick on image click
-        onError={handleImageError} // Fallback on error
-      />
+      <div className="only-imagination">
+        <img 
+          src={imageUrl}
+          alt={headline} 
+          className={`aktualita-image ${expander ? 'expanded' : ''}`} 
+          onClick={toggleImageExpansion} 
+          onError={handleImageError} 
+        />
+        <div className={`icon-next ${expander ? 'expanded' : ''}`} onClick={toggleImageExpansion}>  
+          <FontAwesomeIcon icon={iconDirection} />
+        </div>
+      </div>
 
       <div className="aktualita-insider">
         <div className="headline-headerr">

@@ -35,7 +35,7 @@
 
 .tripple-pic img:hover{
    filter: grayscale(0%);
-   transform: scale(1.1);
+   transform: scale(1.05);
 }
 
 .stadion-wrap{
@@ -61,6 +61,7 @@
    width: 80%;
    max-width: 1600px;
    margin: 0 auto;
+   z-index: 15;
 }
  
  .positionorg {
@@ -70,7 +71,7 @@
    justify-content: center;
    text-transform: uppercase;
    font-weight: 600;
-   font-size: 1.1rem;
+   font-size: 1rem;
    position: relative;
    overflow: hidden;
    padding: 1rem;
@@ -85,10 +86,10 @@
    border-radius: 15px;
    width: 100%;
    text-align: center;
-   padding: 15px;
+   padding: 16px;
    font-weight: 600;
    text-transform: uppercase;
-   font-size: 1.25rem;
+   font-size: 1rem;
    position: absolute;
    top: 0;
    left: 0;

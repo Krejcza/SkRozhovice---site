@@ -23,6 +23,7 @@
   align-items: center;
   transition: 0.3s ease-out;
   overflow: hidden;
+  position: relative;
 }
 
 .aktualita-container:hover {
@@ -30,6 +31,23 @@
   transform: translateX(5px);
   box-shadow: 0px 5px 10px #00000075;
 }
+
+.aktualita-container::before{
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: url('../images/texture-aktu.png');
+   background-size: cover;
+   background-position: center;
+   opacity: 0.1;
+   background-repeat: no-repeat;
+   z-index: 1;
+   transform: rotateZ(180deg);
+}
+
  
 .category-akt{
   background-color: #181818;
@@ -58,11 +76,13 @@
   font-size: 0.75rem;
   padding: 5px;
   border-radius: 5px;
+  z-index: 1;
 }
 
 .category-date{
   transform: rotate(-90deg);
   white-space: nowrap;
+  z-index: 1;
 }
 
 .aktualita-insider{
@@ -80,11 +100,13 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  z-index: 1;
 }
 
 .aktualita-filling{
   flex: 5;
   padding: 1rem;
+  z-index: 1;
 }
 
 .headline-akt{
@@ -115,29 +137,65 @@
   transition: outline 0.3s ease-out;
 }
 
-.aktualita-image.expanded {
-  max-width: 450px; 
-  z-index: 2; 
+.aktualita-image::before {
   position: absolute;
-  top: 10%; 
-  left: 10%;
+  content: '\f0da'; 
+  font-family: 'Font Awesome 5 Free'; 
+  font-weight: 900; 
+  top: 50%; 
+  left: 100%;
+  transform: translateY(-50%);
+  color: #000;
+  font-size: 20px; 
+  z-index: 2;
 }
 
-.aktualita-container {
-  position: relative;
+.only-imagination {
+  display: flex;
+  align-items: center;
 }
 
 .aktualita-image.expanded {
   max-width: 450px;
   height: 325px;
-  z-index: 10;
+  z-index: 15;
   margin: 0;
+  position: absolute;
   top: 50%;
-  left: 350px;
+  left: 352px;
   transform: translate(-50%,-50%);
   box-shadow: 5px 5px 10px #00000075;
   outline: 2px solid #fff;
 }
+
+.icon-next {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px; 
+  height: 100px; 
+  background-color: rgba(0, 0, 0, 0.2); 
+  border-radius: 0 5px 5px 0 ;
+  cursor: pointer; 
+  transition: all 0.3s ease-out;
+  z-index: 11;
+  overflow: hidden;
+}
+
+.icon-next.expanded {
+  border-radius: 5px 0 0 5px;
+  background-color: rgba(0, 0, 0, 0.75); 
+  color: #fff;
+}
+
+.icon-next.expanded:hover{
+  background-color: rgba(0, 0, 0, 0.85); 
+}
+
+.icon-next:hover {
+  background-color: rgba(0, 0, 0, 0.4); 
+}
+
 
 .lineup-container{
   display: flex;

@@ -55,7 +55,7 @@ const CookieConsentBanner = () => {
     <div className="cookie-banner-overlay">
       <div className="cookie-banner">
         <p>
-          Na našem hřišti používáme cookies, abychom vylepšili každou návštěvu. Souhlasíte s touto taktikou?
+          Na našem hřišti používáme cookies, abychom vylepšili každou návštěvu! Souhlasíte s touto taktikou?
         </p>
         <div className="acc-dec-buttons">
           <button className='accept-button-consent' onClick={handleAccept}>Souhlasím</button>

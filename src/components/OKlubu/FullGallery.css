@@ -68,11 +68,10 @@
 }
 
 .modal-contentGal img {
-  max-width: 90%;
-  width: 1500px;
-  max-height: 90%;
-  height: 1000px;
+  max-width: 1500px;
+  width: 90%;
+  max-height: 1000px;
+  height: 90%;
   object-fit: cover;
   z-index: 1200;
 }
-

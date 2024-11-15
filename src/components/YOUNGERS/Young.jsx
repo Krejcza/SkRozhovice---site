@@ -1,6 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import blankpic from '../images/blank-profile-pic.webp';
+import MladsiPripravkaPic from '../images/mladsi_pripravka.jpg';
+import StarsiPripravkaPic from '../images/starsi_pripravka.jpg';
+import MladsiZaciPic from '../images/mladsi_zaci.jpg';
+import StarsiZaciPic from '../images/starsi_zaci.jpg';
+import DorostPic from '../images/dorost.jpg';
 import './Young.css'
 
 
@@ -15,23 +19,23 @@ const Young = () => {
         <div className="section-pickme-all">
           <div className="section-pickme-all-backgr">
             <Link to="/MladsiPriprava" className="pickme-both">
-              <img src={blankpic} alt="Mladší přípravka" />
+              <img src={MladsiPripravkaPic} alt="Mladší přípravka" />
               <h2>Mladší přípravka</h2>
             </Link>
             <Link to="/StarsiPriprava" className="pickme-both">
-              <img src={blankpic} alt="Starší přípravka" />
+              <img src={StarsiPripravkaPic} alt="Starší přípravka" />
               <h2>Starší přípravka</h2>
             </Link>
             <Link to="/MladsiZaci" className="pickme-both">
-              <img src={blankpic} alt="Mladší žáci" />
+              <img src={MladsiZaciPic} alt="Mladší žáci" />
               <h2>Mladší žáci</h2>
             </Link>
             <Link to="/StarsiZaci" className="pickme-both">
-              <img src={blankpic} alt="Starší žáci" />
+              <img src={StarsiZaciPic} alt="Starší žáci" />
               <h2>Starší žáci</h2>
             </Link>
             <Link to="/Dorost" className="pickme-both">
-              <img src={blankpic} alt="Dorost" />
+              <img src={DorostPic} alt="Dorost" />
               <h2>Dorost</h2>
             </Link>
           </div>
