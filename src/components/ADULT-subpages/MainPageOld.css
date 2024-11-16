@@ -127,6 +127,8 @@
    align-items: center;
    justify-content: center;
    margin: 2rem 0;
+   z-index: 15;
+   position: relative;
 }
 
 .actual-score a{

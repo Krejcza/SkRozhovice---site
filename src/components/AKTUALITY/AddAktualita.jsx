@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './AktualityMain.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
 const AddAktualita = ({ onAdd }) => {
   const [headline, setHeadline] = useState('');
@@ -91,7 +93,7 @@ const AddAktualita = ({ onAdd }) => {
 
   return (
     <div className="add-aktualita-container">
-      <h2>Add New Aktualita</h2>
+      <h2 className='editation-header'>Přidat novou aktualitu</h2>
       
       {error && <div className="error-message">{error}</div>}
       {successMessage && <div className="success-message">{successMessage}</div>}
@@ -99,7 +101,7 @@ const AddAktualita = ({ onAdd }) => {
       <form onSubmit={handleSubmit}>
         <div>
           <label>
-            Date:
+            Datum:
             <input
               type="date"
               value={date}
@@ -111,10 +113,10 @@ const AddAktualita = ({ onAdd }) => {
 
         <div>
           <label>
-            Headline:
+            Nadpis:
             <input
               type="text"
-              placeholder="Headline"
+              placeholder="Název aktuality"
               value={headline}
               onChange={(e) => setHeadline(e.target.value)}
               required
@@ -124,12 +126,17 @@ const AddAktualita = ({ onAdd }) => {
 
         <div>
           <label>
-            Image:
+            Nahraj obrázek:
             <input
               type="file"
               accept="image/*"
               onChange={handleFileChange}
+              className="file-upload-input"
             />
+            <span className="file-upload-button">
+              <FontAwesomeIcon icon={faUpload} />
+            </span>
+            {selectedFile && <p>{selectedFile.name}</p>}
           </label>
         </div>
 
@@ -137,7 +144,7 @@ const AddAktualita = ({ onAdd }) => {
           <label>
             Text:
             <textarea
-              placeholder="Text"
+              placeholder="Výplň článku"
               value={text}
               onChange={(e) => setText(e.target.value)}
               required
@@ -147,7 +154,7 @@ const AddAktualita = ({ onAdd }) => {
 
         <div>
           <label>
-            Category:
+            Kategorie:
             <select value={category} onChange={(e) => setCategory(e.target.value)}>
               <option value="INFO">INFO</option>
               <option value="ZÁPAS">ZÁPAS</option>
@@ -157,17 +164,17 @@ const AddAktualita = ({ onAdd }) => {
 
         <div>
           <label>
-            Lineup:
+            Sestava:
             <input
               type="text"
-              placeholder="Lineup"
+              placeholder="Barva - Pieies, Dvořák (86' Holub Martin), Vaško..."
               value={lineup}
               onChange={(e) => setLineup(e.target.value)}
             />
           </label>
         </div>
 
-        <button type="submit">Add Aktualita</button>
+        <button type="submit">Potvrdit přidání</button>
       </form>
     </div>
   );

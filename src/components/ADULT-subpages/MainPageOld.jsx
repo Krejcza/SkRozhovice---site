@@ -160,9 +160,10 @@ const handleModalClose = (e) => {
         <PlayerSection title="Obránci" players={defenders} />
         <PlayerSection title="Záložníci" players={midfielders} />
         <PlayerSection title="Útočníci" players={attackers} />
+        <EditModalPlayer/>
       </div>
 
-      <EditModalPlayer/>
+      
 
       <div className="background-black nb">
         <MatchesTable />

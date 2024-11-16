@@ -61,18 +61,19 @@
    transform: translateX(-50%);
    display: flex;
    gap: 5px;
+   z-index: 6;
  }
  
  .gallery-dot {
    width: 10px;
    height: 10px;
-   background-color: #bbb;
+   background-color: #181818;
    border-radius: 50%;
    cursor: pointer;
  }
  
  .gallery-dot.active {
-   background-color: #181818;
+   background-color: #ffffff;
  }
 
 

@@ -36,7 +36,6 @@ const EditModalPlayer = () => {
     }
   }, [isLoggedIn]);
 
-  // Fetch all players from the backend
   const fetchPlayers = async () => {
     try {
       const response = await fetch('http://localhost:5000/api/players');
@@ -48,6 +47,20 @@ const EditModalPlayer = () => {
   };
 
   const handleSelectPlayer = (playerId) => {
+    if (!playerId) {
+      setSelectedPlayer(null);
+      setFormData({
+        name: '',
+        birthyear: '',
+        height: '',
+        weight: '',
+        clubyear: '',
+        beercount: '',
+        instagram: ''
+      });
+      return;
+    }
+  
     const player = players.find((p) => p._id === playerId);
     setSelectedPlayer(player);
     setFormData({
@@ -88,49 +101,19 @@ const EditModalPlayer = () => {
     }
   };
 
-  const handleDeletePlayer = async () => {
-    if (window.confirm(`Are you sure you want to delete ${selectedPlayer.name}?`)) {
-      try {
-        const response = await fetch(`http://localhost:5000/api/players/${selectedPlayer._id}`, {
-          method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-        if (response.ok) {
-          alert('Player deleted successfully!');
-          setSelectedPlayer(null);
-          setFormData({
-            name: '',
-            birthyear: '',
-            height: '',
-            weight: '',
-            clubyear: '',
-            beercount: '',
-            instagram: ''
-          });
-          fetchPlayers();
-        } else {
-          alert('Failed to delete player');
-        }
-      } catch (error) {
-        console.error('Error deleting player:', error);
-      }
-    }
-  };
-
 
   return (
     isLoggedIn ? (
+      <div className='edit-player-wrapper'>
       <div className="edit-player-container">
-        <h2>Edit Player</h2>
+        <h2>Změnit údaje hráče</h2>
         
         <select
           className="select-player"
           onChange={(e) => handleSelectPlayer(e.target.value)}
           value={selectedPlayer?._id || ''}
         >
-          <option value="">Select a player</option>
+          <option value="">--Vyber hráče--</option>
           {players.map((player) => (
             <option key={player._id} value={player._id}>
               {player.name}
@@ -140,9 +123,9 @@ const EditModalPlayer = () => {
   
         {selectedPlayer && (
           <div className="edit-player-form">
-            <h3>Edit Details for {selectedPlayer.name}</h3>
+            <h3>Upravit údaje u: {selectedPlayer.name}</h3>
             <label>
-              Name:
+              Jméno:
               <input
                 type="text"
                 name="name"
@@ -152,7 +135,7 @@ const EditModalPlayer = () => {
               />
             </label>
             <label>
-              Birth Year:
+              Rok narození:
               <input
                 type="number"
                 name="birthyear"
@@ -162,7 +145,7 @@ const EditModalPlayer = () => {
               />
             </label>
             <label>
-              Height (cm):
+              Výška (cm):
               <input
                 type="number"
                 name="height"
@@ -172,7 +155,7 @@ const EditModalPlayer = () => {
               />
             </label>
             <label>
-              Weight (kg):
+              Váha (kg):
               <input
                 type="number"
                 name="weight"
@@ -182,7 +165,7 @@ const EditModalPlayer = () => {
               />
             </label>
             <label>
-              Club Year:
+              V klubu od roku:
               <input
                 type="number"
                 name="clubyear"
@@ -192,7 +175,7 @@ const EditModalPlayer = () => {
               />
             </label>
             <label>
-              Beer Count:
+              Počet piv před odpadnutím:
               <input
                 type="number"
                 name="beercount"
@@ -212,22 +195,17 @@ const EditModalPlayer = () => {
               />
             </label>
             
-            <div className="button-group">
+            <div className="button-group-editing">
               <button
                 className="button button-save"
                 onClick={handleUpdatePlayer}
               >
-                Update Player
-              </button>
-              <button
-                className="button button-delete"
-                onClick={handleDeletePlayer}
-              >
-                Delete Player
+                Potvrdit změny
               </button>
             </div>
           </div>
         )}
+      </div>
       </div>
     ) : null
   );

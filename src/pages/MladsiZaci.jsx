@@ -1,8 +1,9 @@
 import React from 'react';
 import MainPageY from '../components/YOUNG-subpages/MainPageY';
 import trenerImg from '../components/images/blank-profile-pic.webp';
-import img1 from '../components/images/hive-pattern-gold.png';
-import img2 from '../components/images/hive-pattern.png';
+import img1 from '../components/images/mladsi_zaci_foto1.jpg';
+import img2 from '../components/images/mladsi_zaci_foto2.jpg';
+import img3 from '../components/images/mladsi_zaci_foto3.jpg';
 import Transition from '../Transition'
 import { Helmet } from 'react-helmet-async';
 
@@ -13,7 +14,7 @@ const MladsiZaci = () => {
     { jmeno: 'Volejník Martin', pozice: 'Trenér', obrazek: trenerImg, telefon: '+420 736 434 004'},
   ];
 
-  const images = [img1, img2];
+  const images = [img1, img2, img3];
 
   return (
     <>

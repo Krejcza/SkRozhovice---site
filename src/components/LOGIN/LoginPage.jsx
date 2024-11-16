@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import './LoginPage.css';
+import { Eye, EyeOff } from 'lucide-react';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -100,13 +101,15 @@ const LoginPage = () => {
           {error && <p className="error">{error}</p>}
           <div className="input-group">
             <label htmlFor="username">Uživatel:</label>
-            <input
-              type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
+            <div className="input-container">
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </div>
           </div>
           <div className="input-group">
             <label htmlFor="password">Heslo:</label>
@@ -118,8 +121,13 @@ const LoginPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <button type="button" onClick={togglePasswordVisibility} className="toggle-password">
-                {showPassword ? 'Skrýt' : 'Zobrazit'}
+              <button 
+                type="button" 
+                onClick={togglePasswordVisibility} 
+                className="toggle-password"
+                aria-label={showPassword ? 'Skrýt heslo' : 'Zobrazit heslo'}
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
             </div>
           </div>
@@ -127,8 +135,9 @@ const LoginPage = () => {
         </form>
       ) : (
         <div className="logout-container">
-          <h2>Přihlášen uživatel: {userInfo}</h2>
-          <p>Zbývající čas tokenu: {remainingTime > 0 ? `${Math.floor(remainingTime / 60)} min ${remainingTime % 60} s` : 'Token vypršel'}</p>
+          <h2>Přihlášen uživatel:</h2>
+          <p className='user-identification'>{userInfo}</p>
+          <p className='user-token-time'>Zbývající čas tokenu: {remainingTime > 0 ? `${Math.floor(remainingTime / 60)} min ${remainingTime % 60} s` : 'Token vypršel'}</p>
           <button onClick={handleLogout} className="logout-button">Odhlásit</button>
         </div>
       )}

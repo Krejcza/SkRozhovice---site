@@ -1,4 +1,3 @@
-import React from 'react'
 import './Sponsors.css'
 import '../../App.css'
 
@@ -33,6 +32,8 @@ import bauset from '../images/Logos/bauset.jpg'
 import grof from '../images/Logos/grof.jpg' 
 import rigo from '../images/Logos/rigo.jpg' 
 import maple from '../images/Logos/maple.jpg' 
+import { motion } from 'framer-motion';
+import { useInView } from "react-intersection-observer";
 
 
 
@@ -72,19 +73,44 @@ const sponsors = [
  ];
 
  const Sponsors = () => {
-   return (
-      <div className='background-yellow'>
-         <h2 className='main-topic-small bl'>Sponzoři</h2>
 
-         <div className="sponsors-container">
-            {sponsors.map(sponsor => (
-               <a key={sponsor.id} href={sponsor.url} target="_blank" rel="noopener noreferrer" className="sponsor-item">
-               <img src={sponsor.logo} alt={sponsor.name} className="sponsor-logo" />
-               </a>
-            ))}
-         </div>
-     </div>
-   );
- };
+   const { ref, inView } = useInView({
+      threshold: 0.05,
+      triggerOnce: true, 
+    });
+
+    return (
+      <div className="background-yellow">
+        <h2 className="main-topic-small bl">Sponzoři</h2>
+  
+        <div className="sponsors-container" ref={ref}>
+          {sponsors.map((sponsor, index) => (
+            <motion.div
+              key={sponsor.id}
+              initial={{ opacity: 0, y: 50 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{
+                delay: inView ? index * 0.05 : 0,
+                duration: 0.8,
+              }}
+            >
+              <a
+                href={sponsor.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sponsor-item"
+              >
+                <img
+                  src={sponsor.logo}
+                  alt={sponsor.name}
+                  className="sponsor-logo"
+                />
+              </a>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    );
+  };
 
 export default Sponsors

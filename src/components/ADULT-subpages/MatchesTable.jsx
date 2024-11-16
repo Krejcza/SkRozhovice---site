@@ -156,10 +156,12 @@ const MatchesTable = () => {
               <td>{match.score}</td>
               {isLoggedIn && (
                 <td>
-                  <button onClick={() => {
-                    setEditMatch({ ...match });
-                  }}>Editovat</button>
-                  <button onClick={() => handleDeleteMatch(match._id)}>Smazat</button>
+                  <div className='buttons-for-editation-match'>
+                    <button className='editation-match-btn' onClick={() => {
+                      setEditMatch({ ...match });
+                    }}>Editovat</button>
+                    <button className='deletion-match-btn' onClick={() => handleDeleteMatch(match._id)}>Smazat</button>
+                  </div>
                 </td>
               )}
             </tr>

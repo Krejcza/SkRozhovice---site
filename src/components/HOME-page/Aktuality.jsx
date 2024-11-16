@@ -30,7 +30,7 @@ const Aktuality = () => {
       <h2 className='main-topic-small'>Poslední Aktuality</h2>
       <div className='all-aktuality'>
 
-        {aktuality.map((item) => (
+        {aktuality.map((item, index) => (
           <OneAktualita
             key={item._id}
             date={new Date(item.date).toLocaleDateString()}

@@ -1,8 +1,10 @@
 import React from 'react';
 import MainPageY from '../components/YOUNG-subpages/MainPageY';
 import trenerImg from '../components/images/blank-profile-pic.webp';
-import img1 from '../components/images/hive-pattern-gold.png';
-import img2 from '../components/images/hive-pattern.png';
+import img1 from '../components/images/dorost_foto4.jpg';
+import img2 from '../components/images/dorost_foto2.jpg';
+import img3 from '../components/images/dorost_foto3.jpg';
+import img4 from '../components/images/dorost_foto1.jpg';
 import Transition from '../Transition'
 import { Helmet } from 'react-helmet-async';
 
@@ -13,7 +15,7 @@ const Dorost = () => {
       { jmeno: 'Uhlíř Jan', pozice: 'Trenér', obrazek: trenerImg, telefon: '+420 733 192 667'  },
    ];
 
- const images = [img1, img2];
+ const images = [img1, img2, img3, img4];
 
  return (
   <>

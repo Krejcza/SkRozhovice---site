@@ -1,42 +1,44 @@
-/* General layout for the form */
+.edit-player-wrapper{
+  padding: 2rem 0; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .edit-player-container {
    max-width: 500px;
-   margin: 0 auto;
+   width: 100%;
    padding: 2rem;
-   background-color: #f9f9f9;
+   background-color: #376eae;
    border-radius: 8px;
-   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   box-shadow: 0 5px 10px #181818;
  }
- 
- /* Form title styling */
+
  .edit-player-container h2 {
    text-align: center;
-   color: #333;
-   font-size: 1.5rem;
+   color: #fff;
+   font-size: 1.25rem;
    margin-bottom: 1.5rem;
  }
- 
- /* Dropdown styling */
+
  .select-player {
    width: 100%;
    padding: 0.8rem;
    margin-bottom: 1rem;
-   border-radius: 4px;
-   border: 1px solid #ccc;
+   border-radius: 5px;
+   border: 3px solid #181818;
    background-color: #fff;
    font-size: 1rem;
-   color: #333;
+   color: #181818;
  }
- 
- /* Label styling */
+
  .edit-player-container label {
    display: block;
    margin: 0.5rem 0 0.3rem;
-   color: #333;
-   font-weight: bold;
+   color: #181818;
+   font-weight: 600;
  }
- 
- /* Input styling */
+
  .edit-player-container input[type="text"],
  .edit-player-container input[type="number"],
  .edit-player-container input[type="url"] {
@@ -47,8 +49,7 @@
    border-radius: 4px;
    font-size: 1rem;
  }
- 
- /* Buttons */
+
  .edit-player-container .button {
    width: 48%;
    padding: 0.8rem;
@@ -58,8 +59,14 @@
    cursor: pointer;
    transition: background-color 0.2s;
  }
- 
- /* Save button */
+
+ .button-group-editing{
+    padding-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
  .button-save {
    background-color: #28a745;
    color: #fff;
@@ -70,13 +77,11 @@
    background-color: #218838;
  }
  
- /* Delete button */
- .button-delete {
-   background-color: #dc3545;
-   color: #fff;
- }
- 
- .button-delete:hover {
-   background-color: #c82333;
+
+ .edit-player-form h3{
+    text-align: center;
+    color: #fff;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
  }
  

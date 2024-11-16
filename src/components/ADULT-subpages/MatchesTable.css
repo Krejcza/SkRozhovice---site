@@ -12,6 +12,8 @@
    background-color: #FEDF25;
    border-radius: 15px;
    overflow: hidden; 
+   z-index: 15;
+   position: relative;
  }
  
  .matches-table thead {
@@ -61,7 +63,7 @@
    background-color: #181818;
    color: #fff;
  }
- 
+
  
 
 
@@ -72,8 +74,10 @@
   margin: 20px auto;
   padding: 20px;
   border-radius: 10px;
-  background-color: rgb(101, 175, 255);
+  background-color: #4a90e2;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 15;
+  position: relative;
 }
 
 .add-match-form h3, .edit-match-form h3 {
@@ -143,6 +147,47 @@
    width: 20%; 
  }
  
+.buttons-for-editation-match{
+  display: flex;
+  flex-direction: row;
+  row-gap: 0.5rem;
+  column-gap: 0.5rem;
+}
+
+.editation-match-btn{
+  background-color: #4a90e2;
+  padding: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 3px 5px #181818;
+  color: #fff;
+}
+
+.editation-match-btn:hover{
+  background-color: #376eae;
+}
+
+
+.deletion-match-btn{
+  background-color: #ea5d5d;
+  padding: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 3px 5px #181818;
+  color: #fff;
+}
+
+.deletion-match-btn:hover{
+  background-color: #e62b2b;
+}
+
+
 
 
  @media (max-width: 1000px) {
