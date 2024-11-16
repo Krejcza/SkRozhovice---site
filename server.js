@@ -4,11 +4,10 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
-const router = express.Router();
 const cloudinary = require('cloudinary').v2;
+const requestIp = require('request-ip');
 require('dotenv').config({ path: './code.env' });
+
 
 const uploader = multer({ storage: multer.memoryStorage() }).single('image');
 
@@ -104,7 +103,9 @@ const aktualitaSchema = new mongoose.Schema({
   image: { type: String, default: "" },                    
   category: { type: String, required: true },                  
   lineup: { type: String, default: "" },                 
-  date: { type: Date, required: true }, 
+  date: { type: Date, required: true },
+  dislikeCount: { type: Number, default: 0 }, 
+  likeCount: { type: Number, default: 0 },
 }, {
   collection: 'Aktuality',
   versionKey: false
@@ -179,11 +180,32 @@ app.post('/api/aktuality', verifyToken, async (req, res) => {
   }
 });
 
+// GET endpoint pro získání aktuality podle ID
+app.get('/api/aktualita/:id', async (req, res) => {
+  const { id } = req.params; // Získání ID z URL parametrů
+  
+  try {
+    // Hledání aktuality podle ID v databázi
+    const aktualita = await Aktualita.findById(id);
+    
+    // Pokud aktualita neexistuje, vrátí 404
+    if (!aktualita) {
+      return res.status(404).json({ message: 'Aktualita not found' });
+    }
+
+    // Vrátí nalezenou aktualitu jako JSON odpověď
+    res.json(aktualita);
+  } catch (error) {
+    console.error(error);
+    // Vrátí chybu 500 při neúspěchu
+    res.status(500).json({ message: 'Error retrieving aktualita' });
+  }
+});
 
 app.put('/api/aktuality/:id', verifyToken, async (req, res) => {
   const { id } = req.params;
   const { date, headline, image, text, category, lineup } = req.body;
-
+  
   try {
     const updatedAktualita = await Aktualita.findByIdAndUpdate(
       id,
@@ -217,7 +239,104 @@ app.delete('/api/aktuality/:id', async (req, res) => {
   }
 });
 
+app.post('/api/aktualita/:id/like', async (req, res) => {
+  const { id } = req.params;
+  const clientIp = requestIp.getClientIp(req);  // Get the IP address of the client
 
+  try {
+    const aktualita = await Aktualita.findById(id);
+
+    if (!aktualita) {
+      return res.status(404).json({ message: 'Aktualita not found' });
+    }
+
+    // Check if the user has already voted
+    if (aktualita.votes && aktualita.votes[clientIp]) {
+      return res.status(400).json({ message: 'You have already voted' });
+    }
+
+    // Increment likeCount
+    aktualita.likeCount += 1;
+    if (!aktualita.votes) {
+      aktualita.votes = {};
+    }
+    aktualita.votes[clientIp] = 'liked';  // Store the vote by IP
+
+    await aktualita.save();
+
+    res.json({ message: 'Article liked', likeCount: aktualita.likeCount });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error liking the article' });
+  }
+});
+
+app.post('/api/aktualita/:id/dislike', async (req, res) => {
+  const { id } = req.params;
+  const clientIp = requestIp.getClientIp(req);
+
+  try {
+    const aktualita = await Aktualita.findById(id);
+
+    if (!aktualita) {
+      return res.status(404).json({ message: 'Aktualita not found' });
+    }
+
+    // Check if the user has already voted
+    if (aktualita.votes && aktualita.votes[clientIp]) {
+      return res.status(400).json({ message: 'You have already voted' });
+    }
+
+    // Increment dislikeCount
+    aktualita.dislikeCount += 1;
+    if (!aktualita.votes) {
+      aktualita.votes = {};
+    }
+    aktualita.votes[clientIp] = 'disliked';  // Store the vote by IP
+
+    await aktualita.save();
+
+    res.json({ message: 'Article disliked', dislikeCount: aktualita.dislikeCount });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error disliking the article' });
+  }
+});
+
+app.post('/api/aktualita/:id/unlike', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const aktualita = await Aktualita.findById(id);
+    if (!aktualita) {
+      console.error('Aktualita not found:', id);
+      return res.status(404).json({ message: 'Aktualita not found' });
+    }
+
+    aktualita.likeCount = Math.max(aktualita.likeCount - 1, 0);
+    await aktualita.save();
+
+    res.json({ likeCount: aktualita.likeCount });
+  } catch (error) {
+    console.error('Error while unliking:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+app.post('/api/aktualita/:id/undislike', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const aktualita = await Aktualita.findById(id);
+    if (!aktualita) return res.status(404).json({ message: 'Aktualita not found' });
+
+    aktualita.dislikeCount = Math.max(aktualita.dislikeCount - 1, 0);
+    await aktualita.save();
+
+    res.json({ dislikeCount: aktualita.dislikeCount });
+  } catch (error) {
+    console.error('Error in undislike:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 
 

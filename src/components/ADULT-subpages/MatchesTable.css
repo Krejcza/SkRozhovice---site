@@ -74,7 +74,7 @@
   margin: 20px auto;
   padding: 20px;
   border-radius: 10px;
-  background-color: #4a90e2;
+  background-color: #2596be;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 15;
   position: relative;
@@ -155,7 +155,7 @@
 }
 
 .editation-match-btn{
-  background-color: #4a90e2;
+  background-color: #2596be;
   padding: 0.25rem;
   font-size: 1rem;
   cursor: pointer;
@@ -167,7 +167,7 @@
 }
 
 .editation-match-btn:hover{
-  background-color: #376eae;
+  background-color: #2596be;
 }
 
 

@@ -1,3 +1,5 @@
+
+
 .aktuality-all{
    width: 100%;
    display: flex;
@@ -13,7 +15,7 @@
   width: 1400px;
   min-height: 350px;
   height: auto;
-  background-color: #FEDF25;
+  background: #FEDF25;
   display: flex;
   box-shadow: 0px 5px 20px #00000075;
   padding: 1rem;
@@ -114,12 +116,18 @@
   font-weight: 600;
   text-transform: uppercase;
   border-bottom: 5px solid #fff;
+  color: #181818;
 }
 
 
 .text-akt{
   font-size: 0.9rem;
   font-weight: 500;
+  color: #181818;
+  line-height: 20px;
+  letter-spacing: -1px;
+  font-family: 'Fira Code', monospace;
+
 }
 
 
@@ -201,19 +209,63 @@
   display: flex;
   flex-direction: column;
   row-gap: 0.5rem;
+  margin-top: 2rem;
   margin-bottom: 1rem;
+  border-top: 3px dotted #fff;
 }
 
 .lineup-label {
-  font-weight: 500;
   font-size: 0.9rem;
-  color: #555555;
+  font-weight: 600;
+  color: #181818;
+  text-transform: uppercase;
+  margin-top: 0.25rem;
 }
 
 .lineup-text {
-  font-weight: 400;
   font-size: 0.9rem;
-  color: #555555;
+  color: #181818;
+}
+
+.like-dislike-container{
+  z-index: 15;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.like-button{
+  background-color: #4a90e2;
+  border: 0;
+  outline: 0;
+  padding: 0.5rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #fff;
+  margin-right: 0.5rem;
+  box-shadow: 0 1px 5px #181818;
+}
+
+.like-button svg{
+  margin-right: 5px;
+}
+
+.dislike-button{
+  background-color: #e24a4a;
+  border: 0;
+  outline: 0;
+  padding: 0.5rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #fff;
+  box-shadow: 0 1px 5px #181818;
+}
+
+.dislike-button svg{
+  margin-right: 5px;
 }
 
 
@@ -267,7 +319,7 @@
 
 
 form {
-  background-color: rgb(101, 175, 255); /* White background for the form */
+  background-color: #2596be; /* White background for the form */
   padding: 20px; /* Spacing inside the form */
   border-radius: 10px; /* Rounded corners */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */

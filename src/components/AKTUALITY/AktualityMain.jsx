@@ -3,7 +3,7 @@ import OneAktualita from './AktualityONE';
 import AddAktualita from './AddAktualita';
 import './AktualityMain.css';
 import DeleteAktualita from './DeleteAktualita';
-import EditAktualita from './EditAktualita'
+import EditAktualita from './EditAktualita';
 
 const AktualityMain = () => {
   const [news, setNews] = useState([]);
@@ -16,17 +16,18 @@ const AktualityMain = () => {
   const itemsPerPage = 5;
   const pagesToShow = 3;
 
+  // Fetch aktuality data
   const fetchAktuality = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
       const response = await fetch(`http://localhost:5000/api/aktuality/all?page=${currentPage}&limit=${itemsPerPage}`);
-      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      if (!response.ok) throw new Error(`Failed to fetch data: ${response.status}`);
       const data = await response.json();
       setNews(data.aktuality || []);
       setTotal(data.total || 0);
-    } catch (error) {
-      console.error('Error fetching aktuality:', error.message);
+    } catch (err) {
+      console.error('Error fetching aktuality:', err);
       setError('Failed to load news. Please try again later.');
     } finally {
       setLoading(false);
@@ -37,7 +38,10 @@ const AktualityMain = () => {
     fetchAktuality();
   }, [fetchAktuality]);
 
+  // Calculate total pages
   const totalPages = Math.ceil(total / itemsPerPage);
+
+  // Get page numbers for pagination
   const getPageNumbers = () => {
     const totalPageNumbersToShow = Math.min(pagesToShow, totalPages);
     let startPage = Math.max(1, currentPage - Math.floor(totalPageNumbersToShow / 2));
@@ -53,9 +57,10 @@ const AktualityMain = () => {
 
   const isLoggedIn = !!localStorage.getItem('token');
 
+  // Handlers for adding, deleting, and editing aktuality
   const handleAddAktualita = (newAktualita) => {
     setNews((prevNews) => [newAktualita, ...prevNews]);
-    setTotal((prevTotal) => prevTotal + 1); 
+    setTotal((prevTotal) => prevTotal + 1);
   };
 
   const handleDeleteAktualita = (id) => {
@@ -72,11 +77,7 @@ const AktualityMain = () => {
 
 
   const handleImageClick = (imageId) => {
-    if (expandedImage === imageId) {
-      setExpandedImage(null); // Pokud je obrázek už zvětšený, zmenšíme ho
-    } else {
-      setExpandedImage(imageId); // Pokud není zvětšený, zvětšíme ho
-    }
+    setExpandedImage(prev => (prev === imageId ? null : imageId));
   };
 
   return (
@@ -93,8 +94,9 @@ const AktualityMain = () => {
             <p>{error}</p>
           ) : news.length > 0 ? (
             news.map((item) => (
-              <div key={item._id}>
+              <article key={item._id} className="aktualita-wrapper">
                 <OneAktualita
+                  id={item._id}
                   date={new Date(item.date).toLocaleDateString()}
                   headline={item.headline}
                   image={item.image}
@@ -105,12 +107,12 @@ const AktualityMain = () => {
                   expanded={expandedImage === item._id}
                 />
                 {isLoggedIn && (
-                  <>
+                  <div className="aktualita-actions">
                     <button className='edit-button' onClick={() => setEditingAktualita(item)}>Edit</button>
                     <DeleteAktualita id={item._id} onDelete={handleDeleteAktualita} />
-                  </>
+                  </div>
                 )}
-              </div>
+              </article>
             ))
           ) : (
             <p>Žádné novinky</p>
