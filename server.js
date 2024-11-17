@@ -106,6 +106,10 @@ const aktualitaSchema = new mongoose.Schema({
   date: { type: Date, required: true },
   dislikeCount: { type: Number, default: 0 }, 
   likeCount: { type: Number, default: 0 },
+  votes: {
+    type: Object,
+    default: {}
+  }
 }, {
   collection: 'Aktuality',
   versionKey: false
@@ -239,37 +243,69 @@ app.delete('/api/aktuality/:id', async (req, res) => {
   }
 });
 
+
+
+
+
+
+
+
 app.post('/api/aktualita/:id/like', async (req, res) => {
   const { id } = req.params;
-  const clientIp = requestIp.getClientIp(req);  // Get the IP address of the client
+  const clientIp = requestIp.getClientIp(req);
 
   try {
     const aktualita = await Aktualita.findById(id);
-
     if (!aktualita) {
       return res.status(404).json({ message: 'Aktualita not found' });
     }
 
-    // Check if the user has already voted
-    if (aktualita.votes && aktualita.votes[clientIp]) {
-      return res.status(400).json({ message: 'You have already voted' });
-    }
-
-    // Increment likeCount
-    aktualita.likeCount += 1;
+    // Inicializace votes pokud neexistuje
     if (!aktualita.votes) {
       aktualita.votes = {};
     }
-    aktualita.votes[clientIp] = 'liked';  // Store the vote by IP
 
+    const currentVote = aktualita.votes[clientIp];
+    
+    // Pokud uživatel už dal like
+    if (currentVote === 'liked') {
+      return res.status(400).json({ 
+        message: 'Already liked',
+        likeCount: aktualita.likeCount,
+        dislikeCount: aktualita.dislikeCount
+      });
+    }
+
+    // Pokud měl dislike, odstraníme ho
+    if (currentVote === 'disliked') {
+      aktualita.dislikeCount = Math.max(0, aktualita.dislikeCount - 1);
+    }
+
+    aktualita.likeCount += 1;
+    aktualita.votes[clientIp] = 'liked';
+
+    // Použití markModified pro informování Mongoose o změně v objektu
+    aktualita.markModified('votes');
     await aktualita.save();
 
-    res.json({ message: 'Article liked', likeCount: aktualita.likeCount });
+    res.json({
+      message: 'Article liked',
+      likeCount: aktualita.likeCount,
+      dislikeCount: aktualita.dislikeCount
+    });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error liking the article' });
+    console.error('Error liking:', error);
+    res.status(500).json({ 
+      message: 'Server error',
+      details: error.message 
+    });
   }
 });
+
+
+
+
+
 
 app.post('/api/aktualita/:id/dislike', async (req, res) => {
   const { id } = req.params;
@@ -277,66 +313,215 @@ app.post('/api/aktualita/:id/dislike', async (req, res) => {
 
   try {
     const aktualita = await Aktualita.findById(id);
-
     if (!aktualita) {
       return res.status(404).json({ message: 'Aktualita not found' });
     }
 
-    // Check if the user has already voted
-    if (aktualita.votes && aktualita.votes[clientIp]) {
-      return res.status(400).json({ message: 'You have already voted' });
-    }
-
-    // Increment dislikeCount
-    aktualita.dislikeCount += 1;
+    // Inicializace votes pokud neexistuje
     if (!aktualita.votes) {
       aktualita.votes = {};
     }
-    aktualita.votes[clientIp] = 'disliked';  // Store the vote by IP
 
+    const currentVote = aktualita.votes[clientIp];
+    
+    // Pokud uživatel už dal dislike
+    if (currentVote === 'disliked') {
+      return res.status(400).json({ 
+        message: 'Already disliked',
+        likeCount: aktualita.likeCount,
+        dislikeCount: aktualita.dislikeCount
+      });
+    }
+
+    // Pokud měl like, odstraníme ho
+    if (currentVote === 'liked') {
+      aktualita.likeCount = Math.max(0, aktualita.likeCount - 1);
+    }
+
+    aktualita.dislikeCount += 1;
+    aktualita.votes[clientIp] = 'disliked';
+
+    aktualita.markModified('votes');
     await aktualita.save();
 
-    res.json({ message: 'Article disliked', dislikeCount: aktualita.dislikeCount });
+    res.json({
+      message: 'Article disliked',
+      likeCount: aktualita.likeCount,
+      dislikeCount: aktualita.dislikeCount
+    });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error disliking the article' });
+    console.error('Error disliking:', error);
+    res.status(500).json({ 
+      message: 'Server error',
+      details: error.message 
+    });
   }
 });
 
+
+
+
+
+
+
+
+
 app.post('/api/aktualita/:id/unlike', async (req, res) => {
+  const { id } = req.params;
+  const clientIp = requestIp.getClientIp(req);
+
   try {
-    const { id } = req.params;
     const aktualita = await Aktualita.findById(id);
     if (!aktualita) {
-      console.error('Aktualita not found:', id);
       return res.status(404).json({ message: 'Aktualita not found' });
     }
 
-    aktualita.likeCount = Math.max(aktualita.likeCount - 1, 0);
+    // Inicializace votes pokud neexistuje
+    if (!aktualita.votes) {
+      aktualita.votes = {};
+    }
+
+    const currentVote = aktualita.votes[clientIp];
+    
+    // Pokud uživatel neměl like, nemůžeme ho odebrat
+    if (currentVote !== 'liked') {
+      return res.status(400).json({ 
+        message: 'No like to remove',
+        likeCount: aktualita.likeCount,
+        dislikeCount: aktualita.dislikeCount
+      });
+    }
+
+    aktualita.likeCount = Math.max(0, aktualita.likeCount - 1);
+    delete aktualita.votes[clientIp];
+
+    aktualita.markModified('votes');
     await aktualita.save();
 
-    res.json({ likeCount: aktualita.likeCount });
+    res.json({
+      message: 'Like removed',
+      likeCount: aktualita.likeCount,
+      dislikeCount: aktualita.dislikeCount
+    });
   } catch (error) {
-    console.error('Error while unliking:', error);
+    console.error('Error unliking:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+
+
+
+
+
+
+
 
 app.post('/api/aktualita/:id/undislike', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const aktualita = await Aktualita.findById(id);
-    if (!aktualita) return res.status(404).json({ message: 'Aktualita not found' });
+  const { id } = req.params;
+  const clientIp = requestIp.getClientIp(req);
 
-    aktualita.dislikeCount = Math.max(aktualita.dislikeCount - 1, 0);
+  try {
+    const aktualita = await Aktualita.findById(id);
+    if (!aktualita) {
+      return res.status(404).json({ message: 'Aktualita not found' });
+    }
+
+    // Inicializace votes pokud neexistuje
+    if (!aktualita.votes) {
+      aktualita.votes = {};
+    }
+
+    const currentVote = aktualita.votes[clientIp];
+    
+    // Pokud uživatel neměl dislike, nemůžeme ho odebrat
+    if (currentVote !== 'disliked') {
+      return res.status(400).json({ 
+        message: 'No dislike to remove',
+        likeCount: aktualita.likeCount,
+        dislikeCount: aktualita.dislikeCount
+      });
+    }
+
+    aktualita.dislikeCount = Math.max(0, aktualita.dislikeCount - 1);
+    delete aktualita.votes[clientIp];
+
+    aktualita.markModified('votes');
     await aktualita.save();
 
-    res.json({ dislikeCount: aktualita.dislikeCount });
+    res.json({
+      message: 'Dislike removed',
+      likeCount: aktualita.likeCount,
+      dislikeCount: aktualita.dislikeCount
+    });
   } catch (error) {
-    console.error('Error in undislike:', error);
+    console.error('Error undisliking:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+
+
+
+
+
+
+
+
+app.get('/api/aktualita/:id/status', async (req, res) => {
+  const { id } = req.params;
+  const clientIp = requestIp.getClientIp(req);
+
+  try {
+    console.log('Fetching status for id:', id);
+    console.log('Client IP:', clientIp);
+
+    const aktualita = await Aktualita.findById(id);
+    if (!aktualita) {
+      console.log('Aktualita not found');
+      return res.status(404).json({ message: 'Aktualita not found' });
+    }
+
+    // Inicializace votes pokud neexistuje
+    if (!aktualita.votes) {
+      aktualita.votes = {};
+      aktualita.markModified('votes');
+      await aktualita.save();
+    }
+
+    console.log('Found aktualita:', {
+      id: aktualita._id,
+      likeCount: aktualita.likeCount,
+      dislikeCount: aktualita.dislikeCount,
+      votes: aktualita.votes
+    });
+
+    const userStatus = aktualita.votes[clientIp] || null;
+
+    console.log('User status:', userStatus);
+
+    res.json({
+      likeCount: aktualita.likeCount || 0,
+      dislikeCount: aktualita.dislikeCount || 0,
+      userStatus
+    });
+  } catch (error) {
+    console.error('Detailed error in status endpoint:', {
+      error: error.message,
+      stack: error.stack,
+      id,
+      clientIp
+    });
+    res.status(500).json({ 
+      message: 'Server error', 
+      details: error.message 
+    });
+  }
+});
+
+
+
+
 
 
 

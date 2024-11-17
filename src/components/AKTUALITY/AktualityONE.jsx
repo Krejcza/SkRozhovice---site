@@ -12,6 +12,7 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
   const [likeCount, setLikeCount] = useState(0);
   const [dislikeCount, setDislikeCount] = useState(0);
   const [userStatus, setUserStatus] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const defaultImage = 'https://res.cloudinary.com/dirmiqkcn/image/upload/v1731591618/SkRozhovice/ooo6wxdqeuzyybxxcgbx.webp';
   const imageUrl = imageError || !image ? defaultImage : image;
@@ -19,32 +20,56 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
   const categoryTextClass = category === 'INFO' ? 'cat-info' : 
                             category === 'ZÁPAS' ? 'cat-zapas' : '';
 
-      useEffect(() => {
-        const fetchStatus = async () => {
-          try {
-            const response = await fetch(`http://localhost:5000/api/aktualita/${id}/status`, {
-              method: 'GET',
-            });
-            if (!response.ok) throw new Error('Error fetching like/dislike data');
-            const data = await response.json();
-            setLikeCount(data.likeCount);
-            setDislikeCount(data.dislikeCount);
+  const getCookieStatus = () => Cookies.get(`aktualita-${id}-status`);
+  const setCookieStatus = (status) => Cookies.set(`aktualita-${id}-status`, status, { expires: 365 });
+  const removeCookieStatus = () => Cookies.remove(`aktualita-${id}-status`);
 
-            // Preferovat stav ze serveru nad cookies
-            if (data.userStatus) {
-              setUserStatus(data.userStatus); // Backend vrací 'liked' nebo 'disliked'
-              Cookies.set(`aktualita-${id}-status`, data.userStatus, { expires: 365 });
-            } else {
-              const savedStatus = Cookies.get(`aktualita-${id}-status`);
-              if (savedStatus) setUserStatus(savedStatus);
-            }
-          } catch (error) {
-            console.error('Error fetching like/dislike data:', error);
+  useEffect(() => {
+    const fetchStatus = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch(`http://localhost:5000/api/aktualita/${id}/status`);
+        
+        if (!response.ok) {
+          // Pokud server není dostupný, použijeme data z cookies
+          const savedStatus = getCookieStatus();
+          if (savedStatus) {
+            setUserStatus(savedStatus);
+            // Nastavíme počáteční hodnoty podle cookies
+            if (savedStatus === 'liked') setLikeCount(prev => prev + 1);
+            if (savedStatus === 'disliked') setDislikeCount(prev => prev + 1);
           }
-        };
+          return;
+        }
 
-        fetchStatus();
-      }, [id]);
+        const data = await response.json();
+        setLikeCount(data.likeCount || 0);
+        setDislikeCount(data.dislikeCount || 0);
+
+        // Prioritizujeme server data nad cookies
+        if (data.userStatus) {
+          setUserStatus(data.userStatus);
+          setCookieStatus(data.userStatus);
+        } else {
+          const savedStatus = getCookieStatus();
+          if (savedStatus) setUserStatus(savedStatus);
+        }
+      } catch (error) {
+        console.error('Error fetching status:', error);
+        // V případě chyby použijeme data z cookies
+        const savedStatus = getCookieStatus();
+        if (savedStatus) {
+          setUserStatus(savedStatus);
+          if (savedStatus === 'liked') setLikeCount(prev => prev + 1);
+          if (savedStatus === 'disliked') setDislikeCount(prev => prev + 1);
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchStatus();
+  }, [id]);
 
       const handleImageError = () => {
         setImageError(true);
@@ -57,86 +82,129 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
       };
 
       const handleLike = async () => {
-        if (userStatus === 'liked') {
-          // If already liked, remove like
-          await handleRemoveLike();
-        } else {
-          // If disliked, remove dislike before liking
-          if (userStatus === 'disliked') await handleRemoveDislike();
-          try {
-            const response = await fetch(`http://localhost:5000/api/aktualita/${id}/like`, { method: 'POST' });
-            if (!response.ok) {
-              const data = await response.json();
-              alert(data.message);
-              return;
-            }
-            const data = await response.json();
-            setLikeCount(data.likeCount);
-            setUserStatus('liked');
-            Cookies.set(`aktualita-${id}-status`, 'liked', { expires: 365 });
-          } catch (error) {
-            console.error('Error liking the article:', error);
+        if (isLoading) return;
+        setIsLoading(true);
+        
+        try {
+          if (userStatus === 'liked') {
+            await handleRemoveLike();
+            return;
           }
+    
+          if (userStatus === 'disliked') {
+            await handleRemoveDislike();
+          }
+    
+          const response = await fetch(`http://localhost:5000/api/aktualita/${id}/like`, { 
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+    
+          if (!response.ok) {
+            const data = await response.json();
+            throw new Error(data.message || 'Error liking the article');
+          }
+    
+          const data = await response.json();
+          setLikeCount(data.likeCount || likeCount + 1);
+          setUserStatus('liked');
+          setCookieStatus('liked');
+          
+        } catch (error) {
+          console.error('Error:', error);
+          alert('Nepodařilo se přidat like. Zkuste to prosím později.');
+        } finally {
+          setIsLoading(false);
         }
       };
-
+    
       const handleDislike = async () => {
-        if (userStatus === 'disliked') {
-          // If already disliked, remove dislike
-          await handleRemoveDislike();
-        } else {
-          // If liked, remove like before disliking
-          if (userStatus === 'liked') await handleRemoveLike();
-          try {
-            const response = await fetch(`http://localhost:5000/api/aktualita/${id}/dislike`, { method: 'POST' });
-            if (!response.ok) {
-              const data = await response.json();
-              alert(data.message);
-              return;
-            }
-            const data = await response.json();
-            setDislikeCount(data.dislikeCount);
-            setUserStatus('disliked');
-            Cookies.set(`aktualita-${id}-status`, 'disliked', { expires: 365 });
-          } catch (error) {
-            console.error('Error disliking the article:', error);
+        if (isLoading) return;
+        setIsLoading(true);
+        
+        try {
+          if (userStatus === 'disliked') {
+            await handleRemoveDislike();
+            return;
           }
+    
+          if (userStatus === 'liked') {
+            await handleRemoveLike();
+          }
+    
+          const response = await fetch(`http://localhost:5000/api/aktualita/${id}/dislike`, { 
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+    
+          if (!response.ok) {
+            const data = await response.json();
+            throw new Error(data.message || 'Error disliking the article');
+          }
+    
+          const data = await response.json();
+          setDislikeCount(data.dislikeCount || dislikeCount + 1);
+          setUserStatus('disliked');
+          setCookieStatus('disliked');
+          
+        } catch (error) {
+          console.error('Error:', error);
+          alert('Nepodařilo se přidat dislike. Zkuste to prosím později.');
+        } finally {
+          setIsLoading(false);
         }
       };
-
+    
       const handleRemoveLike = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/api/aktualita/${id}/unlike`, { method: 'POST' });
+          const response = await fetch(`http://localhost:5000/api/aktualita/${id}/unlike`, { 
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+    
           if (!response.ok) {
             const data = await response.json();
-            alert(data.message);
-            return;
+            throw new Error(data.message || 'Error removing like');
           }
+    
           const data = await response.json();
-          setLikeCount(data.likeCount);
+          setLikeCount(data.likeCount || likeCount - 1);
           setUserStatus(null);
-          Cookies.remove(`aktualita-${id}-status`);
+          removeCookieStatus();
         } catch (error) {
-          console.error('Error removing like:', error);
+          console.error('Error:', error);
         }
       };
-
+    
       const handleRemoveDislike = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/api/aktualita/${id}/undislike`, { method: 'POST' });
+          const response = await fetch(`http://localhost:5000/api/aktualita/${id}/undislike`, { 
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+    
           if (!response.ok) {
             const data = await response.json();
-            alert(data.message);
-            return;
+            throw new Error(data.message || 'Error removing dislike');
           }
+    
           const data = await response.json();
-          setDislikeCount(data.dislikeCount);
+          setDislikeCount(data.dislikeCount || dislikeCount - 1);
           setUserStatus(null);
-          Cookies.remove(`aktualita-${id}-status`);
+          removeCookieStatus();
         } catch (error) {
-          console.error('Error removing dislike:', error);
+          console.error('Error:', error);
         }
       };
+    
 
       
   return (
@@ -173,21 +241,23 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
           )}
         </div>
         <div className="like-dislike-container">
-          <button 
-            className={`like-button ${userStatus === 'liked' ? 'active' : ''}`} 
-            onClick={handleLike} 
-          >
-            <FontAwesomeIcon icon={faThumbsUp} />
-            {likeCount}
-          </button>
-          <button 
-            className={`dislike-button ${userStatus === 'disliked' ? 'active' : ''}`} 
-            onClick={handleDislike} 
-          >
-            <FontAwesomeIcon icon={faThumbsDown} />
-            {dislikeCount}
-          </button>
-        </div>
+        <button 
+          className={`like-button ${userStatus === 'liked' ? 'active' : ''}`} 
+          onClick={handleLike}
+          disabled={isLoading}
+        >
+          <FontAwesomeIcon icon={faThumbsUp} />
+          {likeCount}
+        </button>
+        <button 
+          className={`dislike-button ${userStatus === 'disliked' ? 'active' : ''}`} 
+          onClick={handleDislike}
+          disabled={isLoading}
+        >
+          <FontAwesomeIcon icon={faThumbsDown} />
+          {dislikeCount}
+        </button>
+      </div>
       </div>
     </div>
   );
