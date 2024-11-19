@@ -3,6 +3,8 @@ import Youngers from '../components/YOUNGERS/Young'
 import Transition from '../Transition'
 import { Helmet } from 'react-helmet-async';
 
+// Stránka Týmy mládež - s komponentami a popiskem přes react-helmet
+
 const TýmyMládež = () => {
   return (
     <>

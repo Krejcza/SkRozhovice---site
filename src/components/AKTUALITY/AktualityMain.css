@@ -246,6 +246,11 @@
   color: #fff;
   margin-right: 0.5rem;
   box-shadow: 0 1px 5px #181818;
+  transition: 0.3s ease-out;
+}
+
+.like-button:hover{
+  background-color: #3d79bd;
 }
 
 .like-button svg{
@@ -262,11 +267,22 @@
   cursor: pointer;
   color: #fff;
   box-shadow: 0 1px 5px #181818;
+  transition: 0.3s ease-out;
+}
+
+.dislike-button:hover{
+  background-color: #b23a3a;
 }
 
 .dislike-button svg{
   margin-right: 5px;
 }
+
+.like-button.active, .dislike-button.active {
+  background-color: #181818;
+  color: white;
+}
+
 
 
 .pagination {
@@ -319,71 +335,71 @@
 
 
 form {
-  background-color: #2596be; /* White background for the form */
-  padding: 20px; /* Spacing inside the form */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  margin: 20px 0; /* Spacing above and below the form */
-  max-width: 600px; /* Limit the form width */
-  margin-left: auto; /* Center the form horizontally */
-  margin-right: auto; /* Center the form horizontally */
+  background-color: #2596be;
+  padding: 20px; 
+  border-radius: 10px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 20px 0; 
+  max-width: 600px; 
+  margin-left: auto; 
+  margin-right: auto; 
 }
 
 form h2 {
-  margin-bottom: 15px; /* Space below the heading */
-  font-size: 24px; /* Heading size */
-  color: #333; /* Dark gray color for the heading */
+  margin-bottom: 15px;
+  font-size: 24px; 
+  color: #333; 
 }
 
 form p {
-  margin: 10px 0; /* Spacing for error and success messages */
-  font-size: 14px; /* Text size for messages */
+  margin: 10px 0; 
+  font-size: 14px; 
 }
 
 form label {
-  display: block; /* Block layout for labels */
-  margin-bottom: 5px; /* Space below the label */
-  font-weight: bold; /* Bold font for labels */
+  display: block; 
+  margin-bottom: 5px; 
+  font-weight: bold; 
 }
 
 form input[type="text"],
 form input[type="date"],
 form select,
 form textarea {
-  width: 100%; /* Full width inputs */
-  padding: 10px; /* Padding for comfort */
-  border: 1px solid #ced4da; /* Light gray border */
-  border-radius: 5px; /* Slightly rounded corners */
-  box-sizing: border-box; /* Include padding and border in element's total width */
-  margin-bottom: 15px; /* Space below each input */
-  transition: border-color 0.3s; /* Smooth transition for focus */
+  width: 100%; 
+  padding: 10px; 
+  border: 1px solid #ced4da; 
+  border-radius: 5px;
+  box-sizing: border-box; 
+  margin-bottom: 15px; 
+  transition: border-color 0.3s; 
 }
 
 form input[type="text"]:focus,
 form input[type="date"]:focus,
 form select:focus,
 form textarea:focus {
-  border-color: #4a90e2; /* Border color on focus */
-  outline: none; /* Remove default outline */
+  border-color: #4a90e2; 
+  outline: none; 
 }
 
 form textarea {
-  height: 100px; /* Set a fixed height for the textarea */
-  resize: vertical; /* Allow vertical resizing */
+  height: 100px; 
+  resize: vertical; 
 }
 
 form button {
-  background-color: #28a745; /* Green background color */
-  color: white; /* White text color */
-  border: none; /* Remove border */
-  border-radius: 5px; /* Rounded corners */
-  padding: 10px 15px; /* Padding for button */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s; /* Smooth transition for hover */
+  background-color: #28a745; 
+  color: white; 
+  border: none; 
+  border-radius: 5px; 
+  padding: 10px 15px; 
+  cursor: pointer;
+  transition: background-color 0.3s; 
 }
 
 form button:hover {
-  background-color: #218838; /* Darker green on hover */
+  background-color: #218838; 
 }
 
 .file-upload-input {
@@ -394,12 +410,12 @@ form button:hover {
   display: inline-block;
   position: relative;
   width: auto;
-  background-color: #007bff; /* Blue background for button */
-  color: white; /* White text color */
-  border-radius: 5px; /* Rounded corners */
-  padding: 10px 15px; /* Padding for button */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s ease; /* Smooth background color transition */
+  background-color: #007bff; 
+  color: white; 
+  border-radius: 5px; 
+  padding: 10px 15px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
   text-align: center;
 }
 
@@ -407,7 +423,7 @@ form button:hover {
   text-align: center;
   padding: 0.5rem;
   display: block;
-  font-size: 1rem; /* Font size for the text */
+  font-size: 1rem;
   background-color: #fff;
   border: 2px solid #fff;
   border-radius: 5px;
@@ -419,59 +435,55 @@ form button:hover {
   background-color: #FEDF25;
 }
 
-/* Hover effect */
 .file-upload-label:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3; 
 }
 
-/* Optional: Add a focus effect for accessibility */
 .file-upload-label:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.6); /* Blue focus outline */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.6); 
 }
 
-/* AktualityMain.css */
-
 .delete-button {
-  background-color: #dc3545; /* Red background color */
-  color: white; /* White text color */
-  border: none; /* No border */
-  border-radius: 5px; /* Slightly rounded corners */
-  padding: 10px 15px; /* Padding for comfort */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
-  font-size: 16px; /* Font size */
+  background-color: #dc3545; 
+  color: white; 
+  border: none; 
+  border-radius: 5px; 
+  padding: 10px 15px; 
+  cursor: pointer; 
+  transition:0.3s ease-out; 
+  font-size: 16px; 
 }
 
 .delete-button:hover {
-  background-color: #c82333; /* Darker red on hover */
+  background-color: #c82333; 
 }
 
 .delete-button:disabled {
-  background-color: #ccc; /* Gray background when disabled */
-  color: #666; /* Darker gray text when disabled */
-  cursor: not-allowed; /* Not allowed cursor when disabled */
+  background-color: #ccc;
+  color: #666; 
+  cursor: not-allowed; 
 }
 
 .edit-button {
-  background-color: #2f830d; /* Blue background color */
-  color: white; /* White text color */
-  border: none; /* No border */
-  border-radius: 5px; /* Slightly rounded corners */
-  padding: 10px 15px; /* Padding for comfort */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
-  font-size: 16px; /* Font size */
+  background-color: #2f830d; 
+  color: white; 
+  border: none; 
+  border-radius: 5px; 
+  padding: 10px 15px; 
+  cursor: pointer;
+  transition:0.3s ease-out; 
+  font-size: 16px; 
 }
 
 .edit-button:hover {
-  background-color: #29720c; /* Darker blue on hover */
+  background-color: #29720c; 
 }
 
 .edit-button:disabled {
-  background-color: #ccc; /* Gray background when disabled */
-  color: #666; /* Darker gray text when disabled */
-  cursor: not-allowed; /* Not allowed cursor when disabled */
+  background-color: #ccc; 
+  color: #666;
+  cursor: not-allowed;
 }
 
 .add-aktualita-container{
@@ -483,7 +495,19 @@ form button:hover {
   text-align: center;
 }
 
+.loader {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #FEDF25;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
 
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 
 

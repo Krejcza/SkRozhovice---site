@@ -3,6 +3,8 @@ import { jwtDecode } from 'jwt-decode';
 import './LoginPage.css';
 import { Eye, EyeOff } from 'lucide-react';
 
+// Login page na stránce, kde se uživatel může přihlásit a provádět úpravy.
+
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -13,10 +15,13 @@ const LoginPage = () => {
   const [tokenExpiration, setTokenExpiration] = useState(null);
   const [remainingTime, setRemainingTime] = useState(null);
 
+  // Vezme si token z localstorage a pokud ho najde, tak nastaví JWT token na ověřen a nastaví ho na hodinu. Pokud ještě zbývá čas, tak uživatel je přihlášen a může upravovat data.
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
       const decodedToken = jwtDecode(token);
+      // Proč 1000? převod z milisekund na sekundy, protože JWT ho bere v sekundách
       const currentTime = Math.floor(Date.now() / 1000);
       const remainingTime = decodedToken.exp - currentTime;
       
@@ -31,6 +36,8 @@ const LoginPage = () => {
     }
   }, []);
 
+  // Sleduje vypršení platnosti tokenu uživatele. Každou sekundu přepočítává čas, který se nastaví do remainingTime. ClearInterval se ukončí, když už kod není potřeba vykreslovat.
+
   useEffect(() => {
     if (tokenExpiration) {
       const interval = setInterval(() => {
@@ -41,6 +48,8 @@ const LoginPage = () => {
       return () => clearInterval(interval);
     }
   }, [tokenExpiration]);
+
+  // Kontrola uživatelského jména a hesla, kdy pokud sedí tak se nastavít oken a začne se odpočítávat čas. Vyjede alert s úspěšným přihlášením a vymažou se řádky s přihlášením. 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,10 +81,12 @@ const LoginPage = () => {
         setError(message);
       }
     } catch (error) {
-      console.error('Error logging in:', error);
+      console.error('Chyba přihlašování:', error);
       setError('Server error');
     }
   };
+
+  // Funkce na odhlášení uživatele.
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -87,6 +98,8 @@ const LoginPage = () => {
     setRemainingTime(null);
     alert('Byl(a) jste odhlášen(a)');
   };
+
+  // funkce na zobrazit/schovat heslo
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);

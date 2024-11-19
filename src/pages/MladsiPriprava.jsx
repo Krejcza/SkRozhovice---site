@@ -6,6 +6,8 @@ import img2 from '../components/images/mladsi_pripravka_foto2.jpg';
 import Transition from '../Transition'
 import { Helmet } from 'react-helmet-async';
 
+// Stránka Mladší Příprava - s komponentami a popiskem přes react-helmet, kde se data trenérů načítají odtud s arraye. Při úpravě je třeba přidat/odebrat jméno, obrázek nahrát a změnit pozici popřípadě. Pro aktualizaci dat z webu fotbal.cz se používá tato stránka -- ne v komponentě
+
 const MladsiPriprava = () => {
 
   // Data jsou správná

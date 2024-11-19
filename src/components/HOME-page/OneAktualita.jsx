@@ -2,10 +2,10 @@ import './Aktuality.css'
 import { Link } from 'react-router-dom';
 
 
-const OneAktualita = ({ date, headline, image, text }) => {
-  console.log('Image URL:', image);
-  
+// Komponenta jedné aktuality, která se ukazuje na hlavní stránce.
 
+const OneAktualita = ({ date, headline, image, text }) => {
+  
   const imageUrl = image && image !== '' 
     ? image 
     : 'https://res.cloudinary.com/dirmiqkcn/image/upload/v1731591618/SkRozhovice/ooo6wxdqeuzyybxxcgbx.webp';

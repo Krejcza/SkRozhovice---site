@@ -8,23 +8,26 @@ const EditAktualita = ({ aktualita, onUpdate }) => {
   const [text, setText] = useState(aktualita.text);
   const [category, setCategory] = useState(aktualita.category);
   const [lineup, setLineup] = useState(aktualita.lineup);
-  const [date, setDate] = useState(aktualita.date.split('T')[0]); // Format date to 'YYYY-MM-DD'
+  const [date, setDate] = useState(aktualita.date.split('T')[0]); // Formátování data na 'YYYY-MM-DD'
   const [selectedFile, setSelectedFile] = useState(null);
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
+  // Funkce pro zpracování nahraného souboru
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
 
+  // Funkce pro odeslání aktualizovaných dat
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSuccessMessage('');
   
-    let imagePath = "/uploads/default.webp";
-    try {
+    let imagePath = aktualita.image;
 
+    // Logika pro nahrání nového obrázku přes Cloudinary
+    try {
       if (selectedFile) {
         const response = await fetch('http://localhost:5000/api/get-upload-url', { method: 'POST' });
         const data = await response.json();
@@ -44,12 +47,13 @@ const EditAktualita = ({ aktualita, onUpdate }) => {
 
           if (!cloudinaryResponse.ok) {
             console.error('Cloudinary Error:', cloudinaryResult);
-            throw new Error(cloudinaryResult.message || 'Failed to upload image');
+            throw new Error(cloudinaryResult.message || 'Obrázek se nepodařilo nahrát');
           }
         
         imagePath = cloudinaryResult.secure_url; 
       }
 
+      // Příprava aktualizovaných dat aktuality
       const formattedDate = new Date(date).toISOString();
       const updatedAktualita = {
         ...aktualita,
@@ -61,6 +65,7 @@ const EditAktualita = ({ aktualita, onUpdate }) => {
         lineup,
       };
 
+      // Odeslání dat na server metodou PUT
       const response = await fetch(`http://localhost:5000/api/aktuality/${aktualita._id}`, {
         method: 'PUT',
         headers: {
@@ -70,25 +75,27 @@ const EditAktualita = ({ aktualita, onUpdate }) => {
         body: JSON.stringify(updatedAktualita),
       });
 
+       // Zpracování odpovědi
       if (!response.ok) {
-        throw new Error('Failed to update aktualita');
+        throw new Error('Chyba při přidávání aktuality');
       }
 
       const data = await response.json();
-      setSuccessMessage('Aktualita updated successfully!');
-      onUpdate(data); // Callback to update the state in AktualityMain
+      setSuccessMessage('Aktualita byla úspěšně přidána');
+      onUpdate(data);
 
     } catch (error) {
-      setError(error.message || 'An error occurred');
+      setError(error.message || 'Nastala chyba');
     }
   };
 
+  // useeffect pro aktualizaci stavů při změně aktuality
   useEffect(() => {
     setHeadline(aktualita.headline);
     setText(aktualita.text);
     setCategory(aktualita.category);
     setLineup(aktualita.lineup);
-    setDate(aktualita.date.split('T')[0]); // Format date to 'YYYY-MM-DD'
+    setDate(aktualita.date.split('T')[0]);
   }, [aktualita]);
 
   return (
@@ -137,6 +144,7 @@ const EditAktualita = ({ aktualita, onUpdate }) => {
               <FontAwesomeIcon icon={faUpload} />
             </span>
             {selectedFile && <p>{selectedFile.name}</p>}
+            {!selectedFile && <p>Aktuální obrázek: {aktualita.image.split('/').pop()}</p>}
           </label>
         </div>
 

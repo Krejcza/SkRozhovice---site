@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './MatchesTable.css';
 import { jwtDecode } from 'jwt-decode';
 
+// Komponenta tabulky zápasů
+
 const MatchesTable = () => {
   const [matches, setMatches] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -15,8 +17,9 @@ const MatchesTable = () => {
   });
   const [editMatch, setEditMatch] = useState(null);
 
+
+  // ověří se jestli je uživatel přihlášený
   useEffect(() => {
-    // Check if the user is logged in
     const token = localStorage.getItem('token');
     if (token) {
       try {
@@ -24,30 +27,30 @@ const MatchesTable = () => {
         const currentTime = Date.now() / 1000;
         setIsLoggedIn(decodedToken.exp > currentTime);
       } catch (error) {
-        console.error('Error decoding token:', error);
+        console.error('Chyba dekódování tokenu:', error);
       }
     }
 
+    // Načtení zápasů z api
     const fetchMatches = async () => {
       try {
         const response = await fetch('http://localhost:5000/api/matches');
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
 
-        // Sort matches by round number
+        //srování zápasů podle kola
         setMatches(data.sort((a, b) => a.round - b.round));
       } catch (error) {
-        console.error('Error fetching matches:', error.message);
+        console.error('Chyba načítání zápasů:', error.message);
       }
     };
 
     fetchMatches();
   }, []);
 
-  // Function to add a new match
+  // Funkce na přidání nového zápasu
   const handleAddMatch = async () => {
     try {
-      console.log('Adding match with data:', newMatch);
       const response = await fetch('http://localhost:5000/api/matches', {
         method: 'POST',
         headers: { 
@@ -62,14 +65,14 @@ const MatchesTable = () => {
         setMatches((prevMatches) => [...prevMatches, addedMatch]);
         setNewMatch({ round: '', date: '', kickoffTime: '', teamDomaci: '', teamHoste: '', score: '' });
       } else {
-        console.error('Error adding match:', await response.text());
+        console.error('Chyba při přidání zápasu:', await response.text());
       }
     } catch (error) {
-      console.error('Error adding match:', error);
+      console.error('Chyba při přidání zápasu:', error);
     }
   };
 
-  // Function to handle editing a match
+  // Funkce na editaci zápasů
   const handleEditMatchSubmit = async () => {
     if (editMatch) {
       const updatedData = { ...editMatch };
@@ -90,10 +93,10 @@ const MatchesTable = () => {
           );
           setEditMatch(null);
         } else {
-          console.error('Error updating match');
+          console.error('Chyba upravování zápasů');
         }
       } catch (error) {
-        console.error('Error updating match:', error);
+        console.error('Chyba upravování zápasů:', error);
       }
     }
   };
@@ -114,17 +117,17 @@ const MatchesTable = () => {
         if (response.ok) {
           setMatches((prevMatches) => prevMatches.filter(match => match._id !== id));
         } else {
-          console.error('Error deleting match');
+          console.error('Chyba mazání zápasu');
         }
       } catch (error) {
-        console.error('Error deleting match:', error);
+        console.error('Chyba mazání zápasu:', error);
       }
     } else {
-      console.log('Deletion canceled.');
+      console.log('Smazání zápasu přerušeno.');
     }
   };
 
-  // Function to handle input changes in the edit form
+  // funkce na změny co napíše uživatel
   const handleEditInputChange = (e) => {
     setEditMatch({
       ...editMatch,

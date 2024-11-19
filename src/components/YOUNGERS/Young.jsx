@@ -7,7 +7,7 @@ import StarsiZaciPic from '../images/starsi_zaci.jpg';
 import DorostPic from '../images/dorost.jpg';
 import './Young.css'
 
-
+// Komponenta, která vrací Týmy mládež, které si uživatel může zvolit a přesměruje ho to na detailný stránky
 
 const Young = () => {
   return (

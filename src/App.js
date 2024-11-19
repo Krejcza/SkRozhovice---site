@@ -23,6 +23,11 @@ import { AnimatePresence } from 'framer-motion';
 import { HelmetProvider } from 'react-helmet-async';
 import CookieConsentBanner from './components/CookieConsentBanner';
 
+
+// Složení stránek a odkazů na ně 
+
+
+
 const App = () => {
   const location = useLocation();
 

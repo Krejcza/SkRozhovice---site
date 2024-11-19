@@ -1,3 +1,6 @@
+// Datový set, ve kterém se můžou měnit názvy u navbaru - jak hlavního, tak padacích menu
+
+
 export const navItems = [
    {
       id:1,

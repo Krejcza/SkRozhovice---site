@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './OneButton.css';
 
+// Tlačítka, které ukazují nahoře na stránce, adresu, telefon a email.
+
 const OneButton = ({ label, contactInfo }) => {
   const [isOpen, setIsOpen] = useState(false);
 

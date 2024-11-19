@@ -34,6 +34,9 @@ import droneF3 from '../images/AboutClub/DJI_0758.webp'
 import mascot1 from '../images/AboutClub/vcelka1.webp'
 import mascot2 from '../images/AboutClub/vcelka2.webp'
 
+// Nahrané obrázky na stránku o klubu
+
+
 export default {
   image1,
   image2,

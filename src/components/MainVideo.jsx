@@ -4,6 +4,9 @@ import './MainVideo.css'
 import skRozText from '../components/images/SKrozhovicePic.png'
 import fallBackImage from '../components/images/fallback.webp'
 
+
+// Komponenta na hlavní video, kde se kontroluje zda má uživatel wifi připojení. Pokud ano, tak se zobrazní video, pokud ne, tak se zobrazí obrázek týmu.
+
 const MainVideo = () => {
   const [isSlowConnection, setIsSlowConnection] = useState(false);
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import './ContactMain.css';
 
+// Komponenta na vypsání všech trenérů, které jsou na stránce kontakt. Pokud má přiřazenou classu inv tak se změní barva, aby byla kontrastní oproti pozadí.
+
 const OneTrainer = ({ image, name, position, phone, isInverse }) => {
   return (
     <div className="trainer-container">

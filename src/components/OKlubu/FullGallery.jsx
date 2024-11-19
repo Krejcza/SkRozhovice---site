@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import './FullGallery.css';
 
+// Galerie obrázků s možným rozkliknutím na stránce o klubu. Používá a mapuje poslané obrázky z FImages.jsx
+
 const Gallery = ({ images }) => {
   const [selectedImage, setSelectedImage] = useState(null);
+
+
+  // přidává classu noscrool, aby se při koukání na obrázek nedalo scrollovat
 
   const openImage = (image) => {
     setSelectedImage(image);
     document.body.classList.add('no-scroll');
   };
+
+  // funkce na ukončení obrázku, když kliknu na křížek a zároveň se povolí scroll
 
   const closeModal = () => {
     setSelectedImage(null);

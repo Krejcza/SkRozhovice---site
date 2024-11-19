@@ -13,12 +13,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 
+// Hlavní navbar na stránce, který obsahuje jak desktop verzi, tak i mobilní verzi, tak i vyskakovací bubble verzi když sjedu dolů
+
 const Navbar = () => {
     const [dropdown, setDropdown] = useState(false);
     const [youthDropdown, setYouthDropdown] = useState(false);
     const [showBubbleMenu, setShowBubbleMenu] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const location = useLocation();
+
+
+    // Useeffect, který když posunu stránku o víc než 80px na ScrollY a zároveň není otevřeno mobilní menu, tak se ukáže bubble menu 
 
     useEffect(() => {
         const handleScroll = () => {
@@ -35,9 +40,15 @@ const Navbar = () => {
         };
     }, [mobileMenuOpen]);
 
+
+    // Useeffect, když přepnu na jinou stránku a zobrazí se mi transition, tak aby zajelo mobilní menu když je otevřené.
+
     useEffect(() => {
         setMobileMenuOpen(false);
     }, [location]);
+
+
+    // Funkce kontroluje zobrazení mobilního a bublinkového menu. 
 
     const handleMenuClick = () => {
         setMobileMenuOpen(!mobileMenuOpen);

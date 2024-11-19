@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import './EditModalPlayer.css'
 import { jwtDecode } from 'jwt-decode';
 
+// Editace hráče - jeho kartičky v modálním okně
+
 const EditModalPlayer = () => {
   const [players, setPlayers] = useState([]);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
@@ -17,6 +19,8 @@ const EditModalPlayer = () => {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+
+  // ověření uživatele
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -25,7 +29,7 @@ const EditModalPlayer = () => {
         const currentTime = Date.now() / 1000;
         setIsLoggedIn(decodedToken.exp > currentTime);
       } catch (error) {
-        console.error('Error decoding token:', error);
+        console.error('Chyba získávání tokenu:', error);
       }
     }
   }, []);
@@ -36,16 +40,19 @@ const EditModalPlayer = () => {
     }
   }, [isLoggedIn]);
 
+
+  // načítání hráčů
   const fetchPlayers = async () => {
     try {
       const response = await fetch('http://localhost:5000/api/players');
       const data = await response.json();
       setPlayers(data);
     } catch (error) {
-      console.error('Error fetching players:', error);
+      console.error('Chyba načítání hráčů:', error);
     }
   };
 
+  // vybrání konkrétního hráče
   const handleSelectPlayer = (playerId) => {
     if (!playerId) {
       setSelectedPlayer(null);
@@ -73,13 +80,13 @@ const EditModalPlayer = () => {
       instagram: player.instagram
     });
   };
-
-  // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  
+  // funkce na updatování hráče
   const handleUpdatePlayer = async () => {
     try {
       const response = await fetch(`http://localhost:5000/api/players/${selectedPlayer._id}`, {
@@ -91,13 +98,13 @@ const EditModalPlayer = () => {
         body: JSON.stringify(formData)
       });
       if (response.ok) {
-        alert('Player updated successfully!');
+        alert('Hráč byl úspěšně aktualizován!');
         fetchPlayers();
       } else {
-        alert('Failed to update player');
+        alert('Chyba při upravování hráče');
       }
     } catch (error) {
-      console.error('Error updating player:', error);
+      console.error('Chyba při upravování hráče:', error);
     }
   };
 

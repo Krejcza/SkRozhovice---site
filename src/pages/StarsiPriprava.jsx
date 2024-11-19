@@ -6,9 +6,11 @@ import img2 from '../components/images/starsi_pripravka_foto2.jpg';
 import Transition from '../Transition'
 import { Helmet } from 'react-helmet-async';
 
+// Stránka Starší Příprava - s komponentami a popiskem přes react-helmet, kde se data trenérů načítají odtud s arraye. Při úpravě je třeba přidat/odebrat jméno, obrázek nahrát a změnit pozici popřípadě. Pro aktualizaci dat z webu fotbal.cz se používá tato stránka -- ne v komponentě
+
 const StarsiPriprava = () => {
 
-  // Data jsou správná
+  // Data jsou správná - 19.11.2024
   const treneri = [
     { jmeno: 'Uttendorský Jakub', pozice: 'Trenér', obrazek: trenerImg, telefon: '+420 606 602 249'}, { jmeno: 'Žáková Denisa', pozice: 'Hlavní vedoucí', obrazek: trenerImg, telefon: '+420 728 415 383' }
   ];

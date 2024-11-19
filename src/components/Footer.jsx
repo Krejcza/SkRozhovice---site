@@ -6,6 +6,8 @@ import './Footer.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faSquareFacebook } from '@fortawesome/free-brands-svg-icons';
 
+// Jednoduchá footer komponenta, která vrací spodní část stránky
+
 const Footer = () => {
    return (
       <footer className='footer'>

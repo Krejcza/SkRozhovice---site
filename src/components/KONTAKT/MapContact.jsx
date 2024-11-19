@@ -4,6 +4,8 @@ import loat from '../images/BEE-logo.png'
 import L from 'leaflet';
 import './ContactMain.css'
 
+// Komponenta na mapku, která je dole na stránce a nastavují se zde souřadnice, které má ukazovat
+
 const center = [49.9683, 15.7092];
 
 const customIcon = new L.Icon({

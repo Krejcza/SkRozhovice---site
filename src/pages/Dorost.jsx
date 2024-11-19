@@ -8,6 +8,8 @@ import img4 from '../components/images/dorost_foto1.jpg';
 import Transition from '../Transition'
 import { Helmet } from 'react-helmet-async';
 
+// Stránka Dorostu - s komponentami a popiskem přes react-helmet, kde se data trenérů načítají odtud s arraye. Při úpravě je třeba přidat/odebrat jméno, obrázek nahrát a změnit pozici popřípadě. Pro aktualizaci dat z webu fotbal.cz se používá tato stránka -- ne v komponentě
+
 const Dorost = () => {
 
    // Data jsou správná

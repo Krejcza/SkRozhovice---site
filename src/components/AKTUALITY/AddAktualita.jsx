@@ -3,6 +3,8 @@ import './AktualityMain.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
+// Komponenta, která dokáže přidávat aktuality uživatelem.
+
 const AddAktualita = ({ onAdd }) => {
   const [headline, setHeadline] = useState('');
   const [text, setText] = useState('');
@@ -13,18 +15,24 @@ const AddAktualita = ({ onAdd }) => {
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
+
+  // Funkce pro zpracování nahraného souboru
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
 
+
+  // Hlavní funkce pro odeslání formuláře
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Reset stavů před odesláním
     setError('');
     setSuccessMessage('');
   
     let imagePath = "/uploads/default.webp";
+      // Logika pro nahrání obrázku na Cloudinary
     try {
-
       if (selectedFile) {
         const response = await fetch('http://localhost:5000/api/get-upload-url', { method: 'POST' });
         const data = await response.json();
@@ -44,14 +52,14 @@ const AddAktualita = ({ onAdd }) => {
 
           if (!cloudinaryResponse.ok) {
             console.error('Cloudinary Error:', cloudinaryResult);
-            throw new Error(cloudinaryResult.message || 'Failed to upload image');
+            throw new Error(cloudinaryResult.message || 'Obrázek se nepodařilo nahrát');
           }
         
         imagePath = cloudinaryResult.secure_url; 
       }
   
   
-
+      // Příprava dat pro odeslání na server
       const formattedDate = new Date(date).toISOString();
       const aktualitaData = {
         date: formattedDate,
@@ -62,6 +70,7 @@ const AddAktualita = ({ onAdd }) => {
         lineup,
       };
 
+      // Odeslání dat na backend
       const response = await fetch('http://localhost:5000/api/aktuality', {
         method: 'POST',
         headers: {
@@ -71,13 +80,14 @@ const AddAktualita = ({ onAdd }) => {
         body: JSON.stringify(aktualitaData),
       });
 
-      if (!response.ok) throw new Error((await response.json()).message || 'Failed to add aktualita');
+      // Kontrola odpovědi
+      if (!response.ok) throw new Error((await response.json()).message || 'Chyba při přidávání aktuality');
 
       const data = await response.json();
-      setSuccessMessage('Aktualita added successfully!');
+      setSuccessMessage('Aktualita byla úspěšně přidána');
       onAdd(data);
 
-      // Reset form
+      // Reset formuláře
       setHeadline('');
       setText('');
       setCategory('INFO');
@@ -86,7 +96,7 @@ const AddAktualita = ({ onAdd }) => {
       setSelectedFile(null);
       document.querySelector('input[type="file"]').value = '';
     } catch (error) {
-      setError(error.message || 'An error occurred');
+      setError(error.message || 'Nastala chyba');
     }
   };
 

@@ -6,9 +6,12 @@ import img2 from '../components/images/starsi_zaci_foto1.jpg';
 import Transition from '../Transition'
 import { Helmet } from 'react-helmet-async';
 
+
+// Stránka Starší žáci - s komponentami a popiskem přes react-helmet, kde se data trenérů načítají odtud s arraye. Při úpravě je třeba přidat/odebrat jméno, obrázek nahrát a změnit pozici popřípadě. Pro aktualizaci dat z webu fotbal.cz se používá tato stránka -- ne v komponentě
+
 const StarsiZaci = () => {
 
-  // Data jsou správná
+  // Data jsou správná - 19.11.2024
   const treneri = [
     { jmeno: 'Tomčík Michal', pozice: 'Trenér', obrazek: trenerImg, telefon: '+420 775 869 281'  },
   ];

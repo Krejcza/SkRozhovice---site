@@ -2,6 +2,9 @@ import Transition from '../Transition'
 import MainPageOld from '../components/ADULT-subpages/MainPageOld'
 import { Helmet } from 'react-helmet-async';
 
+
+// Stránka hlavního A-týmu - s komponentami a popiskem přes react-helmet, kde se data trenérů načítají odtud s arraye. Při úpravě je třeba přidat/odebrat jméno, obrázek nahrát a změnit pozici popřípadě.
+
 const Ateam = () => {
   return (
     <>

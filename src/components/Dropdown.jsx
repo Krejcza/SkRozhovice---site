@@ -4,12 +4,13 @@ import { oldDropdown } from './NavItems'
 import { Link } from 'react-router-dom'
 import './Dropdown.css'
 
+
+
+// Dropdown na hlavním menu, který cílí na Týmy dospělí. Bere si data z NavItems, kde se dají měnit stránky/odkazy
+
 const Dropdown = () => {
 
    const [dropdown, setDropdown] = useState(false)
-
-
-
 
   return (
     <>

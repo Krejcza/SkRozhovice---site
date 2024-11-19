@@ -3,6 +3,8 @@ import AboutClub from '../components/OKlubu/AboutClub'
 import Transition from '../Transition'
 import { Helmet } from 'react-helmet-async';
 
+// Stránka O Klubu - s komponentami a popiskem přes react-helmet
+
 const OKlubu = () => {
   return (
     <>

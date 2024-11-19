@@ -3,6 +3,8 @@ import ContactMain from '../components/KONTAKT/ContactMain'
 import Transition from '../Transition'
 import { Helmet } from 'react-helmet-async';
 
+// Stránka Kontakt. Pro additional informace o stránce na meta-description se používá react-helmet.
+
 const Kontakt = () => {
   return (
     <>

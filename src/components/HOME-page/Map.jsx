@@ -4,6 +4,8 @@ import 'leaflet/dist/leaflet.css';
 import loat from '../images/BEE-logo.png'
 import L from 'leaflet';
 
+// Komponenta mapky, která je na hlavní stránce. Zde se mění lokace mapky kam ukazuje.
+
 const center = [49.9683, 15.7092];
 
 const customIcon = new L.Icon({

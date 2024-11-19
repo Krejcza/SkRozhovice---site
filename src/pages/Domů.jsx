@@ -7,6 +7,8 @@ import Map from '../components/HOME-page/Map';
 import Transition from '../Transition';
 import { Helmet } from 'react-helmet-async';
 
+// Main domovská stránka složená z komponent. První stránka, kterou vidí uživatel, když přijde na web.
+
 const Domů = () => {
   return (
     <>

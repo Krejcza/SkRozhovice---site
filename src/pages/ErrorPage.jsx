@@ -3,6 +3,9 @@ import Transition from '../Transition'
 import BeePic from '../components/images/beehive.png'
 import { Helmet } from 'react-helmet-async';
 
+// Error page, když se stránka nenajde nebo nenačte/špatně napíše. Nemá komponenty - celá stránka je napsaná zde.
+
+
 const ErrorPage = () => {
   return (
     <>

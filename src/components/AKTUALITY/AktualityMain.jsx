@@ -16,19 +16,19 @@ const AktualityMain = () => {
   const itemsPerPage = 5;
   const pagesToShow = 3;
 
-  // Fetch aktuality data
+  // Načtení aktualit z API
   const fetchAktuality = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
       const response = await fetch(`http://localhost:5000/api/aktuality/all?page=${currentPage}&limit=${itemsPerPage}`);
-      if (!response.ok) throw new Error(`Failed to fetch data: ${response.status}`);
+      if (!response.ok) throw new Error(`Chyba při načítání dat: ${response.status}`);
       const data = await response.json();
       setNews(data.aktuality || []);
       setTotal(data.total || 0);
     } catch (err) {
-      console.error('Error fetching aktuality:', err);
-      setError('Failed to load news. Please try again later.');
+      console.error('Chyba při načítání dat:', err);
+      setError('Nepodařilo se načíst zprávy. Zkuste to prosím později.');
     } finally {
       setLoading(false);
     }
@@ -38,10 +38,10 @@ const AktualityMain = () => {
     fetchAktuality();
   }, [fetchAktuality]);
 
-  // Calculate total pages
+  
   const totalPages = Math.ceil(total / itemsPerPage);
 
-  // Get page numbers for pagination
+  // Výpočet stránek pro stránkování
   const getPageNumbers = () => {
     const totalPageNumbersToShow = Math.min(pagesToShow, totalPages);
     let startPage = Math.max(1, currentPage - Math.floor(totalPageNumbersToShow / 2));
@@ -57,7 +57,7 @@ const AktualityMain = () => {
 
   const isLoggedIn = !!localStorage.getItem('token');
 
-  // Handlers for adding, deleting, and editing aktuality
+   // Handlery pro manipulaci s aktualitami
   const handleAddAktualita = (newAktualita) => {
     setNews((prevNews) => [newAktualita, ...prevNews]);
     setTotal((prevTotal) => prevTotal + 1);
@@ -89,7 +89,7 @@ const AktualityMain = () => {
       <div className='background-linear-deff mappp minhei'>
         <div className="aktuality-all">
           {loading ? (
-            <p>Loading...</p>
+            <p  className='loader'></p>
           ) : error ? (
             <p>{error}</p>
           ) : news.length > 0 ? (
@@ -108,7 +108,7 @@ const AktualityMain = () => {
                 />
                 {isLoggedIn && (
                   <div className="aktualita-actions">
-                    <button className='edit-button' onClick={() => setEditingAktualita(item)}>Edit</button>
+                    <button className='edit-button' onClick={() => setEditingAktualita(item)}>Upravit</button>
                     <DeleteAktualita id={item._id} onDelete={handleDeleteAktualita} />
                   </div>
                 )}

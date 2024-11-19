@@ -1,5 +1,8 @@
 import React from 'react';
-import './AboutClub.css'; // Ujisti se, že CSS soubor je importován
+import './AboutClub.css';
+
+
+// Komponenta organizace na stránce O klubu, která si posílá data AbourClub.jsx
 
 const ButtonOrganization = ({ pozice, jmeno }) => {
   return (

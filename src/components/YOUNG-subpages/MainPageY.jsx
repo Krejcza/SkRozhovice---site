@@ -2,6 +2,8 @@ import React from 'react';
 import './MainPageY.css'
 import Gallery from './Gallery';
 
+// Komponenta jednotlivých týmů mladších, která vrací odkazy na zápasy, statistiky, tabulky. Upravuje se v /pages.
+
 
 const MainPageY = ({ title, zapasy, statistiky, tabulka, trener, galleryImages, chainedTeams }) => {
 

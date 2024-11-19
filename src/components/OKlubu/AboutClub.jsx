@@ -3,6 +3,9 @@ import FullGallery from '../OKlubu/FullGallery'
 import ButtonOrganization from './ButtonOrganization'
 import images from './FImages';
 
+
+// Hlavní komponenta stránky O klubu, kde se dají měnit data organizace a taky se odsud posílají obrázky z FImage.
+
 const AboutClub = () => {
 
    const pozice = ['Stejskal Milan', 'Ježek Robert', 'Zykudová Soňa', 'Valenta Radek']

@@ -8,6 +8,9 @@ import videoBg from '../videos/fotbal-kontakt_prob3.mp4';
 import thumbnail from '../images/thumbnail-kontakt.png'
 
 
+// Hlavní komponenta na kontaktní stránku. Upravují se tady data tlačítek, sociálních sítía trenérů.
+
+
 const ContactMain = () => {
 
   // Data jsou správná

@@ -3,6 +3,8 @@ import AktualityMain from '../components/AKTUALITY/AktualityMain'
 import Transition from '../Transition'
 import { Helmet } from 'react-helmet-async';
 
+// Stránka Aktuality - s komponentami a popiskem přes react-helmet
+
 const Aktuality = () => {
   return (
     <>

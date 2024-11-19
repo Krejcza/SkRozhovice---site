@@ -3,6 +3,9 @@ import { youthDropdown } from './NavItems';
 import { Link } from 'react-router-dom';
 import './Dropdown.css';
 
+
+// Dropdown na hlavním menu, který cílí na Týmy mládež. Bere si data z NavItems, kde se dají měnit stránky/odkazy
+
 const YouthDropdown = () => {
    const [dropdown, setDropdown] = useState(false);
 

@@ -9,6 +9,8 @@ import { getPlayerImage } from './PlayerImages';
 import EditModalPlayer from './EditModalPlayer'
 
 
+// hlavní stránka A-týmu, kde se dají upravovat hlavní kartičky a jejich jména
+
 const MainPageOld = () => {
 
   const [selectedPlayer, setSelectedPlayer] = useState(null);
@@ -79,16 +81,17 @@ const MainPageOld = () => {
   },
 ];
 
+// Načítání hráčů
+
 const fetchPlayerDetails = async (playerName) => {
   try {
     const encodedName = encodeURIComponent(playerName);
-    console.log('Fetching player:', playerName);
     
     const response = await fetch(`http://localhost:5000/api/players/name/${encodedName}`);
     
     if (!response.ok) {
       const errorData = await response.text();
-      console.error('Error fetching player details:', errorData);
+      console.error('Chyba při načítání hráče:', errorData);
       setSelectedPlayer({
         name: "Neznámý hráč",
         birthyear: "N/A",
@@ -107,7 +110,7 @@ const fetchPlayerDetails = async (playerName) => {
     setSelectedPlayer(data);
     setModalVisible(true);
   } catch (error) {
-    console.error('Error fetching player details:', error);
+    console.error('Chyba při načítání hráče:', error);
     setSelectedPlayer({
       name: "Neznámý hráč",
       birthyear: "N/A",
@@ -121,13 +124,14 @@ const fetchPlayerDetails = async (playerName) => {
   }
 };
 
+// vypnutí modálního okna
 const handleModalClose = (e) => {
   if (e.target.classList.contains('modal')) {
     setModalVisible(false);
   }
 };
 
-
+// funkce na vypsání hráčů na stránku
   const PlayerSection = ({ title, players }) => (
     <>
       <div className="positions-fifa">

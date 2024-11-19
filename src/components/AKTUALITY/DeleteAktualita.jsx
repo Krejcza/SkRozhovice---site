@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import './AktualityMain.css';
 
+
+// Komponenta pro mazání aktuality
 const DeleteAktualita = ({ id, onDelete }) => {
    const [isDeleting, setIsDeleting] = useState(false);
  
+
+   // Asynchronní funkce pro smazání aktuality
    const handleDelete = async () => {
-     const confirmDelete = window.confirm('Are you sure you want to delete this aktualita?');
+     const confirmDelete = window.confirm('Jste si jistí, že chcete odstranit tuto aktualitu?');
      if (!confirmDelete) return;
  
      setIsDeleting(true);
@@ -22,8 +26,8 @@ const DeleteAktualita = ({ id, onDelete }) => {
  
        onDelete(id);
      } catch (error) {
-       console.error('Error deleting aktualita:', error.message);
-       alert('Failed to delete aktualita. Please try again later.');
+       console.error('Chyba při mazání aktuality:', error.message);
+       alert('Chyba při mazání aktuality. Prosím zkuste to znovu později.');
      } finally {
        setIsDeleting(false);
      }
@@ -31,7 +35,7 @@ const DeleteAktualita = ({ id, onDelete }) => {
  
    return (
      <button onClick={handleDelete} className="delete-button" disabled={isDeleting}>
-       {isDeleting ? 'Deleting...' : 'Delete'}
+       {isDeleting ? 'Probíhá mazání...' : 'Vymazat'}
      </button>
    );
  };

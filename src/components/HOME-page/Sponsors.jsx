@@ -35,7 +35,7 @@ import maple from '../images/Logos/maple.jpg'
 import { motion } from 'framer-motion';
 import { useInView } from "react-intersection-observer";
 
-
+// Komponenta sponzorů, která vypíše jméno a ukáže logo sponzora. Kliknutím na odkaz se převede na stránku. Toto jsou jenom data.
 
 const sponsors = [
    { id: 1, name: 'Pardubický kraj', logo: pardubice, url: 'https://www.pardubickykraj.cz/' },
@@ -73,6 +73,8 @@ const sponsors = [
  ];
 
  const Sponsors = () => {
+
+  // Animace sponzorů, kde když se ukážou na stránce, tak se mi seřadí v animaci přes framer
 
    const { ref, inView } = useInView({
       threshold: 0.05,

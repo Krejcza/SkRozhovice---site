@@ -3,6 +3,8 @@ import Adult from '../components/ADULT/Adult'
 import Transition from '../Transition'
 import { Helmet } from 'react-helmet-async';
 
+// Stránka Týmy Dospělí - s komponentami a popiskem přes react-helmet
+
 const TýmyDospělí = () => {
   return (
     <>

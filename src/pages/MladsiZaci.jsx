@@ -7,9 +7,11 @@ import img3 from '../components/images/mladsi_zaci_foto3.jpg';
 import Transition from '../Transition'
 import { Helmet } from 'react-helmet-async';
 
+// Stránka Mladší žáci - s komponentami a popiskem přes react-helmet, kde se data trenérů načítají odtud s arraye. Při úpravě je třeba přidat/odebrat jméno, obrázek nahrát a změnit pozici popřípadě. Pro aktualizaci dat z webu fotbal.cz se používá tato stránka -- ne v komponentě
+
 const MladsiZaci = () => {
 
-  // Data jsou správná
+  // Data jsou správná - 19.11.2024
   const treneri = [
     { jmeno: 'Volejník Martin', pozice: 'Trenér', obrazek: trenerImg, telefon: '+420 736 434 004'},
   ];

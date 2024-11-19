@@ -2,9 +2,15 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import './CookieConsentBanner.css'
 
+
+
+// Komponenta cookie consent banner, kterou uživatel odklikává, když přijde na stránku. Pokud ano tak se uloží cookie na GA4, která vydží rok. Pokud zamítne, data se nesbírají.
+
 const CookieConsentBanner = () => {
   const [isConsentGiven, setIsConsentGiven] = useState(false);
   const [isBannerVisible, setIsBannerVisible] = useState(false);
+
+  // useEffect, který kontroluje, že pokud uživatel potvrdit cookies, tak se spustí GA4 a zároveň se schová banner, aby už mu nevyskakoval.
 
   useEffect(() => {
     const consent = Cookies.get('cookie_consent');
@@ -16,6 +22,8 @@ const CookieConsentBanner = () => {
     }
   }, []);
 
+  // funkce na přijetí cookie
+
   const handleAccept = () => {
     Cookies.set('cookie_consent', 'accepted', { expires: 365 });
     setIsConsentGiven(true);
@@ -23,11 +31,16 @@ const CookieConsentBanner = () => {
     initializeGA4();
   };
 
+ // funkce na odmítnutí cookie
+
   const handleDecline = () => {
     Cookies.set('cookie_consent', 'declined', { expires: 365 });
     setIsConsentGiven(false);
     setIsBannerVisible(false);
   };
+
+
+  // funkce, která aktivuje GA4 - G-12VTRDF3BY
 
   const initializeGA4 = () => {
     if (!window.gtag) {
@@ -46,6 +59,8 @@ const CookieConsentBanner = () => {
       };
     }
   };
+
+  // pokud není banner viditelný, tak komponenta se vůbec nezobrazí
 
   if (!isBannerVisible) {
     return null;

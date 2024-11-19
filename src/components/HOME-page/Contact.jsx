@@ -4,6 +4,9 @@ import blankPic from '../images/blank-profile-pic.webp';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
+
+// Komponenta kontakt na hlavní stránce, kde je vypsané vedení klubu. Mění se zde jména organizace.
+
 const contacts = [
   {
     id: 1,
@@ -34,6 +37,9 @@ const contacts = [
     photo: blankPic
   }
 ];
+
+
+// Animace přes framer-motion, vyjetí zleva doprava 
 
 const Contact = () => {
   const { ref, inView } = useInView({

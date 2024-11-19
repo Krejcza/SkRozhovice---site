@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import ateamphoto from '../images/a-team-photo.webp';
 import './Adult.css'
 
+
+// Komponenta týmů dospělých, kdy je možné přidat další týmy
+
 const Adult = () => {
 
 

@@ -1,6 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+
+// Přechod mezi stránky - přechod slider-in načte přechod nahoru a slider-out načítá přechod hned za ním, vytvářející efekt přechodu stránky
+
 const Transition = (OgComponent) => {
   return () => (
     <>

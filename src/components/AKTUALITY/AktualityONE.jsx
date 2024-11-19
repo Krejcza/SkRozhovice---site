@@ -4,26 +4,35 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft, faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import Cookies from 'js-cookie';
 
+
+// Komponenta pro zobrazení jedné aktuality
 const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => {
   const [imageError, setImageError] = useState(false);
   const [expander, setExpander] = useState(false);
   const [iconDirection, setIconDirection] = useState(faChevronRight);
 
+  // Stavy pro like/dislike funkcionalitu
   const [likeCount, setLikeCount] = useState(0);
   const [dislikeCount, setDislikeCount] = useState(0);
   const [userStatus, setUserStatus] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  // Defaultní obrázek pro případ chyby
   const defaultImage = 'https://res.cloudinary.com/dirmiqkcn/image/upload/v1731591618/SkRozhovice/ooo6wxdqeuzyybxxcgbx.webp';
   const imageUrl = imageError || !image ? defaultImage : image;
 
+  // Dynamické stylování kategorie
   const categoryTextClass = category === 'INFO' ? 'cat-info' : 
                             category === 'ZÁPAS' ? 'cat-zapas' : '';
 
+
+   // Funkce pro práci s cookies na liky                          
   const getCookieStatus = () => Cookies.get(`aktualita-${id}-status`);
   const setCookieStatus = (status) => Cookies.set(`aktualita-${id}-status`, status, { expires: 365 });
   const removeCookieStatus = () => Cookies.remove(`aktualita-${id}-status`);
 
+
+  // Effect pro načtení statusu aktuality
   useEffect(() => {
     const fetchStatus = async () => {
       try {
@@ -31,11 +40,10 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
         const response = await fetch(`http://localhost:5000/api/aktualita/${id}/status`);
         
         if (!response.ok) {
-          // Pokud server není dostupný, použijeme data z cookies
           const savedStatus = getCookieStatus();
           if (savedStatus) {
             setUserStatus(savedStatus);
-            // Nastavíme počáteční hodnoty podle cookies
+
             if (savedStatus === 'liked') setLikeCount(prev => prev + 1);
             if (savedStatus === 'disliked') setDislikeCount(prev => prev + 1);
           }
@@ -46,7 +54,6 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
         setLikeCount(data.likeCount || 0);
         setDislikeCount(data.dislikeCount || 0);
 
-        // Prioritizujeme server data nad cookies
         if (data.userStatus) {
           setUserStatus(data.userStatus);
           setCookieStatus(data.userStatus);
@@ -56,7 +63,7 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
         }
       } catch (error) {
         console.error('Error fetching status:', error);
-        // V případě chyby použijeme data z cookies
+        // V případě chyby se použijou data z cookies
         const savedStatus = getCookieStatus();
         if (savedStatus) {
           setUserStatus(savedStatus);
@@ -71,16 +78,20 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
     fetchStatus();
   }, [id]);
 
+
+  // Funkce pro zpracování chyby načtení obrázku
       const handleImageError = () => {
         setImageError(true);
-        console.log('Image failed to load, falling back to default');
+        console.log('Obrázek se nepodaařilo nahrát. Bude použitý defaultní obrázek.');
       };
 
+  // Funkce pro roztažení/zmenšení obrázku
       const toggleImageExpansion = () => {
         setExpander(!expander); 
         setIconDirection(expander ? faChevronRight : faChevronLeft); 
       };
 
+  // Funkce pro like
       const handleLike = async () => {
         if (isLoading) return;
         setIsLoading(true);
@@ -104,7 +115,7 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
     
           if (!response.ok) {
             const data = await response.json();
-            throw new Error(data.message || 'Error liking the article');
+            throw new Error(data.message || 'Chyba při likování aktuality');
           }
     
           const data = await response.json();
@@ -120,6 +131,8 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
         }
       };
     
+
+  // Funkce pro dislike aktuality
       const handleDislike = async () => {
         if (isLoading) return;
         setIsLoading(true);
@@ -143,7 +156,7 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
     
           if (!response.ok) {
             const data = await response.json();
-            throw new Error(data.message || 'Error disliking the article');
+            throw new Error(data.message || 'Chyba při dislikování aktuality');
           }
     
           const data = await response.json();
@@ -170,7 +183,7 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
     
           if (!response.ok) {
             const data = await response.json();
-            throw new Error(data.message || 'Error removing like');
+            throw new Error(data.message || 'Chyba odebrání liku.');
           }
     
           const data = await response.json();
@@ -193,7 +206,7 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
     
           if (!response.ok) {
             const data = await response.json();
-            throw new Error(data.message || 'Error removing dislike');
+            throw new Error(data.message || 'Chyba odebrání disliku.');
           }
     
           const data = await response.json();

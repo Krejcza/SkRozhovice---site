@@ -3,6 +3,8 @@ import Transition from '../Transition'
 import LoginPage from '../components/LOGIN/LoginPage'
 import { Helmet } from 'react-helmet-async';
 
+// Přihlašovací stránka pro usery webu, kde můžou upravovat v mongodb. Pro additional informace o stránce na meta-description se používá react-helmet.
+
 const LoginUser = () => {
   return (
     <>
