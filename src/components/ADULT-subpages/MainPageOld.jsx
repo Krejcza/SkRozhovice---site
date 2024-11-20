@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import './MainPageOld.css';
 import fifacard from '../images/fifa-card.png';
 import MatchesTable from './MatchesTable';
@@ -7,93 +7,141 @@ import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons
 import refpic from '../images/blank-profile-pic.webp'
 import { getPlayerImage } from './PlayerImages';
 import EditModalPlayer from './EditModalPlayer'
-
-
-// hlavní stránka A-týmu, kde se dají upravovat hlavní kartičky a jejich jména
+import { useSpring, animated } from "react-spring";
 
 const MainPageOld = () => {
-
   const [selectedPlayer, setSelectedPlayer] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [modalVisibles, setModalVisibles] = useState(false);
+  const [loadink, setLoadink] = useState(false);
+  const [hoveredPlayer, setHoveredPlayer] = useState(null);
+  const [playersDetailz, setPlayersDetailz] = useState({});
+  const [error, setError] = useState(null);
 
   const goalkeepers = [
     { name: 'Barva Michal', image: fifacard },
     { name: 'Kudláček Lukáš', image: fifacard },
     { name: 'Pleskot Matěj', image: fifacard },
     { name: 'Málek Patrik', image: fifacard },
-];
+  ];
 
   const defenders = [
-   { name: 'Pieies Sehrhii', image: fifacard },
-   { name: 'Vaško Jakub', image: fifacard },
-   { name: 'Fedor Viacheslav', image: fifacard },
-   { name: 'Dvořák Denis', image: fifacard },
-   { name: 'Zhyhariev Mykola', image: fifacard },
- ];
+    { name: 'Pieies Sehrhii', image: fifacard },
+    { name: 'Vaško Jakub', image: fifacard },
+    { name: 'Fedor Viacheslav', image: fifacard },
+    { name: 'Dvořák Denis', image: fifacard },
+    { name: 'Zhyhariev Mykola', image: fifacard },
+  ];
 
- const midfielders = [
-   {  name: 'Holub Martin', image: fifacard },
-   {  name: 'Mudruňka Josef', image: fifacard },
-   {  name: 'Kopp Zdeněk', image: fifacard },
-   {  name: 'Bačkovský Petr', image: fifacard },
-   {  name: 'Stejskal David', image: fifacard },
-   {  name: 'Holeček Filip', image: fifacard },
-   {  name: 'Pekař Jiří', image: fifacard },
-   {  name: 'Novák Filip', image: fifacard },
-   {  name: 'Kostinec Jakub', image: fifacard },
-   {  name: 'Holub Marek', image: fifacard },
- ];
+  const midfielders = [
+    { name: 'Holub Martin', image: fifacard },
+    { name: 'Mudruňka Josef', image: fifacard },
+    { name: 'Kopp Zdeněk', image: fifacard },
+    { name: 'Bačkovský Petr', image: fifacard },
+    { name: 'Stejskal David', image: fifacard },
+    { name: 'Holeček Filip', image: fifacard },
+    { name: 'Pekař Jiří', image: fifacard },
+    { name: 'Novák Filip', image: fifacard },
+    { name: 'Kostinec Jakub', image: fifacard },
+    { name: 'Holub Marek', image: fifacard },
+  ];
+
+  const attackers = [
+    { name: 'Bednarz Jakub', image: fifacard },
+    { name: 'Voženílek Jakub', image: fifacard },
+    { name: 'Žalud Daniel', image: fifacard },
+    { name: 'Zhyhariev Oleksandr', image: fifacard },
+    { name: 'Holý Jakub', image: fifacard }
+  ];
+
+  const realizeTeam = [
+    {
+      image: refpic,
+      name: 'Stejskal David',
+      position: 'Hlavní trenér',
+      phone: '+420 723 739 151'
+    },
+    {
+      image: refpic,
+      name: 'Holub Martin',
+      position: 'Asistent trenéra',
+      phone: '+420 776 020 468'
+    },
+    {
+      image: refpic,
+      name: 'Kopp Zdeněk',
+      position: 'Asistent trenéra',
+      phone: '+420 602 464 595'
+    },
+    {
+      image: refpic,
+      name: 'Dušek Petr',
+      position: 'Vedoucí týmu',
+      phone: '+420 723 024 430'
+    },
+  ];
+
+  // Hromadné načtení všech hráčů na začátku
+  useEffect(() => {
+    const allPlayers = [
+      ...goalkeepers.map(p => p.name),
+      ...defenders.map(p => p.name),
+      ...midfielders.map(p => p.name),
+      ...attackers.map(p => p.name)
+    ];
+  
+    console.log('Seznam všech hráčů:', allPlayers);
+    console.log('Počet hráčů:', allPlayers.length);
+  
+    const fetchAllPlayerDetails = async () => {
+      const startTime = Date.now(); 
+      const detailsMap = {};
+
+      
+      for (const playerName of allPlayers) {
+        console.log('ahoj', playerName);
+        try {
+          const encodedName = encodeURIComponent(playerName);
+          const response = await fetch(`http://localhost:5000/api/players/name/${encodedName}`);
+          
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          
+          const data = await response.json();
+          detailsMap[playerName] = data;
+        } catch (error) {
+          console.error(`Chyba při načítání hráče ${playerName}:`, error);
+          detailsMap[playerName] = {
+            name: playerName,
+            birthyear: "N/A",
+            height: "N/A",
+            weight: "N/A",
+            clubyear: "N/A",
+            beercount: "N/A",
+            instagram: "N/A"
+          };
+        }
+      }
+      setPlayersDetailz(detailsMap);
+  
+      const endTime = Date.now();
+      console.log(`Načítání všech hráčů trvalo: ${endTime - startTime}ms`);
+    };
+  
+    fetchAllPlayerDetails();
+  }, []);
 
 
- const attackers = [
-   {  name: 'Bednarz Jakub', image: fifacard },
-   {  name: 'Voženílek Jakub', image: fifacard },
-   {  name: 'Žalud Daniel', image: fifacard },
-   {  name: 'Zhyhariev Oleksandr', image: fifacard },
-   {  name: 'Holý Jakub', image: fifacard }
- ];
 
- const realizeTeam = [
-  {
-    image: refpic,
-    name: 'Stejskal David',
-    position: 'Hlavní trenér',
-    phone: '+420 723 739 151'
-  },
-  {
-    image: refpic,
-    name: 'Holub Martin',
-    position: 'Asistent trenéra',
-    phone: '+420 776 020 468'
-  },
-  {
-    image: refpic,
-    name: 'Kopp Zdeněk',
-    position: 'Asistent trenéra',
-    phone: '+420 602 464 595'
-  },
-  {
-    image: refpic,
-    name: 'Dušek Petr',
-    position: 'Vedoucí týmu',
-    phone: '+420 723 024 430'
-  },
-];
-
-// Načítání hráčů
-
-const fetchPlayerDetails = async (playerName) => {
-  try {
-    const encodedName = encodeURIComponent(playerName);
-    
-    const response = await fetch(`http://localhost:5000/api/players/name/${encodedName}`);
-    
-    if (!response.ok) {
-      const errorData = await response.text();
-      console.error('Chyba při načítání hráče:', errorData);
+  const fetchPlayerDetails =(playerName) => {
+    console.log(`Fetching details for: ${playerName}`);
+    if (playersDetailz[playerName]) {
+      setSelectedPlayer(playersDetailz[playerName]);
+      setModalVisibles(true);
+      setLoadink(false);
+    } else {
       setSelectedPlayer({
-        name: "Neznámý hráč",
+        name: playerName,
         birthyear: "N/A",
         height: "N/A",
         weight: "N/A",
@@ -101,56 +149,107 @@ const fetchPlayerDetails = async (playerName) => {
         beercount: "N/A",
         instagram: "N/A"
       });
-      setModalVisible(true);
-      return;
+      setModalVisibles(true);
+      setLoadink(false);
     }
+  };
 
-    const data = await response.json();
-    console.log('Received player data:', data);
-    setSelectedPlayer(data);
-    setModalVisible(true);
-  } catch (error) {
-    console.error('Chyba při načítání hráče:', error);
-    setSelectedPlayer({
-      name: "Neznámý hráč",
-      birthyear: "N/A",
-      height: "N/A",
-      weight: "N/A",
-      clubyear: "N/A",
-      beercount: "N/A",
-      instagram: "N/A"
-    });
-    setModalVisible(true);
-  }
-};
+  // Zavření modálního okna
+  const handleModalClose = (e) => {
+    e.stopPropagation();
+    if (e.target.classList.contains('modal') || e.target.classList.contains('close-button')) {
+      setModalVisibles(false);
+      setSelectedPlayer(null);
+      setError(null);
+    }
+  };
 
-// vypnutí modálního okna
-const handleModalClose = (e) => {
-  if (e.target.classList.contains('modal')) {
-    setModalVisible(false);
-  }
-};
+  // Animace karty
+  const [props, api] = useSpring(() => ({
+    xys: [0, 0, 1],
+    config: { mass: 5, tension: 400, friction: 30 },
+  }));
 
-// funkce na vypsání hráčů na stránku
-  const PlayerSection = ({ title, players }) => (
-    <>
-      <div className="positions-fifa">
-        <h3>{title}</h3>
-      </div>
-      <div className="fifa-cards">
-        {players.map((player, index) => (
-          <div key={index} className="fifa-card">
-            <img 
-              src={player.image} 
-              alt={player.name} 
-              onClick={() => fetchPlayerDetails(player.name)} 
-            />
-            <p onClick={() => fetchPlayerDetails(player.name)}>{player.name}</p>
-          </div>
-        ))}
-      </div>
-    </>
-  );
+  const trans = (x, y, s) => 
+    `perspective(750px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
+
+  const calc = (x, y, rect) => {
+    const BUFFER = 50;
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    const ex = (x - centerX) / BUFFER;
+    const why = -(y - centerY) / BUFFER;
+    
+    return [why, ex, 1.025];
+  };
+
+
+
+
+  const PlayerSection = ({ title, players }) => {
+    return (
+      <>
+        <div className="positions-fifa">
+          <h3>{title}</h3>
+        </div>
+
+        <div className="fifa-cards">
+          {players.map((player, index) => (
+            <div className="fifa-card-wrapper" key={index}>
+              <animated.div
+                className="fifa-card"
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const { clientX: x, clientY: y } = e;
+                  
+                  if (hoveredPlayer === player.name) {
+                    api.start({ xys: calc(x, y, rect) });
+                  }
+                }}
+                onMouseLeave={() => {
+                  console.log("Mouse left: ", player.name);
+                  if (hoveredPlayer === player.name) {
+                    api.start({ xys: [0, 0, 1] });
+                  }
+                }}
+                onMouseEnter={() => {
+                  console.log("Hovering over: ", player.name);
+                  setHoveredPlayer(player.name);
+                }}
+                style={{
+                  transform: hoveredPlayer === player.name 
+                    ? props.xys.to(trans) 
+                    : undefined,
+                  transition: "transform 0.1s ease-out",
+                  transformStyle: "preserve-3d",
+                }}
+              >
+
+                {/* Dělá to tohle hovno */}
+                <img
+                  // src={player.image}
+                  alt={player.name}
+                  className='one-and-only-image'
+                  onClick={() => {
+                    fetchPlayerDetails(player.name);
+                  }}
+                />
+              </animated.div>
+              <p 
+                className='name-of-player-fifa' 
+                onClick={() => {
+                  fetchPlayerDetails(player.name);
+                }}
+              >
+                {player.name}
+              </p>
+            </div>
+          ))}
+        </div>
+      </>
+    );
+  };
 
   return (
     <>
@@ -159,15 +258,12 @@ const handleModalClose = (e) => {
       </div>
       <div className="background-linear-deff">
         <h2 className="main-topic-small bl">Soupiska</h2>
-
         <PlayerSection title="Brankáři" players={goalkeepers} />
         <PlayerSection title="Obránci" players={defenders} />
         <PlayerSection title="Záložníci" players={midfielders} />
         <PlayerSection title="Útočníci" players={attackers} />
         <EditModalPlayer/>
       </div>
-
-      
 
       <div className="background-black nb">
         <MatchesTable />
@@ -179,7 +275,6 @@ const handleModalClose = (e) => {
           <FontAwesomeIcon icon={faChevronLeft} className='icon-chev icon-chev-left' />
         </div>
       </div>
-
 
       <div className="background-linear-deff mappp">
         <h2 className='main-topic-small bl'>Realizační tým</h2>
@@ -197,22 +292,23 @@ const handleModalClose = (e) => {
         </div>
       </div>
 
-      {modalVisible && selectedPlayer && (
+      {modalVisibles && selectedPlayer && (
         <div className="modal" onClick={handleModalClose}>
           <div className="modal-content">
-            <span className="close-button" onClick={() => setModalVisible(false)}>&times;</span>
+            <span className="close-button" onClick={() => setModalVisibles(false)}>&times;</span>
 
-            {loading && <div className="loading-spinner">Načítání...</div>}
+            {loadink && <div className="loading-spinner">Načítání...</div>}
 
             <img
               src={getPlayerImage(selectedPlayer.imagePath)}
               alt={selectedPlayer.name}
-              onLoad={() => setLoading(false)}
-              onError={() => setLoading(false)}
-              style={{ display: loading ? 'none' : 'block' }}
+              onLoad={() => setLoadink(false)}
+              onError={() => setLoadink(false)}
+              style={{ display: loadink ? 'none' : 'block' }}
+              className='modal-content-img'
             />
 
-            {!loading && (
+            {!loadink && (
               <div className="modal-info-pl">
                 <div className="one-modal-pl">
                   <h5>Jméno:</h5>
@@ -240,7 +336,7 @@ const handleModalClose = (e) => {
                 </div>
                 <div className="one-modal-pl">
                   <h5>Instagram:</h5>
-                  <p><a href={`https://${selectedPlayer.instagram}`} target="_blank" rel="noopener noreferrer">Odkaz</a></p>
+                  <p><a href={selectedPlayer.instagram} target="_blank" rel="noopener noreferrer">Odkaz</a></p>
                 </div>
               </div>
             )}
@@ -251,4 +347,4 @@ const handleModalClose = (e) => {
   );
 };
 
-export default MainPageOld
+export default MainPageOld;

@@ -17,7 +17,7 @@
 }
 
 body{
-   background: rgb(122, 122, 122);
+   background: linear-gradient(-45deg, #F5F5F5, #fffcdf);
 }
 
 .row {

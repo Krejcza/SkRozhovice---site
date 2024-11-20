@@ -1,31 +1,56 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import videoBg from '../components/videos/video-short.mov'
 import './MainVideo.css'
 import skRozText from '../components/images/SKrozhovicePic.png'
 import fallBackImage from '../components/images/fallback.webp'
 
-
-// Komponenta na hlavní video, kde se kontroluje zda má uživatel wifi připojení. Pokud ano, tak se zobrazní video, pokud ne, tak se zobrazí obrázek týmu.
-
 const MainVideo = () => {
   const [isSlowConnection, setIsSlowConnection] = useState(false);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     if (navigator.connection) {
       const connection = navigator.connection;
-      if (connection.saveData || (connection.downlink && connection.downlink < 1.5)) {
+      if (connection.saveData || (connection.downlink && connection.downlink < 3)) {
         setIsSlowConnection(true);
       }
     }
   }, []);
 
+  useEffect(() => {
+    const videoElement = videoRef.current;
+
+    const handleCanPlayThrough = () => {
+      setIsVideoLoaded(true);
+    };
+
+    if (videoElement) {
+      videoElement.addEventListener('canplaythrough', handleCanPlayThrough);
+    }
+
+    return () => {
+      if (videoElement) {
+        videoElement.removeEventListener('canplaythrough', handleCanPlayThrough);
+      }
+    };
+  }, []);
+
   return (
     <div className='main-video'>
-      <div className="overlay-video"></div>
+      {isVideoLoaded && <div className="overlay-video"></div>}
+        
       {isSlowConnection ? (
         <img src={fallBackImage} alt="Background" className="fallback-image" />
       ) : (
-        <video src={videoBg} autoPlay loop muted playsInline></video>
+        <video 
+          ref={videoRef} 
+          src={videoBg} 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+        />
       )}
       <div className="video-text">
         <img src={skRozText} alt="" />

@@ -13,6 +13,11 @@
    margin-top: 0rem;
    margin-bottom: 2rem;
    min-height: 20vh;
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+   max-width: 1600px;
 }
 
 .button-container {
@@ -74,6 +79,13 @@
   padding: 1rem; 
   pointer-events: all; 
   z-index: 1;
+}
+
+.social-btns{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
  
 

@@ -33,9 +33,30 @@
   position: relative;
   max-width: 200px;
   width: 100%;
-  overflow: visible; 
+  overflow: visible;
   border-radius: 1rem;
   cursor: pointer;
+  perspective: 750px;
+  transition: 0.3s ease-out;
+  transform-style: preserve-3d;
+  z-index: 150;
+}
+
+
+.one-and-only-image {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  transition: 0.3s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.8));
+}
+
+.fifa-card:hover .one-and-only-image {
+  transform: rotateX(10deg) rotateY(10deg);
+  
 }
 
 .fifa-card::before {
@@ -50,6 +71,7 @@
   transition: clip-path 0.4s ease;
   z-index: 2;
 }
+
 
 .fifa-card::after {
   content: '';
@@ -74,9 +96,11 @@
   animation: lens-flare 0.5s ease forwards; 
 }
 
-.fifa-card:hover img {
+.fifa-card:hover .one-and-only-image {
   transform: scale(1.025);
+  filter: drop-shadow(0 0 50px #FEDF25);
 }
+
 
 @keyframes lens-flare {
   0% {
@@ -105,15 +129,7 @@
   }
 }
 
-.fifa-card img {
-   max-width: 100%;
-   width: 100%;
-   height: auto;
-   transition: 1s ease;
-   cursor: pointer;
-}
-
-.fifa-card p {
+.name-of-player-fifa {
    text-align: center;
    text-transform: uppercase;
    font-size: 1rem;
@@ -208,7 +224,7 @@
    z-index: -1;
  }
 
- .modal-content img{
+ .modal-content-img{
    width: 50%; 
    max-height: 500px; 
    height: auto;

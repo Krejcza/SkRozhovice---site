@@ -4,6 +4,7 @@ import AddAktualita from './AddAktualita';
 import './AktualityMain.css';
 import DeleteAktualita from './DeleteAktualita';
 import EditAktualita from './EditAktualita';
+import { motion } from 'framer-motion';
 
 const AktualityMain = () => {
   const [news, setNews] = useState([]);
@@ -80,6 +81,7 @@ const AktualityMain = () => {
     setExpandedImage(prev => (prev === imageId ? null : imageId));
   };
 
+
   return (
     <>
       <div className='main-banner-ep'>
@@ -93,7 +95,18 @@ const AktualityMain = () => {
           ) : error ? (
             <p>{error}</p>
           ) : news.length > 0 ? (
-            news.map((item) => (
+            news.map((item, index) => (
+              <motion.article
+                    key={item._id}
+                    className="aktualita-wrapper"
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -50 }}
+                    transition={{
+                      duration: 0.5, 
+                      delay: index * 0.2, 
+                    }}
+              >
               <article key={item._id} className="aktualita-wrapper">
                 <OneAktualita
                   id={item._id}
@@ -113,6 +126,7 @@ const AktualityMain = () => {
                   </div>
                 )}
               </article>
+              </motion.article>
             ))
           ) : (
             <p>Žádné novinky</p>

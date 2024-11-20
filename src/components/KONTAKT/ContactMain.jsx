@@ -6,6 +6,9 @@ import MapContact from './MapContact';
 import SocialButton from './SocialButton';
 import videoBg from '../videos/fotbal-kontakt_prob3.mp4';
 import thumbnail from '../images/thumbnail-kontakt.png'
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+
 
 
 // Hlavní komponenta na kontaktní stránku. Upravují se tady data tlačítek, sociálních sítía trenérů.
@@ -93,6 +96,16 @@ const ContactMain = () => {
    }
  ];
 
+ const { ref: socialRef, inView: socialInView } = useInView({
+  triggerOnce: true, 
+  threshold: 0.1,
+});
+
+const { ref: trainersRef, inView: trainersInView } = useInView({
+  triggerOnce: true, 
+  threshold: 0.1,
+});
+
 
   return (
     <>
@@ -110,6 +123,16 @@ const ContactMain = () => {
          <h2 className='main-topic-small'>Trenéři týmu dospělí</h2>
          <div className="trainers-list">
           {trainers.map((trainer, index) => (
+            <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0}}
+            exit={{ opacity: 0, y: 50 }}
+            transition={{
+              duration: 0.3,
+              delay: index * 0.05,
+            }}
+          >
             <OneTrainer
               key={index}
               image={trainer.image}
@@ -118,36 +141,67 @@ const ContactMain = () => {
               phone={trainer.phone}
               isInverse={false}
             />
+            </motion.div>
           ))}
+          
          </div>
       </div>
       <div className="background-linear-deff">
-         <h2 className='main-topic-small bl'>Trenéři týmu mládež</h2>
-         <div className="trainers-list">
+        <h2 className='main-topic-small bl'>Trenéři týmu mládež</h2>
+        <div className="trainers-list">
           {trainersYoung.map((trainer, index) => (
-            <OneTrainer
+            <motion.div
               key={index}
-              image={trainer.image}
-              name={trainer.name}
-              position={trainer.position}
-              phone={trainer.phone}
-              isInverse={true}
-            />
+              ref={trainersRef}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: trainersInView ? 1 : 0, y: trainersInView ? 0 : 50 }}
+              exit={{ opacity: 0, y: 50 }}
+              transition={{
+                duration: 0.4,
+                delay: index * 0.1,
+              }}
+            >
+              <OneTrainer
+                key={index}
+                image={trainer.image}
+                name={trainer.name}
+                position={trainer.position}
+                phone={trainer.phone}
+                isInverse={true}
+              />
+            </motion.div>
           ))}
-         </div>
+        </div>
       </div>
+
+
       <div className="background-yellow wyc" >
          <h2 className='main-topic-small bl'>Kde nás najdete?</h2>
          <MapContact />
       </div>
       <div className="background-linear-deff mappp">
-         <h2 className='main-topic-small bl'>Kde nás můžete sledovat?</h2>
-         <div className="button-group diff">
-         {socials.map((social, index) => (
-            <SocialButton key={index} label={social.label} url={social.url} />
-         ))}
-         </div>
+      <h2 className='main-topic-small bl'>Kde nás můžete sledovat?</h2>
+        <div className="button-group diff">
+          {socials.map((social, index) => (
+            <motion.div
+              key={index}
+              className='social-btns'
+              ref={socialRef}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: socialInView ? 1 : 0, y: socialInView ? 0 : 50 }}
+              exit={{ opacity: 0, y: 50 }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.2,
+              }}
+            >
+              <SocialButton key={index} label={social.label} url={social.url} />
+            </motion.div>
+          ))}
+        </div>
+
          <div className="video-playing">
+          <p>Své by k tomu řekl i bývalý kapitán Denis Dvořák.</p>
             <video 
             src={videoBg} 
             playsInline 
