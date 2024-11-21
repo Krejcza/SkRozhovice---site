@@ -69,6 +69,49 @@ app.post('/api/get-upload-url', (req, res) => {
   }
 });
 
+
+const assignCloudinaryImages = async () => {
+  try {
+    console.log('Function started');
+    const players = await Player.find();
+    console.log('Players found:', players);
+
+    for (const player of players) {
+      let imageUrl = '';
+
+      try {
+        const image = await cloudinary.api.resource(`Players/${player._id}.png`);
+        console.log(`Cloudinary image for ${player.name}: ${image.secure_url}`);
+        imageUrl = image.secure_url; 
+      } catch (error) {
+        console.error(`Error fetching image for player ${player.name}:`, error);
+
+        imageUrl = 'https://res.cloudinary.com/dirmiqkcn/image/upload/Players/e4xhbh2pxnxcku6skbx1.png';
+        console.log(`Default image assigned to player ${player.name}`);
+      }
+
+      const updatedPlayer = await Player.findByIdAndUpdate(player._id, { cloudinaryImage: imageUrl }, { new: true });
+      console.log(`Updated image for player ${player.name}: ${updatedPlayer.cloudinaryImage}`);
+    }
+
+    console.log('Image assignment completed!');
+  } catch (error) {
+    console.error('Error assigning images:', error);
+  }
+};
+
+
+
+app.post('/assign-cloudinary-images', async (req, res) => {
+  try {
+    await assignCloudinaryImages();
+    res.status(200).json({ message: 'Images assigned successfully!' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error assigning images', error });
+  }
+});
+
+
 // JWT Middleware
 const verifyToken = (req, res, next) => {
   const token = req.headers['authorization'];
@@ -132,7 +175,7 @@ const playerSchema = new mongoose.Schema({
   clubyear: { type: Number, required: true },
   beercount: { type: Number, required: true },
   instagram: {type: String, required: false},
-  imagePath: {type: String, default: 'onePlayer'} 
+  cloudinaryImage: { type: String, required: true }
 }, { collection: 'Players' });
 
 const Aktualita = mongoose.model('Aktualita', aktualitaSchema);
@@ -612,16 +655,26 @@ app.get('/api/players/:id', async (req, res) => {
   }
 });
 
+const checkImageExists = async (imageUrl) => {
+  try {
+    const res = await fetch(imageUrl, { method: 'HEAD' }); 
+    return res.ok; 
+  } catch (error) {
+    console.error('Error checking image existence:', error);
+    return false; 
+  }
+};
+
 app.get('/api/players/name/:name', async (req, res) => {
   try {
     const decodedName = decodeURIComponent(req.params.name);
     console.log('Searching for player:', decodedName);
-    
+
     const escapedName = escapeRegExp(decodedName);
     const nameRegex = new RegExp(`^${escapedName}$`, 'i');
-    
+
     const player = await Player.findOne({ name: nameRegex });
-    
+
     if (!player) {
       console.log('Player not found:', decodedName);
       return res.status(404).json({ 
@@ -629,9 +682,28 @@ app.get('/api/players/name/:name', async (req, res) => {
         searchedName: decodedName 
       });
     }
+
+    console.log(`Found player: ${player.name}, ID: ${player._id}`);
+
+    const cloudinaryImagePath = `https://res.cloudinary.com/dirmiqkcn/image/upload/Players/${player._id}.png`;
+    console.log(`Checking image URL: ${cloudinaryImagePath}`);
+
+    const imageExists = await checkImageExists(cloudinaryImagePath);
+
+    let imageUrl = '';
+    if (imageExists) {
+      imageUrl = cloudinaryImagePath; 
+      console.log(`Cloudinary image for ${player.name}: ${imageUrl}`);
+    } else {
+      console.error(`Image not found for player ${player.name}, using default image.`);
+      imageUrl = ''; 
+    }
+
+    res.json({ 
+      ...player.toObject(),
+      cloudinaryImage: imageUrl || ''
+    });
     
-    console.log('Found player:', player);
-    res.json(player);
   } catch (error) {
     console.error('Error fetching player by name:', error);
     res.status(500).json({ 
@@ -652,13 +724,24 @@ app.put('/api/players/:id', async (req, res) => {
 });
 
 
-app.delete('/api/players/:id', async (req, res) => {
+app.get('/api/players/:id', async (req, res) => {
   try {
-    const deletedPlayer = await Player.findByIdAndDelete(req.params.id);
-    if (!deletedPlayer) return res.status(404).json({ message: 'Player not found' });
-    res.status(204).send();
+    const player = await Player.findById(req.params.id);
+    
+    if (!player) {
+      return res.status(404).json({ message: 'Player not found' });
+    }
+
+
+    if (!player.cloudinaryImage) {
+      const imageUrl = `https://res.cloudinary.com/dirmiqkcn/image/upload/Players/${player._id}.png`;
+      player.cloudinaryImage = imageUrl;
+      await player.save();
+    }
+
+    res.json(player);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Error fetching player details:', error);
+    res.status(500).json({ message: 'Error fetching player details' });
   }
 });
-

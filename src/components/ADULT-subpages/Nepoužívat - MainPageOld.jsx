@@ -5,7 +5,6 @@ import MatchesTable from './MatchesTable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import refpic from '../images/blank-profile-pic.webp'
-import { getPlayerImage } from './PlayerImages';
 import EditModalPlayer from './EditModalPlayer'
 import { useSpring, animated } from "react-spring";
 
@@ -228,7 +227,7 @@ const MainPageOld = () => {
 
                 {/* Dělá to tohle hovno */}
                 <img
-                  // src={player.image}
+                  src={player.image}
                   alt={player.name}
                   className='one-and-only-image'
                   onClick={() => {
@@ -299,14 +298,14 @@ const MainPageOld = () => {
 
             {loadink && <div className="loading-spinner">Načítání...</div>}
 
-            <img
+            {/* <img
               src={getPlayerImage(selectedPlayer.imagePath)}
               alt={selectedPlayer.name}
               onLoad={() => setLoadink(false)}
               onError={() => setLoadink(false)}
               style={{ display: loadink ? 'none' : 'block' }}
               className='modal-content-img'
-            />
+            /> */}
 
             {!loadink && (
               <div className="modal-info-pl">

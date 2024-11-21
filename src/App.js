@@ -22,6 +22,7 @@ import BottomToTop from './components/BottomToTop';
 import { AnimatePresence } from 'framer-motion';
 import { HelmetProvider } from 'react-helmet-async';
 import CookieConsentBanner from './components/CookieConsentBanner';
+import NewMainPageOld from './components/ADULT-subpages/NewMainPageOld';
 
 
 // Složení stránek a odkazů na ně 
@@ -51,7 +52,7 @@ const App = () => {
           <Route path='/OKlubu' element={<OKlubu />} />
           <Route path='/Kontakt' element={<Kontakt />} />
           <Route path='/LoginUser' element={<LoginUser />} />
-          <Route path='*' element={<ErrorPage />} />
+          <Route path='*' element={<NewMainPageOld />} />
         </Routes>
       </AnimatePresence>
       <Footer />
