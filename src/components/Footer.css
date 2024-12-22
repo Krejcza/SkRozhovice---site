@@ -1,10 +1,25 @@
 .footer {
-   background-color: #181818;
+   /* background-color: #ff6969; */
+   background: linear-gradient(180deg, #181818, #121212);
    padding: 20px 0;
    color: #fff;
    text-align: center;
    border-top: 10px solid #fff;
+   position: relative;
+}
 
+.footer::before{
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   content: '';
+   background-image: url('./images/texture-aktu.png');
+   background-size:cover;
+   background-repeat: no-repeat;
+   z-index: 1;
+   opacity: 0.1;
 }
 
 .footer-container {
@@ -19,13 +34,16 @@
 .footer-logo {
    width: 100%;
    max-width: 1600px;
+   z-index: 10;
 }
+
 
 .footer-links {
    list-style: none;
    display: flex;
    column-gap: 5rem;
    margin-bottom: 2rem;
+   z-index: 10;
 }
 
 .footer-links li {
@@ -55,6 +73,8 @@
 .footer-copyright {
    font-size: 0.9rem;
    color: #3f3f3f;
+   z-index: 10;
+   position: relative;
 }
 
 .socials-logos{
@@ -69,6 +89,7 @@
    font-size: 2rem;
    transform: rotate(360deg);
    transition: 0.3s ease-out;
+   z-index: 10;
 }
 
 .socials-logos a:hover{
@@ -78,6 +99,7 @@
 
 .footer-logo-two{
    display: none;
+   z-index: 10;
 }
 
 

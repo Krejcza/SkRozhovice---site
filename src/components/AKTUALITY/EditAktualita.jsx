@@ -29,7 +29,7 @@ const EditAktualita = ({ aktualita, onUpdate }) => {
     // Logika pro nahrání nového obrázku přes Cloudinary
     try {
       if (selectedFile) {
-        const response = await fetch('http://localhost:5000/api/get-upload-url', { method: 'POST' });
+        const response = await fetch('https://backend-rozhovice.onrender.com/api/get-upload-url', { method: 'POST' });
         const data = await response.json();
   
         const formData = new FormData();
@@ -66,7 +66,7 @@ const EditAktualita = ({ aktualita, onUpdate }) => {
       };
 
       // Odeslání dat na server metodou PUT
-      const response = await fetch(`http://localhost:5000/api/aktuality/${aktualita._id}`, {
+      const response = await fetch(`https://backend-rozhovice.onrender.com/api/aktuality/${aktualita._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

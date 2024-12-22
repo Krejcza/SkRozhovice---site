@@ -37,7 +37,7 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
     const fetchStatus = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch(`http://localhost:5000/api/aktualita/${id}/status`);
+        const response = await fetch(`https://backend-rozhovice.onrender.com/api/aktualita/${id}/status`);
         
         if (!response.ok) {
           const savedStatus = getCookieStatus();
@@ -106,7 +106,7 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
             await handleRemoveDislike();
           }
     
-          const response = await fetch(`http://localhost:5000/api/aktualita/${id}/like`, { 
+          const response = await fetch(`https://backend-rozhovice.onrender.com/api/aktualita/${id}/like`, { 
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -147,7 +147,7 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
             await handleRemoveLike();
           }
     
-          const response = await fetch(`http://localhost:5000/api/aktualita/${id}/dislike`, { 
+          const response = await fetch(`https://backend-rozhovice.onrender.com/api/aktualita/${id}/dislike`, { 
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -174,7 +174,7 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
     
       const handleRemoveLike = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/api/aktualita/${id}/unlike`, { 
+          const response = await fetch(`https://backend-rozhovice.onrender.com/api/aktualita/${id}/unlike`, { 
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -197,7 +197,7 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
     
       const handleRemoveDislike = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/api/aktualita/${id}/undislike`, { 
+          const response = await fetch(`https://backend-rozhovice.onrender.com/api/aktualita/${id}/undislike`, { 
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -227,23 +227,26 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
         <p className='category-date'>{date}</p>
       </div>
 
-      <div className="only-imagination">
-        <img 
-          src={imageUrl}
-          alt={headline} 
-          className={`aktualita-image ${expander ? 'expanded' : ''}`} 
-          onClick={toggleImageExpansion} 
-          onError={handleImageError} 
-        />
-        <div className={`icon-next ${expander ? 'expanded' : ''}`} onClick={toggleImageExpansion}>  
-          <FontAwesomeIcon icon={iconDirection} />
-        </div>
-      </div>
+      
 
       <div className="aktualita-insider">
+        <div className="only-imagination">
+          <img 
+            src={imageUrl}
+            alt={headline} 
+            className={`aktualita-image ${expander ? 'expanded' : ''}`} 
+            onClick={toggleImageExpansion} 
+            onError={handleImageError} 
+          />
+          <div className={`icon-next ${expander ? 'expanded' : ''}`} onClick={toggleImageExpansion}>  
+            <FontAwesomeIcon icon={iconDirection} />
+          </div>
+        </div>
+        <div className="only-insider-text">
         <div className="headline-headerr">
           <h2 className='headline-akt'>{headline}</h2>
         </div>
+        <div className="both-fill-like">
         <div className='aktualita-filling'>
           <p className="text-akt">{text}</p>
           {lineup && (
@@ -270,6 +273,8 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
           <FontAwesomeIcon icon={faThumbsDown} />
           {dislikeCount}
         </button>
+      </div>
+      </div>
       </div>
       </div>
     </div>

@@ -15,7 +15,7 @@ const DeleteAktualita = ({ id, onDelete }) => {
      setIsDeleting(true);
  
      try {
-       const response = await fetch(`http://localhost:5000/api/aktuality/${id}`, {
+       const response = await fetch(`https://backend-rozhovice.onrender.com/api/aktuality/${id}`, {
          method: 'DELETE',
          headers: {
            'Authorization': `Bearer ${localStorage.getItem('token')}`

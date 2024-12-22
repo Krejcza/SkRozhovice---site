@@ -24,7 +24,6 @@ const goalkeepers = [
    { name: 'Vaško Jakub', image: fifacard },
    { name: 'Fedor Viacheslav', image: fifacard },
    { name: 'Dvořák Denis', image: fifacard },
-   { name: 'Zhyhariev Mykola', image: fifacard },
  ];
 
  const midfielders = [
@@ -44,8 +43,8 @@ const goalkeepers = [
    { name: 'Bednarz Jakub', image: fifacard },
    { name: 'Voženílek Jakub', image: fifacard },
    { name: 'Žalud Daniel', image: fifacard },
-   { name: 'Zhyhariev Oleksandr', image: fifacard },
-   { name: 'Holý Jakub', image: fifacard }
+   { name: 'Holý Jakub', image: fifacard },
+   { name: 'Vojtěch Holeček', image: fifacard },
  ];
 
  const realizeTeam = [
@@ -121,7 +120,7 @@ const goalkeepers = [
      setError(null);
  
      try {
-       const response = await fetch(`http://localhost:5000/api/players/name/${encodeURIComponent(player.name)}`);
+       const response = await fetch(`https://backend-rozhovice.onrender.com/api/players/name/${encodeURIComponent(player.name)}`);
        if (!response.ok) {
          throw new Error('Failed to fetch player details');
        }

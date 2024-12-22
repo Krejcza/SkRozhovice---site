@@ -28,7 +28,7 @@ const Adult = () => {
               <h2>A-tým</h2>
             </Link>
           </motion.div>
-        </div>
+        </div> 
       </div>
     </>
   );

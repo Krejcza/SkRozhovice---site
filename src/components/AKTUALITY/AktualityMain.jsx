@@ -22,7 +22,7 @@ const AktualityMain = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`http://localhost:5000/api/aktuality/all?page=${currentPage}&limit=${itemsPerPage}`);
+      const response = await fetch(`https://backend-rozhovice.onrender.com/api/aktuality/all?page=${currentPage}&limit=${itemsPerPage}`);
       if (!response.ok) throw new Error(`Chyba při načítání dat: ${response.status}`);
       const data = await response.json();
       setNews(data.aktuality || []);

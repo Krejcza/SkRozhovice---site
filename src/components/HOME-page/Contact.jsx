@@ -3,6 +3,10 @@ import './Contact.css';
 import blankPic from '../images/blank-profile-pic.webp';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import pic1 from '../images/CHAIRMAN.jpg'
+import pic2 from '../images/SUBCHAIRMAN.jpg'
+import pic3 from '../images/ECONOMICS.jpg'
+import pic4 from '../images/FOLDER.jpg'
 
 
 // Komponenta kontakt na hlavní stránce, kde je vypsané vedení klubu. Mění se zde jména organizace.
@@ -13,28 +17,28 @@ const contacts = [
     name: 'Stejskal Milan',
     position: 'Předseda',
     phone: '602 741 200',
-    photo: blankPic
+    photo: pic1
   },
   {
     id: 2,
     name: 'Ježek Robert',
     position: 'Místopředseda',
     phone: '606 620 230',
-    photo: blankPic
+    photo: pic2
   },
   {
     id: 3,
     name: 'Zykudová Soňa',
     position: 'Hlavní Ekonomka',
     phone: '',
-    photo: blankPic
+    photo: pic3
   },
   {
     id: 4,
     name: 'Valenta Radek',
     position: 'Sekretář klubu',
     phone: '721 029 700',
-    photo: blankPic
+    photo: pic4
   }
 ];
 

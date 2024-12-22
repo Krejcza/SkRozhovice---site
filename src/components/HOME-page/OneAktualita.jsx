@@ -23,7 +23,7 @@ const OneAktualita = ({ date, headline, image, text }) => {
       </div>
       <p className='text-text-akt'>{text}</p>
       <div className="aktualita-aktualita">
-        <Link to='/Aktuality'>Číst zde</Link>
+        <Link to='/Aktuality'>Pokračovat ve čtení</Link>
       </div>
     </div>
   );

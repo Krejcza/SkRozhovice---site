@@ -44,7 +44,7 @@ const EditModalPlayer = () => {
   // načítání hráčů
   const fetchPlayers = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/players');
+      const response = await fetch('https://backend-rozhovice.onrender.com/api/players');
       const data = await response.json();
       setPlayers(data);
     } catch (error) {
@@ -89,7 +89,7 @@ const EditModalPlayer = () => {
   // funkce na updatování hráče
   const handleUpdatePlayer = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/players/${selectedPlayer._id}`, {
+      const response = await fetch(`https://backend-rozhovice.onrender.com/api/players/${selectedPlayer._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -52,7 +52,7 @@ const App = () => {
           <Route path='/OKlubu' element={<OKlubu />} />
           <Route path='/Kontakt' element={<Kontakt />} />
           <Route path='/LoginUser' element={<LoginUser />} />
-          <Route path='*' element={<NewMainPageOld />} />
+          <Route path='*' element={<ErrorPage />} />
         </Routes>
       </AnimatePresence>
       <Footer />

@@ -34,7 +34,7 @@ const MatchesTable = () => {
     // Načtení zápasů z api
     const fetchMatches = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/matches');
+        const response = await fetch('https://backend-rozhovice.onrender.com/api/matches');
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
 
@@ -51,7 +51,7 @@ const MatchesTable = () => {
   // Funkce na přidání nového zápasu
   const handleAddMatch = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/matches', {
+      const response = await fetch('https://backend-rozhovice.onrender.com/api/matches', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ const MatchesTable = () => {
     if (editMatch) {
       const updatedData = { ...editMatch };
       try {
-        const response = await fetch(`http://localhost:5000/api/matches/${editMatch._id}`, {
+        const response = await fetch(`https://backend-rozhovice.onrender.com/api/matches/${editMatch._id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ const MatchesTable = () => {
   
     if (confirmDelete) {
       try {
-        const response = await fetch(`http://localhost:5000/api/matches/${id}`, {
+        const response = await fetch(`https://backend-rozhovice.onrender.com/api/matches/${id}`, {
           method: 'DELETE',
           headers: { 
             'Authorization': `Bearer ${localStorage.getItem('token')}`
