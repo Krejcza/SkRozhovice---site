@@ -169,6 +169,7 @@ const goalkeepers = [
    
     const modalContent = isModalOpen && (
      <div className="modal" onClick={closeModal}>
+      <div className="modal-wrapper-one">
        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
          <span onClick={closeModal} className="close-button">
            ×
@@ -228,6 +229,7 @@ const goalkeepers = [
            </div>
          ) : null}
        </div>
+      </div>
      </div>
    );
    

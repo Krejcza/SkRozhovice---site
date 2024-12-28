@@ -207,6 +207,13 @@
    column-gap: 2rem;
  }
 
+ .modal-wrapper-one{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+ }
+
  .modal {
    position: fixed;
    top: 0;
@@ -383,7 +390,7 @@
 }
 
 .instagram-btn .instagram-link .fa-instagram {
-  font-size: 24px; /* Velikost ikony */
+  font-size: 24px; 
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
@@ -551,22 +558,70 @@
     width: 90%;
   }
 
-  .modal-inside-content {
+  .modal-inside-content{
+    display: flex;
     flex-direction: column;
     row-gap: 2rem;
-    width: 90%;
+    justify-content: space-between;
+    align-items: center;
+   }
+
+  .modal-wrapper-one{
+    padding: 1rem;
+   }
+
+  .modal {
+    width: 100%;
+  }
+
+  .modal-content {
+    display: flex;
+    background-color: #181818;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 950px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 25px #fff;
   }
 
   .modal-content::after {
     top: 25%;
     left: 50%;
-    background-size: 60%;
+    background-size: 80%;
     background-position: center;
+    filter: blur(3px);
     transform: translate(-50%, -50%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 60%);
+   -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 60%);
   }
 
+  .modal-content-img{
+    width: 90%; 
+    max-height: 400px; 
+    height: auto;
+    object-fit: contain;
+    z-index: 2;
+    filter: drop-shadow(0px 0px 30px #fff);
+  }
+
+  .ml11 {
+    font-size: 1.25rem;
+    padding-bottom: 1rem;
+  }
+
+  .one-modal-pl.instagram-btn{
+    padding-top: 1rem;
+ }
+
+
   .modal-info-pl{
-    width: 90%;
+    width: 100%;
    }
 
   
