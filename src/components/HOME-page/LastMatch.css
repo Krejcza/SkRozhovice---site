@@ -1,7 +1,7 @@
 .every-section-matcher{
    display: flex;
    align-items: center;
-   justify-content: center;
+   justify-content: space-evenly;
    flex-direction: row;
    width: 100%;
    max-width: 1400px;
@@ -164,6 +164,7 @@
 
 .mvp-player-wrap{
    border: 2px solid red;
-   width: 100%;
+   width: 400px;
    height: 400px;
 }
+

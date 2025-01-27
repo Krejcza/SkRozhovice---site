@@ -71,7 +71,6 @@ const Aktuality = () => {
       </div>
     </div>
     <LastMatch />
-    
     </>
   );
 };

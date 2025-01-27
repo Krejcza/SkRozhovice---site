@@ -6,13 +6,15 @@ const MatchesTable = () => {
   const [matches, setMatches] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [players, setPlayers] = useState([]);
   const [newMatch, setNewMatch] = useState({
     round: '',
     date: '',
     kickoffTime: '',
     teamDomaci: '',
     teamHoste: '',
-    score: ''
+    score: '',
+    mvpPlayer: ''
   });
   const [editMatch, setEditMatch] = useState(null);
 
@@ -28,6 +30,19 @@ const MatchesTable = () => {
         console.error('Chyba dekódování tokenu:', error);
       }
     }
+
+    const fetchPlayers = async () => {
+      try {
+        const response = await fetch('https://backend-rozhovice.onrender.com/api/players');
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        setPlayers(data);
+      } catch (error) {
+        console.error('Chyba načítání hráčů:', error.message);
+      }
+    };
+
+    fetchPlayers();
 
     // Načtení zápasů z api
     const fetchMatches = async () => {
@@ -76,7 +91,10 @@ const MatchesTable = () => {
   // Funkce na editaci zápasů
   const handleEditMatchSubmit = async () => {
     if (editMatch) {
-      const updatedData = { ...editMatch };
+      const updatedData = {
+        ...editMatch,
+        mvpPlayer: editMatch.mvpPlayer || ''
+      };
       try {
         const response = await fetch(`https://backend-rozhovice.onrender.com/api/matches/${editMatch._id}`, {
           method: 'PUT',
@@ -219,6 +237,17 @@ const MatchesTable = () => {
                 value={newMatch.score}
                 onChange={(e) => setNewMatch({ ...newMatch, score: e.target.value })}
               />
+              <select
+                value={newMatch.mvpPlayer}
+                onChange={(e) => setNewMatch({ ...newMatch, mvpPlayer: e.target.value })}
+              >
+                <option value="">Vyberte MVP zápasu</option>
+                {players.map((player) => (
+                  <option key={player._id} value={player.name}>
+                    {player.name}
+                  </option>
+                ))}
+              </select>
               <button onClick={handleAddMatch}>Přidat zápas</button>
             </div>
           )}
@@ -256,6 +285,22 @@ const MatchesTable = () => {
                 value={editMatch.score}
                 onChange={handleEditInputChange}
               />
+                <select
+                  name="mvpPlayer"
+                  value={editMatch.mvpPlayer || ''} // Toto už máme
+                  onChange={handleEditInputChange}
+                >
+                  <option value="">Vyberte MVP zápasu</option>
+                  {players.map((player) => (
+                    <option 
+                      key={player._id} 
+                      value={player.name}
+                      selected={editMatch.mvpPlayer === player.name} // Přidáme selected pro aktuální MVP
+                    >
+                      {player.name}
+                    </option>
+                  ))}
+                </select>
               <button onClick={handleEditMatchSubmit}>Uložit změny</button>
               <button onClick={() => setEditMatch(null)}>Zrušit</button>
             </div>

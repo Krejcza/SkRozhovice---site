@@ -4,23 +4,34 @@ import './LastMatch.css';
 const LastMatch = () => {
   const [lastMatch, setLastMatch] = useState(null);
   const [upcomingMatch, setUpcomingMatch] = useState(null);
+  const [players, setPlayers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-   const fetchMatches = async () => {
+   const fetchData = async () => {
      try {
        setIsLoading(true);
-       const response = await fetch('https://backend-rozhovice.onrender.com/api/matches');
-       if (!response.ok) {
-         throw new Error('Síťová odpověď nebyla v pořádku');
-       }
-       const data = await response.json();
- 
-       const now = new Date();
+       const [matchesResponse, playersResponse] = await Promise.all([
+        fetch('https://backend-rozhovice.onrender.com/api/matches'),
+        fetch('https://backend-rozhovice.onrender.com/api/players')
+      ]);
+
+      if (!matchesResponse.ok || !playersResponse.ok) {
+        throw new Error('Síťová odpověď nebyla v pořádku');
+      }
+
+      const [matchesData, playersData] = await Promise.all([
+        matchesResponse.json(),
+        playersResponse.json()
+      ]);
+
+      setPlayers(playersData);
+
+      const now = new Date();
  
        // Minulé zápasy: datum < aktuální čas nebo existuje skóre
-       const pastMatches = data
+       const pastMatches = matchesData
          .filter(
            (item) =>
              item.date && 
@@ -29,7 +40,7 @@ const LastMatch = () => {
          .sort((a, b) => new Date(b.date) - new Date(a.date)); // Nejnovější první
  
        // Budoucí zápasy: datum >= aktuální čas a skóre je prázdné
-       const futureMatches = data
+       const futureMatches = matchesData
          .filter(
            (item) =>
              item.date && 
@@ -55,8 +66,13 @@ const LastMatch = () => {
      }
    };
  
-   fetchMatches();
+   fetchData();
  }, []);
+
+ const getMvpPlayer = () => {
+  if (!lastMatch?.mvpPlayer || !players) return null;
+  return players.find(player => player.name === lastMatch.mvpPlayer);
+};
 
   if (isLoading) {
     return (
@@ -80,9 +96,12 @@ const LastMatch = () => {
     return <p>Žádné zápasy nebyly nalezeny.</p>;
   }
 
+  const mvpPlayer = getMvpPlayer();
+
   return (
     <>
     <div className="background-linear-deff">
+    <h2 className='main-topic-small bl'>VČELÍ STATISTIKA</h2>
     <div className="every-section-matcher">
       <div className="both-matches">
         {lastMatch && (
@@ -149,10 +168,15 @@ const LastMatch = () => {
         )}
         </div>
         <div className="mvp-player-wrap">
-          <div className="mvp-player">
-            <p className="name-of-mvp"></p>
-            <img src="" alt="" className="pic-of-mvp" />
-          </div>
+            {mvpPlayer && (
+              <div className="mvp-player">
+                <p className="name-of-mvp">{mvpPlayer.name}</p>
+                <h2>MVP</h2>
+                <p>{lastMatch.score}</p>
+                <p>{lastMatch.teamDomaci}</p>
+                <p>{lastMatch.teamHoste}</p>
+              </div>
+            )}
         </div>
       </div>
       </div>
