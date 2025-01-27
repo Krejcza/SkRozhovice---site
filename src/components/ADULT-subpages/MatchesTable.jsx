@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import './MatchesTable.css';
 import { jwtDecode } from 'jwt-decode';
 
-// Komponenta tabulky zápasů
-
 const MatchesTable = () => {
   const [matches, setMatches] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [newMatch, setNewMatch] = useState({
     round: '',
     date: '',
@@ -16,7 +15,6 @@ const MatchesTable = () => {
     score: ''
   });
   const [editMatch, setEditMatch] = useState(null);
-
 
   // ověří se jestli je uživatel přihlášený
   useEffect(() => {
@@ -34,6 +32,7 @@ const MatchesTable = () => {
     // Načtení zápasů z api
     const fetchMatches = async () => {
       try {
+        setIsLoading(true);
         const response = await fetch('https://backend-rozhovice.onrender.com/api/matches');
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
@@ -42,6 +41,8 @@ const MatchesTable = () => {
         setMatches(data.sort((a, b) => a.round - b.round));
       } catch (error) {
         console.error('Chyba načítání zápasů:', error.message);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -138,119 +139,128 @@ const MatchesTable = () => {
   return (
     <div className="matches-table">
       <h2 className='main-topic-small'>Seznam Zápasů</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Kolo</th>
-            <th>Datum</th>
-            <th>Čas Výkopu</th>
-            <th>Zápas</th>
-            <th>Skóre</th>
-            {isLoggedIn && <th>Akce</th>}
-          </tr>
-        </thead>
-        <tbody>
-          {matches.map((match) => (
-            <tr key={match._id}>
-              <td>{match.round}</td>
-              <td>{match.date ? new Date(match.date).toLocaleDateString() : ''}</td>
-              <td>{match.kickoffTime}</td>
-              <td>{match.teamDomaci} || {match.teamHoste}</td>
-              <td>{match.score}</td>
-              {isLoggedIn && (
-                <td>
-                  <div className='buttons-for-editation-match'>
-                    <button className='editation-match-btn' onClick={() => {
-                      setEditMatch({ ...match });
-                    }}>Editovat</button>
-                    <button className='deletion-match-btn' onClick={() => handleDeleteMatch(match._id)}>Smazat</button>
-                  </div>
-                </td>
-              )}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {isLoggedIn && (
-        <div className="add-match-form">
-          <h3>Přidat nový zápas</h3>
-          <input
-            type="text"
-            placeholder="Kolo"
-            value={newMatch.round}
-            onChange={(e) => setNewMatch({ ...newMatch, round: e.target.value })}
-          />
-          <input
-            type="date"
-            placeholder="Datum"
-            value={newMatch.date ? newMatch.date.split('T')[0] : ''}
-            onChange={(e) => setNewMatch({ ...newMatch, date: e.target.value })}
-          />
-          <input
-            type="time"
-            placeholder="Čas Výkopu"
-            value={newMatch.kickoffTime}
-            onChange={(e) => setNewMatch({ ...newMatch, kickoffTime: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Domácí tým"
-            value={newMatch.teamDomaci}
-            onChange={(e) => setNewMatch({ ...newMatch, teamDomaci: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Hostující tým"
-            value={newMatch.teamHoste}
-            onChange={(e) => setNewMatch({ ...newMatch, teamHoste: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Skóre"
-            value={newMatch.score}
-            onChange={(e) => setNewMatch({ ...newMatch, score: e.target.value })}
-          />
-          <button onClick={handleAddMatch}>Přidat zápas</button>
+      {isLoading ? (
+        <div className="spinner-container">
+          <div className="spinner-table"></div>
+          <p>Načítáme zápasy. Prosíme o strpení.</p>
         </div>
-      )}
+      ) : (
+        <>
+          <table>
+            <thead>
+              <tr>
+                <th>Kolo</th>
+                <th>Datum</th>
+                <th>Čas Výkopu</th>
+                <th>Zápas</th>
+                <th>Skóre</th>
+                {isLoggedIn && <th>Akce</th>}
+              </tr>
+            </thead>
+            <tbody>
+              {matches.map((match) => (
+                <tr key={match._id}>
+                  <td>{match.round}</td>
+                  <td>{match.date ? new Date(match.date).toLocaleDateString() : ''}</td>
+                  <td>{match.kickoffTime}</td>
+                  <td>{match.teamDomaci} - {match.teamHoste}</td>
+                  <td>{match.score}</td>
+                  {isLoggedIn && (
+                    <td>
+                      <div className='buttons-for-editation-match'>
+                        <button className='editation-match-btn' onClick={() => {
+                          setEditMatch({ ...match });
+                        }}>Editovat</button>
+                        <button className='deletion-match-btn' onClick={() => handleDeleteMatch(match._id)}>Smazat</button>
+                      </div>
+                    </td>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
-      {editMatch && (
-        <div className="edit-match-form">
-          <h3>Upravit zápas - Kolo {editMatch.round}</h3>
-          <input
-            type="date"
-            name="date"
-            value={editMatch.date ? editMatch.date.split('T')[0] : ''}
-            onChange={handleEditInputChange}
-          />
-          <input
-            type="time"
-            name="kickoffTime"
-            value={editMatch.kickoffTime}
-            onChange={handleEditInputChange}
-          />
-          <input
-            type="text"
-            name="teamDomaci"
-            value={editMatch.teamDomaci}
-            onChange={handleEditInputChange}
-          />
-          <input
-            type="text"
-            name="teamHoste"
-            value={editMatch.teamHoste}
-            onChange={handleEditInputChange}
-          />
-          <input
-            type="text"
-            name="score"
-            value={editMatch.score}
-            onChange={handleEditInputChange}
-          />
-          <button onClick={handleEditMatchSubmit}>Uložit změny</button>
-          <button onClick={() => setEditMatch(null)}>Zrušit</button>
-        </div>
+          {isLoggedIn && (
+            <div className="add-match-form">
+              <h3>Přidat nový zápas</h3>
+              <input
+                type="text"
+                placeholder="Kolo"
+                value={newMatch.round}
+                onChange={(e) => setNewMatch({ ...newMatch, round: e.target.value })}
+              />
+              <input
+                type="date"
+                placeholder="Datum"
+                value={newMatch.date ? newMatch.date.split('T')[0] : ''}
+                onChange={(e) => setNewMatch({ ...newMatch, date: e.target.value })}
+              />
+              <input
+                type="time"
+                placeholder="Čas Výkopu"
+                value={newMatch.kickoffTime}
+                onChange={(e) => setNewMatch({ ...newMatch, kickoffTime: e.target.value })}
+              />
+              <input
+                type="text"
+                placeholder="Domácí tým"
+                value={newMatch.teamDomaci}
+                onChange={(e) => setNewMatch({ ...newMatch, teamDomaci: e.target.value })}
+              />
+              <input
+                type="text"
+                placeholder="Hostující tým"
+                value={newMatch.teamHoste}
+                onChange={(e) => setNewMatch({ ...newMatch, teamHoste: e.target.value })}
+              />
+              <input
+                type="text"
+                placeholder="Skóre"
+                value={newMatch.score}
+                onChange={(e) => setNewMatch({ ...newMatch, score: e.target.value })}
+              />
+              <button onClick={handleAddMatch}>Přidat zápas</button>
+            </div>
+          )}
+
+          {editMatch && (
+            <div className="edit-match-form">
+              <h3>Upravit zápas - Kolo {editMatch.round}</h3>
+              <input
+                type="date"
+                name="date"
+                value={editMatch.date ? editMatch.date.split('T')[0] : ''}
+                onChange={handleEditInputChange}
+              />
+              <input
+                type="time"
+                name="kickoffTime"
+                value={editMatch.kickoffTime}
+                onChange={handleEditInputChange}
+              />
+              <input
+                type="text"
+                name="teamDomaci"
+                value={editMatch.teamDomaci}
+                onChange={handleEditInputChange}
+              />
+              <input
+                type="text"
+                name="teamHoste"
+                value={editMatch.teamHoste}
+                onChange={handleEditInputChange}
+              />
+              <input
+                type="text"
+                name="score"
+                value={editMatch.score}
+                onChange={handleEditInputChange}
+              />
+              <button onClick={handleEditMatchSubmit}>Uložit změny</button>
+              <button onClick={() => setEditMatch(null)}>Zrušit</button>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

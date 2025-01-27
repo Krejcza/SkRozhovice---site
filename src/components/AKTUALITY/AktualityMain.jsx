@@ -91,9 +91,12 @@ const AktualityMain = () => {
       <div className='background-linear-deff mappp minhei'>
         <div className="aktuality-all">
           {loading ? (
-            <p  className='loader'></p>
+            <div className='loaderer-div'>
+              <div className='loader-aktall'></div>
+              <p>Načítání aktualit. Prosíme o strpení.</p>
+            </div>
           ) : error ? (
-            <p>{error}</p>
+            <p className='erorik'>{error}</p>
           ) : news.length > 0 ? (
             news.map((item, index) => (
               <motion.article

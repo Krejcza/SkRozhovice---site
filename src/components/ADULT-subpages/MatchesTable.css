@@ -188,6 +188,33 @@
 }
 
 
+.spinner-table {
+  border: 5px solid #fff;
+  border-left-color: #FEDF25;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spinner-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner-container p{
+  color: #fff;
+}
+
 
 
  @media (max-width: 1000px) {

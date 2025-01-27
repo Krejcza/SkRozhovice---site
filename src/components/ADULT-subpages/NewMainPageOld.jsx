@@ -4,47 +4,67 @@ import ReactDOM from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
-import fifacard from '../images/fifa-card.png';
 import refpic from '../images/blank-profile-pic.webp'
 import EditModalPlayer from './EditModalPlayer'
 import { useSpring, animated } from "react-spring";
 import AnimatedText from './AnimatedText';
 import './MainPageOld.css'
+import barva from '../images/CARDS/Barva.png'
+import kudlacek from '../images/CARDS/Kudláček.png'
+import bednarz from '../images/CARDS/Bednarz.png'
+import dvorak from '../images/CARDS/Dvořák.png'
+import fedor from '../images/CARDS/Fedor.png'
+import holecek from '../images/CARDS/Holeček.png'
+import holub from '../images/CARDS/Holub.png'
+import holubml from '../images/CARDS/Holubml.png'
+import holy from '../images/CARDS/Holý.png'
+import kopp from '../images/CARDS/Kopp.png'
+import kostinec from '../images/CARDS/Kostinec.png'
+import malek from '../images/CARDS/Málek.png'
+import mudrunka from '../images/CARDS/Mudruňka.png'
+import novak from '../images/CARDS/Novák.png'
+import pekar from '../images/CARDS/Pekař.png'
+import pleskot from '../images/CARDS/Pleskot.png'
+import backovsky from '../images/CARDS/Bačkovský.png'
+import serhii from '../images/CARDS/Shrhii.png'
+import stejskal from '../images/CARDS/Stejskal.png'
+import vasko from '../images/CARDS/Vaško.png'
+import vozenilek from '../images/CARDS/Voženílek.png'
+import zalud from '../images/CARDS/Žalud.png'
 
 
 const goalkeepers = [
-   { name: 'Barva Michal', image: fifacard },
-   { name: 'Kudláček Lukáš', image: fifacard },
-   { name: 'Pleskot Matěj', image: fifacard },
-   { name: 'Málek Patrik', image: fifacard },
+   { name: 'Barva Michal', image: barva },
+   { name: 'Kudláček Lukáš', image: kudlacek },
+   { name: 'Pleskot Matěj', image: pleskot },
+   { name: 'Málek Patrik', image: malek },
  ];
 
  const defenders = [
-   { name: 'Pieies Sehrhii', image: fifacard },
-   { name: 'Vaško Jakub', image: fifacard },
-   { name: 'Fedor Viacheslav', image: fifacard },
-   { name: 'Dvořák Denis', image: fifacard },
+   { name: 'Pieies Sehrhii', image: serhii },
+   { name: 'Vaško Jakub', image: vasko },
+   { name: 'Fedor Viacheslav', image: fedor },
+   { name: 'Dvořák Denis', image: dvorak },
  ];
 
  const midfielders = [
-   { name: 'Holub Martin', image: fifacard },
-   { name: 'Mudruňka Josef', image: fifacard },
-   { name: 'Kopp Zdeněk', image: fifacard },
-   { name: 'Bačkovský Petr', image: fifacard },
-   { name: 'Stejskal David', image: fifacard },
-   { name: 'Holeček Filip', image: fifacard },
-   { name: 'Pekař Jiří', image: fifacard },
-   { name: 'Novák Filip', image: fifacard },
-   { name: 'Kostinec Jakub', image: fifacard },
-   { name: 'Holub Marek', image: fifacard },
+   { name: 'Holub Martin', image: holub },
+   { name: 'Mudruňka Josef', image: mudrunka },
+   { name: 'Kopp Zdeněk', image: kopp },
+   { name: 'Bačkovský Petr', image: backovsky },
+   { name: 'Stejskal David', image: stejskal },
+   { name: 'Holeček Filip', image: holecek },
+   { name: 'Pekař Jiří', image: pekar },
+   { name: 'Novák Filip', image: novak },
+   { name: 'Kostinec Jakub', image: kostinec },
+   { name: 'Holub Marek', image: holubml },
  ];
 
  const attackers = [
-   { name: 'Bednarz Jakub', image: fifacard },
-   { name: 'Voženílek Jakub', image: fifacard },
-   { name: 'Žalud Daniel', image: fifacard },
-   { name: 'Holý Jakub', image: fifacard },
-   { name: 'Vojtěch Holeček', image: fifacard },
+   { name: 'Bednarz Jakub', image: bednarz },
+   { name: 'Voženílek Jakub', image: vozenilek },
+   { name: 'Žalud Daniel', image: zalud },
+   { name: 'Holý Jakub', image: holy },
  ];
 
  const realizeTeam = [
@@ -73,13 +93,6 @@ const goalkeepers = [
      phone: '+420 723 024 430'
    },
  ];
-
- const Loader = () => (
-   <div className="loader-container">
-     <div className="loader"></div>
-   </div>
- );
- 
 
  const PlayerCard = ({ player }) => {
    const [isModalOpen, setIsModalOpen] = useState(false);
@@ -176,7 +189,10 @@ const goalkeepers = [
          </span>
 
          {isLoading ? (
-           <Loader />
+            <div className="loader-container">
+              <div className="loader"></div>
+              <p>Načítáme hráče. Prosíme o strpení.</p>
+            </div>
          ) : error ? (
            <div className="error-text">{error}</div>
          ) : playerDetails ? (

@@ -1,5 +1,6 @@
 import React from 'react';
 import OneAktualita from './OneAktualita';
+import LastMatch from './LastMatch';
 import { useState, useEffect } from 'react';
 import './Aktuality.css'
 import '../../App.css'
@@ -39,12 +40,12 @@ const Aktuality = () => {
     <div className="loader-container-main">
       <div className="loader-main">
         <div className="spinner-main"></div>
-        <p>Načítání aktualit. Prosíme o strpení.</p>
+        <p>Načítání aktualit a zápasů. Prosíme o strpení.</p>
       </div>
     </div>
   );
 
-  return (
+  return (<>
     <div className='background-black'>
       <h2 className='main-topic-small'>Poslední Aktuality</h2>
       <div className='all-aktuality'>
@@ -69,6 +70,9 @@ const Aktuality = () => {
         )}
       </div>
     </div>
+    <LastMatch />
+    
+    </>
   );
 };
 

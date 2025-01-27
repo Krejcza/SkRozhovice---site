@@ -38,11 +38,13 @@ const BottomToTop = () => {
   }, []);
 
   return (
+    <>
     <div className={`scrolly-to-top ${isVisible ? 'visible' : ''}`}>
       <button onClick={scrollToTop} className="scroll-button">
         <FontAwesomeIcon icon={faAnglesUp} size="2x" />
       </button>
     </div>
+    </>
   );
 };
 

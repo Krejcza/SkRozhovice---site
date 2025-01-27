@@ -10,6 +10,10 @@
    align-items: center;
 }
 
+.erorik{
+  color: red;
+}
+
 .aktualita-container {
   border-radius: 15px;
   width: 1400px;
@@ -520,7 +524,16 @@ form button:hover {
   text-align: center;
 }
 
-.loader {
+.loaderer-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+
+}
+
+.loader-aktall{
   border: 5px solid #f3f3f3;
   border-top: 5px solid #FEDF25;
   border-radius: 50%;
