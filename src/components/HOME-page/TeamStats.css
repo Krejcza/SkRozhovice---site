@@ -1,0 +1,106 @@
+.stats-wrap{
+   padding: 2rem 0;
+   max-width: 1400px;
+   margin: 0 auto;
+}
+
+.stats-only{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   padding: 2rem 1rem;
+   background-color: #181818;
+   border-radius: 20px;
+   box-shadow: 0 5px 20px #00000075;
+   width: 100%;
+   row-gap: 2rem;
+}
+
+.stats-only h3{
+   color: #fff;
+   font-size: 1.25rem;
+}
+
+.stats-of-games{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+   align-items: center;
+   width: 100%;
+}
+
+.stats-win, .stats-loss, .stats-draw {
+   display: flex;
+   flex-direction: column-reverse;
+   align-items: center;
+   justify-content: space-evenly;
+   background-color: #FEDF25;
+   color: #fff;
+   width: 150px;
+   height: 150px;
+   border-radius: 15px;
+   box-shadow: 0 5px 20px #00000075;
+   position: relative;
+   transition: 0.3s ease-out;
+}
+
+.stats-win:hover, .stats-loss:hover, .stats-draw:hover{
+   box-shadow: 0 0px 10px #fff;
+   transform: scale(1.025);
+}
+
+.icon {
+   position: absolute;
+   top: 15px;
+   right: -30px;
+   width: 30px;
+   height: 40px;
+   background-color: #FEDF25;
+   border-radius: 0px 10px 10px 0px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   color: #181818;
+   font-size: 1rem;
+ }
+
+.loss-icon{
+   background-color: #fff;
+}
+
+.win-icon{
+   background-color: #fff;
+}
+
+.draw-icon{
+   background-color: #fff;
+}
+
+.first-stat{
+   font-size: 6rem;
+   font-weight: 500;
+   color: #181818;
+   font-family: 'Teko', sans-serif;
+   padding-top: 25px;
+}
+
+.second-stat{
+   font-size: 1rem;
+   color: #181818;
+   font-weight: 500;
+   position: absolute;
+   top: 10%;
+   left: 50%;
+   transform: translateX(-50%);
+}
+
+.odometer {
+   font-family: inherit;
+   font-size: inherit;
+ }
+ 
+ .first-stat .odometer-inside {
+   display: inline-block;
+ }
+

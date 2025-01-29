@@ -13,7 +13,7 @@
 
 .aktualita-item {
    border-radius: 15px;
-   background-color: #fff;
+   background-color: #FEDF25;
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -25,22 +25,6 @@
    position: relative;
    z-index: 2;
    overflow: hidden;
- }
-
- .aktualita-item::before{
-   content: '';
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   background-image: url('../images/hive-pattern-gold.png');
-   background-size: cover;
-   background-position: left;
-   z-index: -1;
-   opacity: 0.1;
-   background-repeat: no-repeat;
-   border-radius: 15px;
  }
 
  .aktualita-item::after{
@@ -99,6 +83,7 @@
 
 .aktualita-item:hover .aktualita-image-one{
   filter: grayscale(0%);
+  transform: scale(1.15);
  }
 
  .aktualita-about{
@@ -143,7 +128,7 @@
    font-size: 0.9rem;
    color: #181818;
    font-weight: 500;
-   background-color: #FEDF25;
+   background-color: #fff;
    width: 100%;
    text-align: center;
    padding: 0.2rem 0.5rem;
@@ -182,6 +167,11 @@
     text-decoration: none;
     font-size: 0.65rem;
     font-weight: 600;
+    transition: 0.3s ease-out;
+ }
+
+ .aktualita-aktualita:hover.aktualita-aktualita a{
+    color: #fff;
  }
 
   .loader-container-main {

@@ -28,9 +28,8 @@
    filter: grayscale(0%);
  }
 
- .no-scroll {
-  overflow: hidden; 
-  height: 100%; 
+ .no-scroller {
+  overflow: hidden;
 }
  
 .modalGal {

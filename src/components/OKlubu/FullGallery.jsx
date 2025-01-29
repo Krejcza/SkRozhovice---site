@@ -11,14 +11,17 @@ const Gallery = ({ images }) => {
 
   const openImage = (image) => {
     setSelectedImage(image);
-    document.body.classList.add('no-scroll');
+    // Prevent scrolling by adding a class to the body
+    document.body.classList.add('no-scroller');
+    // Store the current scroll position
+    const scrollY = window.scrollY;
+    document.body.style.top = `-${scrollY}px`; // Lock the scroll position
   };
-
-  // funkce na ukončení obrázku, když kliknu na křížek a zároveň se povolí scroll
 
   const closeModal = () => {
     setSelectedImage(null);
-    document.body.classList.remove('no-scroll');
+    document.body.classList.remove('no-scroller');
+    document.body.style.top = '';
   };
 
   return (
