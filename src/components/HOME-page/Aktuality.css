@@ -40,10 +40,13 @@
   border-radius: 0 0 5px 5px;
   opacity: 0.5;
   transition: 0.3s ease-out;
+  box-shadow: 0px 5px 10px #181818;
  }
 
  .aktualita-item:hover.aktualita-item::after{
   opacity: 1;
+  height: 60px;
+  width: 150px;
  }
 
  .aktualita-item:hover{
@@ -125,14 +128,24 @@
  }
 
  .text-date-akt{
-   font-size: 0.9rem;
-   color: #181818;
-   font-weight: 500;
-   background-color: #fff;
-   width: 100%;
-   text-align: center;
-   padding: 0.2rem 0.5rem;
-   box-shadow: 0px 5px 10px #00000075;
+   position: absolute;
+   top: -10px;
+   left: 50%;
+   transform: translateX(-50%);
+   z-index: 10;
+   opacity: 0;
+   transition: 0.3s ease-out;
+ }
+
+ .only-text-date-akt{
+  z-index: 10;
+  color: #181818;
+  font-weight: 500;
+ }
+
+ .aktualita-item:hover .text-date-akt{
+  opacity: 1;
+  top: 5px;
  }
  
  .text-text-akt {
@@ -144,7 +157,7 @@
    text-overflow: ellipsis;
    display: -webkit-box;
    -webkit-box-orient: vertical;
-   -webkit-line-clamp: 4;
+   -webkit-line-clamp: 6;
    padding: 0 0.5rem;
  }
 
@@ -152,26 +165,46 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #181818;
   width: 100%;
   max-height: 100%;
   height: 30px;
   border-radius: 0 0 10px 10px;
   text-align: center;
-  border-top: 3px solid #fff;
  }
 
- .aktualita-aktualita a{
-    text-transform: uppercase;
-    color: #FEDF25;
-    text-decoration: none;
-    font-size: 0.65rem;
-    font-weight: 600;
-    transition: 0.3s ease-out;
+ .ref-to-aktualita{
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  content:'';
+  width: 100px;
+  height: 25px;
+  background-color: #fff;
+  opacity: 0.5;
+  transition: 0.3s ease-out;
+  border-radius: 5px 5px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px -2px 10px #181818;
  }
 
- .aktualita-aktualita:hover.aktualita-aktualita a{
-    color: #fff;
+ .aktualita-item:hover .ref-to-aktualita{
+  opacity: 1;
+  height: 30px;
+  width: 150px;
+  bottom: 0px;
+ }
+
+ .icon-to-full-akt{
+  color: #181818;
+  opacity: 0;
+  transition: 0.3s ease-out;
+ }
+
+ .aktualita-item:hover .icon-to-full-akt{
+  opacity: 1;
  }
 
   .loader-container-main {
@@ -188,6 +221,10 @@
     align-items: center;
   }
 
+  .loader-textr{
+    color: #fff;
+  }
+
   .spinner-main {
     border: 5px solid #f3f3f3;
     border-left-color: #FEDF25;
@@ -196,10 +233,6 @@
     height: 40px;
     animation: spin 1s linear infinite;
     margin-bottom: 20px;
-  }
-
-  .loader-main p{
-    color: #fff;
   }
 
   @keyframes spin {
@@ -297,7 +330,4 @@
     font-size: 0.9rem;
   }
 
-  .aktualita-aktualita {
-    border-top: 1px solid #fff;
-   }
 }

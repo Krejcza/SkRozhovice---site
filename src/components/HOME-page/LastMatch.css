@@ -76,7 +76,7 @@
    align-items: flex-start;
    justify-content: center;
    width: 700px;
-   background-color: #343434;
+   background-color: #FEDF25;
    border-radius: 15px;
    color: #fff;
    padding: 1.5rem 2rem;
@@ -104,8 +104,8 @@
 }
 
 .up-matchos-p{
-   background-color: #FEDF25;
-   color: #181818;
+   background-color: #181818;
+   color: #fff;
    padding: 10px 20px;
    font-weight: 500;
    border-radius: 5px;
@@ -212,10 +212,15 @@
    padding: 0px 5px;
 }
 
+.upmatch-score{
+   color: #181818;
+   padding: 0px 5px;
+}
+
 
 .second-uppart-matcher{
    display: flex;
-   color: #ffffff;
+   color: #181818;
    width: 100%;
    justify-content: space-evenly;
    justify-content: flex-start;
@@ -239,7 +244,7 @@
 }
 
 .upmatcher-dates-two{
-   color: #fff;
+   color: #181818;
 }
 
 .uptimer-dates-one{
@@ -247,7 +252,7 @@
 }
 
 .uptimer-dates-two{
-   color: #fff;
+   color: #181818;
 }
 
 .mvp-player-wrap{

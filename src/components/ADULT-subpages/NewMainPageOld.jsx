@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MatchesTable from './MatchesTable';
 import ReactDOM from 'react-dom';
+import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
@@ -72,25 +73,25 @@ const goalkeepers = [
      image: refpic,
      name: 'Stejskal David',
      position: 'Hlavní trenér',
-     phone: '+420 723 739 151'
+     phone: '723 739 151'
    },
    {
      image: refpic,
      name: 'Holub Martin',
      position: 'Asistent trenéra',
-     phone: '+420 776 020 468'
+     phone: '776 020 468'
    },
    {
      image: refpic,
      name: 'Kopp Zdeněk',
      position: 'Asistent trenéra',
-     phone: '+420 602 464 595'
+     phone: '602 464 595'
    },
    {
      image: refpic,
      name: 'Dušek Petr',
      position: 'Vedoucí týmu',
-     phone: '+420 723 024 430'
+     phone: '723 024 430'
    },
  ];
 
@@ -189,10 +190,12 @@ const goalkeepers = [
          </span>
 
          {isLoading ? (
-            <div className="loader-container">
-              <div className="loader"></div>
-              <p>Načítáme hráče. Prosíme o strpení.</p>
+          <div className="loader-container-main-player">
+            <div className="loader-main-player">
+              <div className="spinner-name-player"></div>
+              <p className='loader-name-text'>Načítání hráče. Prosíme o strpení.</p>
             </div>
+          </div>
          ) : error ? (
            <div className="error-text">{error}</div>
          ) : playerDetails ? (
@@ -248,6 +251,21 @@ const goalkeepers = [
       </div>
      </div>
    );
+
+   const location = useLocation();
+
+   useEffect(() => {
+    if (location.hash === '#tablematchref') {
+      const timeout = setTimeout(() => {
+        const element = document.getElementById('tablematchref');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 400); 
+
+      return () => clearTimeout(timeout);
+    }
+  }, [location]);
    
    return (
      <>
@@ -342,7 +360,7 @@ const goalkeepers = [
          <EditModalPlayer/>
        </div>
  
-       <div className="background-black nb">
+       <div id='tablematchref' className="background-black nb">
          <MatchesTable />
          <div className="actual-score">
            <FontAwesomeIcon icon={faChevronRight} className='icon-chev icon-chev-right' />

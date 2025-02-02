@@ -40,7 +40,7 @@ const Aktuality = () => {
     <div className="loader-container-main">
       <div className="loader-main">
         <div className="spinner-main"></div>
-        <p>Načítání aktualit a zápasů. Prosíme o strpení.</p>
+        <p className='loader-textr'>Načítání aktualit a zápasů. Prosíme o strpení.</p>
       </div>
     </div>
   );

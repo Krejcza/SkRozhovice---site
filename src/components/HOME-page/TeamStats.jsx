@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useRef} from 'react';
 import './TeamStats.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretUp, faCaretDown, faGripLinesVertical } from "@fortawesome/free-solid-svg-icons";
+import { faCaretUp, faCaretDown, faGripLinesVertical, faTurnUp } from "@fortawesome/free-solid-svg-icons";
 import Odometer from 'react-odometerjs';
 import 'odometer/themes/odometer-theme-minimal.css';
+import { useNavigate } from 'react-router-dom';
 
 const TeamStats = () => {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showStats, setShowStats] = useState(false);
   const statsRef = useRef(null);
+
+  const navigate = useNavigate();
   
   const TEAM_NAME = "SK Rozhovice";
   const API_URL = "https://backend-rozhovice.onrender.com/api/matches";
@@ -92,10 +95,14 @@ const TeamStats = () => {
 
   const stats = calculateStats();
 
+  const handleRedirect = () => {
+    navigate('/Ateam#tablematchref');
+  };
+
   return (
     <div className='stats-wrap' ref={statsRef}>
       <div className='stats-only'>
-        <h3>PŘEHLED ZÁPASŮ</h3>
+        <h3>ODEHRANÉ ZÁPASY</h3>
         <div className="stats-of-games">
           <div className='stats-loss'>
             <div className='first-stat'>
@@ -105,6 +112,9 @@ const TeamStats = () => {
             <span className="icon loss-icon">
               <FontAwesomeIcon icon={faCaretDown} />
             </span>
+            <div className='return-of-the-jedi' onClick={handleRedirect}>
+              <FontAwesomeIcon icon={faTurnUp} className='icon-to-matches' />
+            </div>
           </div>
           <div className='stats-win'>
             <div className='first-stat'>
@@ -114,6 +124,9 @@ const TeamStats = () => {
             <span className="icon win-icon">
               <FontAwesomeIcon icon={faCaretUp} />
             </span>
+            <div className='return-of-the-jedi' onClick={handleRedirect}>
+              <FontAwesomeIcon icon={faTurnUp} className='icon-to-matches' />
+            </div>
           </div>
           <div className='stats-draw'>
             <div className='first-stat'>
@@ -123,9 +136,11 @@ const TeamStats = () => {
             <span className="icon draw-icon">
               <FontAwesomeIcon icon={faGripLinesVertical} />
             </span>
+            <div className='return-of-the-jedi' onClick={handleRedirect}>
+              <FontAwesomeIcon icon={faTurnUp} className='icon-to-matches' />
+            </div>
           </div>
         </div>
-        <p>Rozjet </p>
       </div>
     </div>
   );

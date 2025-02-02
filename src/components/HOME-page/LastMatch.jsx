@@ -102,6 +102,8 @@ const LastMatch = () => {
     <>
       <div className="background-linear-deff">
         <h2 className='main-topic-small bl'>Rychlý přehled</h2>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio nemo nulla perferendis minus enim voluptas natus, numquam magni nam quo autem ad iste corporis ratione, ab nobis, temporibus doloribus eum!  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore veritatis, consectetur dignissimos, odio error voluptatem officia eaque consequuntur esse quia unde inventore quidem omnis ratione recusandae porro laborum praesentium impedit?</p>
         
         {isLoading && (
           <div className="loader-container-main">
@@ -187,7 +189,7 @@ const LastMatch = () => {
                     <div className="second-uppart-matcher">
                       <div className="match-teams">
                         <span className="team-home">{upcomingMatch.teamDomaci}</span>
-                        <span className="match-score">VS</span>
+                        <span className="upmatch-score">-</span>
                         <span className="team-away">{upcomingMatch.teamHoste}</span>
                       </div>
                     </div>
