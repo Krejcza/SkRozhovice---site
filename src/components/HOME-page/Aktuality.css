@@ -1,31 +1,56 @@
 .all-aktuality{
    display: flex;
+   flex-wrap: wrap;
    flex-direction: row;
    justify-content: center;
    align-items: center;
    margin: 0 auto;
-   column-gap: 2rem;
+   column-gap: 5rem;
+   row-gap: 5rem;
    margin-top: 2rem;
    margin-bottom: 2rem;
-   max-width: 1200px;
+   max-width: 1400px;
    padding: 0 2rem;
 }
 
+.aktualita-one-everithing{
+  position: relative;
+  transition: 0.3s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .aktualita-item {
-   border-radius: 15px;
-   background-color: #FEDF25;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: space-between;
-   width: 350px;
-   min-height: 500px;
-   box-shadow: 0px 2px 5px #ffffff75;
-   transition: 0.3s ease-out;
-   position: relative;
-   z-index: 2;
-   overflow: hidden;
- }
+  border-radius: 15px;
+  background-color: #181818;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 350px;
+  min-height: 500px;
+  box-shadow: 0px 2px 5px #ffffff75;
+  transition: 0.3s ease-out;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.aktualita-item::before{
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: 70%;
+  width: 100%;
+  height: 100%;
+  background-image: url('../images/hive-pattern.png');
+  background-size: 80%; 
+  background-position: bottom left; 
+  background-repeat: no-repeat;
+  opacity: 0.2;
+}
+
 
  .aktualita-item::after{
   content: '';
@@ -54,12 +79,6 @@
    box-shadow: 0px 2px 20px #ffffffc3;
  }
  
-
- .aktualita-item:hover.aktualita-item::before{
-  background-image: url('../images/hive-pattern.png');
-  opacity: 0.1;
-  transform: scale(1.5);
- }
 
 
  .aktualita-item:hover .text-text-akt{
@@ -90,9 +109,48 @@
  }
 
  .aktualita-about{
-  width: 100%;
-  height: 100%;
+  width: 105%;
+  min-height: 70px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 20;
+  background-color: #FEDF25;
+  box-shadow: 0px -5px 10px #181818;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.4s ease-out;
+ 
  }
+
+ .aktualita-about h2 {
+  font-size: 1rem;
+  color: #181818; 
+  text-align: left;
+  padding: 1rem 1rem;
+  width:100%;
+  height: 100%;
+  overflow: hidden;
+  transition: ease-out 0.3s;
+  font-weight: 400;
+
+  /* text-transform: capitalize; */
+}
+
+
+.aktualita-one-everithing:hover .aktualita-about{
+  background-color: #181818;
+  box-shadow: 0px -5px 10px #fff;
+  width: 110%;
+}
+  
+.aktualita-one-everithing:hover .aktualita-about h2{
+  color: #fff;
+}
+
 
  .aktualita-item img {
   width: 100%;
@@ -104,25 +162,10 @@
   border-top-right-radius: 10px;
   box-shadow: 0px 5px 10px #00000075;
   transition: 0.3s ease-out;
+  
 }
  
- .aktualita-item h2 {
-   position: relative;
-   font-size: 1rem;
-   color: #fff;
-   text-align: center;
-   padding: 1rem 1rem;
-   background-color: #181818;
-   box-shadow: 0px -5px 10px #fff;
-   width:100%;
-   height: 50px;
-   white-space: nowrap;
-   overflow: hidden;
-   text-overflow: ellipsis;
-   transition: ease-out 0.3s;
-   text-transform: uppercase;
- }
-
+ 
  .aktualita-item:hover.aktualita-item h2{
   box-shadow: 0px -10px 10px #fff;
  }
@@ -151,8 +194,8 @@
  .text-text-akt {
    max-width: 325px;
    font-size: 1rem;
-   color: #181818;
-   font-weight: 500;
+   color: #fff;
+   font-weight: 400;
    overflow: hidden;
    text-overflow: ellipsis;
    display: -webkit-box;
@@ -223,6 +266,8 @@
 
   .loader-textr{
     color: #fff;
+    text-align: center;
+    font-size: 1rem;
   }
 
   .spinner-main {
@@ -249,6 +294,11 @@
   text-align: center;
   width: 100%;
   padding: 20px;
+  }
+
+
+  @media (max-width: 1350px){
+
   }
 
 
@@ -314,7 +364,7 @@
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 6;
     padding: 0 1rem;
   }
 
@@ -327,6 +377,10 @@
   }
 
   .text-text-akt {
+    font-size: 0.9rem;
+  }
+
+  .loader-textr{
     font-size: 0.9rem;
   }
 

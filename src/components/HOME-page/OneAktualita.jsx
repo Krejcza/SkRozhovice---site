@@ -13,6 +13,11 @@ const OneAktualita = ({ date, headline, image, text }) => {
     : 'https://res.cloudinary.com/dirmiqkcn/image/upload/v1731591618/SkRozhovice/ooo6wxdqeuzyybxxcgbx.webp';
 
   return (
+  <>
+  <div className="aktualita-one-everithing">
+    <div className='aktualita-about'>
+      <h2>{headline}</h2>
+    </div>
     <div className="aktualita-item">
       <div className="aktualita-and-about">
         <div className="aktualita-image-one">
@@ -21,9 +26,7 @@ const OneAktualita = ({ date, headline, image, text }) => {
         <div className="text-date-akt">
             <p className='only-text-date-akt'>{date}</p>
           </div>
-        <div className='aktualita-about'>
-          <h2>{headline}</h2>
-        </div>
+       
       </div>
       <p className='text-text-akt'>{text}</p>
       <div className="aktualita-aktualita">
@@ -35,7 +38,10 @@ const OneAktualita = ({ date, headline, image, text }) => {
         </div>
       </div>
     </div>
-  );
+    </div>
+    
+    </>
+    );
 };
 
 

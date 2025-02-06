@@ -541,6 +541,11 @@ form button:hover {
   margin: 20px 0;
 }
 
+.loader-aktall p{
+  font-size: 1rem;
+  text-align: center;
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -660,6 +665,10 @@ form button:hover {
   }
 
   .text-akt{
+    font-size: 0.9rem;
+  }
+
+  .loader-aktall p{
     font-size: 0.9rem;
   }
 

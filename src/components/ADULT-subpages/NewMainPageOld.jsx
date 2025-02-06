@@ -155,7 +155,7 @@ const goalkeepers = [
 
     
 
-   const defaultImage = 'https://res.cloudinary.com/dirmiqkcn/image/upload/Players/e4xhbh2pxnxcku6skbx1.png';
+   const defaultImage = 'https://res.cloudinary.com/dirmiqkcn/image/upload/v1738785766/Players/basic_pics.png';
 
    const getImageUrl = (imageUrl) => {
       return imageUrl || defaultImage;

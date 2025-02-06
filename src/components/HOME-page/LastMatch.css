@@ -34,6 +34,7 @@
    align-items: center;
    justify-content: center;
    z-index: 10;
+   padding: 0 1rem;
 }
 
 .upcoming-match{
@@ -44,6 +45,7 @@
    align-items: center;
    justify-content: center;
    z-index: 10;
+   padding: 0 1rem;
 }
 
 
@@ -101,6 +103,7 @@
    width: 250px;
    text-align: center;
    box-shadow: 0 5px 20px #00000075;
+   font-size: 1rem;
 }
 
 .up-matchos-p{
@@ -112,6 +115,7 @@
    width: 250px;
    text-align: center;
    box-shadow: 0 5px 20px #00000075;
+   font-size: 1rem;
 }
 
 
@@ -195,6 +199,7 @@
 
 .matcher-dates-two{
    color: #fff;
+   font-size: 1rem;
 }
 
 .timer-dates{
@@ -205,6 +210,12 @@
 
 .timer-dates-two{
    color: #fff;
+   font-size: 1rem;
+}
+
+.match-teams{
+   display: flex;
+   flex-direction: row;
 }
 
 .match-score{
@@ -259,7 +270,6 @@
    width: 400px;
    height: 400px;
    flex: 1;
-   /* border: 2px solid red; */
    display: flex;
    flex-direction: row;
    align-items: center;
@@ -268,8 +278,7 @@
 }
 
 .mvp-player-inside-wr{
-   /* border: 2px solid blue; */
-   width: 50%;
+   width: 320px;
    height: 100%;
    background-color: #181818;
    border-radius: 15px;
@@ -400,4 +409,275 @@
 
 .wait-a-minute{
    color: #181818;
+   font-size: 1rem;
+   text-align: center;
+}
+
+.about-our-ftb{
+   max-width: 1400px;
+   margin: 0 auto;
+   padding: 0 1.5rem;
+}
+
+.assessment-text{
+   font-size: 1rem;
+}
+
+
+@media (max-width: 1400px) {
+
+   .every-section-matcher{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      row-gap: 5rem;
+   }
+
+   .both-matches{
+      row-gap: 2rem;
+   }
+
+   .mvp-player-inside-wr{
+      width: 320px;
+      height: 100%;
+      background-color: #181818;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px #00000075;
+      transition: 0.3s ease-out;
+   }
+   
+
+ }
+
+ @media (max-width: 800px){
+   .match-details{
+      max-width: 700px;
+      row-gap: 2rem;
+      height: 100%;
+   }
+
+   .first-part-matcher{
+      display: flex;
+      flex-direction: column;
+      row-gap: 1rem;
+      align-items: center;
+   }
+
+   .match-details-up{
+      max-width: 700px;
+      row-gap: 2rem;
+      height: 100%;
+   }
+   
+   .match-details-up:hover{
+      transform: scale(1.005);
+   }
+   
+   
+   .second-part-matcher{
+      display: flex;
+      flex-direction: column;
+      row-gap: 1.5rem;
+      border-top: 3px solid #fff;
+      padding-top: 1rem;
+      
+   }
+
+   .second-uppart-matcher{
+      display: flex;
+      flex-direction: column;
+      row-gap: 1.5rem;
+      border-top: 3px solid #181818;
+      padding-top: 1rem;
+   }
+
+   .mvp-svgs{
+      display: none;
+   }
+
+   .match-teams{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+   }
+
+   .team-home{
+      font-size: 1rem;
+      font-weight: 500;
+   }
+
+   .team-away{
+      font-size: 1rem;
+      font-weight: 500;
+   }
+
+   .match-score{
+      padding: 0.5rem 0;
+      font-size: 3rem;
+      font-weight: 500;
+   }
+
+   .match-details:hover{
+      transform: scale(1.005);
+   }
+
+}
+
+@media (max-width: 600px){
+   .mvp-player-wrap{
+      max-width: 400px;
+   }
+
+   .mvp-player-inside-wr{
+      width: 280px;
+   }
+   
+   .mvp-player-inside-wr:hover .img-of-mvp-wrapper{
+      transform: scale(1.15);
+   }
+   
+   .name-of-mvp{
+      font-size: 3rem;
+      top: 15px;
+      letter-spacing: 1px;
+      background-color: #FEDF25;
+      width: 320px;
+      box-shadow: 0 5px 15px #00000075;
+   }
+   
+   .mvp-of-mvp{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      bottom: 35px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 5rem;
+      color: #fff;
+      text-shadow: 0px 0px 10px #181818;
+      font-family: 'Teko', sans-serif;
+      z-index: 3;
+      transition: 0.3s ease-out;
+   }
+   
+   
+   .img-of-mvp-wrapper {
+      position: relative;
+      width: 225px;
+      margin: 50px auto;
+      transition: 0.3s ease-out;
+   }
+   
+   .img-of-mvp {
+      width: 100%;
+      display: block;
+      filter: grayscale(30%) drop-shadow(0px 0px 5px #181818);;
+   }
+   
+   .img-of-mvp-wrapper::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 30%;
+      background: linear-gradient(to top, #181818, rgba(24, 24, 24, 0));
+      pointer-events: none; 
+      z-index: 2;
+   }
+
+   .mvp-player-inside-wr:hover .img-of-mvp-wrapper{
+      transform: scale(1.1);
+   }
+   
+   .mvp-player-inside-wr:hover .mvp-of-mvp{
+      font-size: 5rem;
+   }
+   
+   .mvp-match-res{
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+   }
+   
+   .mvp-match-res-wrap{
+      background-color: #FEDF25;
+      width: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px #00000075;
+      z-index: 5;
+   }
+   
+   .mvp-of-score{
+      color: #181818;
+      font-family: 'Teko', sans-serif;
+      font-size: 2rem;
+      margin: 0 5px;
+      z-index: 3;
+   }
+   .mvp-of-domaci{
+      font-family: 'Teko', sans-serif;
+      color: #181818;
+      font-size: 1.25rem;
+      width: 150px;
+      text-align: center;
+      z-index: 3;
+   }
+   
+   .mvp-of-hoste{
+      font-family: 'Teko', sans-serif;
+      color: #181818;
+      font-size: 1.25rem;
+      width: 150px;
+      text-align: center;
+      z-index: 3;
+   }
+}
+
+
+@media (max-width: 450px){
+   .about-our-ftb{
+      font-size: 0.9rem;
+      font-weight: 500;
+   }
+   
+   .last-matchos-p{
+      font-size: 0.9rem;
+   }
+
+   .up-matchos-p{
+      font-size: 0.9rem;
+   }
+
+   .matcher-dates-two{
+      font-size: 0.9rem;
+   }
+   
+   .timer-dates-two{
+      font-size: 0.9rem;
+   }
+
+   .assessment-text{
+      font-size: 0.9rem;
+   }
+
+   .upmatcher-dates-two{
+      font-size: 0.9rem;
+   }
+
+   .uptimer-dates-two{
+      font-size: 0.9rem;
+   }
+
+   .wait-a-minute{
+      font-size: 0.9rem;
+   }
 }
