@@ -19,6 +19,7 @@
    flex-direction: column;
    row-gap: 5rem;
    justify-content: center;
+   width: 100%;
 }
 
 .button-zapasy, .button-tabulka, .button-statistiky {
@@ -27,11 +28,11 @@
    justify-content: center;
    background-color: #181818;
    padding: 1rem;
-   width: 400px;
+   width: 330px;
    border-radius: 10px;
    box-shadow: 0px 5px 20px #00000075;
    text-decoration: none;
-   font-size: 1.2rem;
+   font-size: 1.1rem;
    color: #fff;
    font-weight: 600;
    text-transform: uppercase;
@@ -86,6 +87,7 @@
    font-weight: 600;
 }
 
+
 .trener-box img{
    width: 150px;
    height: 150px;
@@ -115,15 +117,17 @@
       row-gap: 2rem;
       justify-content: center;
       align-items: center;
-      width: 100%;
+      width: 500px;
+      padding-bottom: 2rem;
    }
 
    .button-zapasy, .button-tabulka, .button-statistiky {
-      width: 90%;
+      width: 100%;
    }
 
    .chained-teams{
-      padding: 2rem 0;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
    }
 
    .trener-box h3{
@@ -150,5 +154,16 @@
    .trener-box img{
       width: 100px;
       height: 100px;
+   }
+}
+
+
+@media (max-width: 600px){
+   .buttons-team-y {
+      width: 300px;
+   }
+
+   .button-zapasy, .button-tabulka, .button-statistiky {
+      font-size: 0.9rem;
    }
 }

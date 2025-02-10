@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   height: 80vh;
+  width: 100%;
 }
 
 .login-form {
@@ -118,7 +119,7 @@
 }
 
 .logout-container h2 {
-  font-size: 18px;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #333;
   margin-bottom: 10px;
@@ -151,4 +152,36 @@
   font-size: 1rem;
   color: #181818;
   margin-bottom: 1rem;
+}
+
+.error-msg{
+  text-align: center;
+}
+
+
+@media (max-width: 500px){
+  .login-container {
+    padding: 0 1rem;
+  }
+
+
+  .login-form {
+    width: 100%;
+  }
+
+  .input-group label {
+    font-size: 0.9rem;
+  }
+
+  .login-button {
+    font-size: 0.9rem;
+  }
+
+  .logout-container h2 {
+    font-size: 1rem;
+  }
+
+  .user-token-time {
+    font-size: 0.9rem;
+  }
 }

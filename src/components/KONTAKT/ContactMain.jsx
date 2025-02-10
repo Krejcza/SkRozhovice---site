@@ -4,10 +4,12 @@ import OneTrainer from './OneTrainer';
 import refpic from '../images/blank-profile-pic.webp'
 import MapContact from './MapContact';
 import SocialButton from './SocialButton';
-import videoBg from '../videos/fotbal-kontakt_prob3.mp4';
+import videoBg from '../videos/fotbal-kontakt_prob3.webm';
 import thumbnail from '../images/thumbnail-kontakt.png'
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useState, useEffect } from 'react';
+
 
 
 
@@ -15,6 +17,17 @@ import { useInView } from 'react-intersection-observer';
 
 
 const ContactMain = () => {
+
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1000);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth > 1000);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Data jsou správná
 
@@ -102,8 +115,8 @@ const ContactMain = () => {
 });
 
 const { ref: trainersRef, inView: trainersInView } = useInView({
-  triggerOnce: true, 
-  threshold: 0.1,
+  triggerOnce: true,
+  threshold: 0.1, 
 });
 
 
@@ -147,20 +160,20 @@ const { ref: trainersRef, inView: trainersInView } = useInView({
          </div>
       </div>
       <div className="background-linear-deff">
-        <h2 className='main-topic-small bl'>Trenéři týmu mládež</h2>
+        <h2 className='main-topic-small bl animation-of-tex'>Trenéři týmu mládež</h2>
         <div className="trainers-list">
           {trainersYoung.map((trainer, index) => (
             <motion.div
-              key={index}
-              ref={trainersRef}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: trainersInView ? 1 : 0, y: trainersInView ? 0 : 50 }}
-              exit={{ opacity: 0, y: 50 }}
-              transition={{
-                duration: 0.4,
-                delay: index * 0.1,
-              }}
-            >
+            key={index}
+            ref={trainersRef}
+            initial={{ opacity: 1, y: 50 }}
+            animate={isDesktop && trainersInView ? { opacity: 1, y: 0 } : {}}
+            exit={{ opacity: 0, y: 50 }}
+            transition={{
+              duration: 0.4,
+              delay: index * 0.1,
+            }}
+          >
               <OneTrainer
                 key={index}
                 image={trainer.image}

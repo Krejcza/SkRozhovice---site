@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import videoBg from '../components/videos/video-short.mov'
+import videoBg from '../components/videos/video-short.webm'
 import './MainVideo.css'
 import skRozText from '../components/images/SKrozhovicePic.png'
 import fallBackImage from '../components/images/fallback.webp'

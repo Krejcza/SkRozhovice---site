@@ -78,7 +78,12 @@ const LoginPage = () => {
         setPassword('');
       } else {
         const { message } = await response.json();
-        setError(message);
+        
+        if (message === 'Invalid username or password') {
+          setError('Nesprávné uživatelské jméno nebo heslo.');
+        } else {
+          setError('Chyba při přihlašování.');
+        }
       }
     } catch (error) {
       console.error('Chyba přihlašování:', error);
@@ -105,13 +110,27 @@ const LoginPage = () => {
     setShowPassword((prev) => !prev);
   };
 
+
+   // Bezpečné handlery pro změnu hodnot ve Firefox na iOS
+  const handleUsernameChange = (e) => {
+    if (e && e.target) {
+      setUsername(e.target.value);
+    }
+  };
+
+  const handlePasswordChange = (e) => {
+    if (e && e.target) {
+      setPassword(e.target.value);
+    }
+  };
+
   return (
     <div className="background-linear-deff mappp">
     <div className="login-container">
       {!isLoggedIn ? (
         <form onSubmit={handleSubmit} className="login-form">
           <h2>Přihlášení</h2>
-          {error && <p className="error">{error}</p>}
+          {error && <p className="error-msg">{error}</p>}
           <div className="input-group">
             <label htmlFor="username">Uživatel:</label>
             <div className="input-container">
@@ -119,7 +138,7 @@ const LoginPage = () => {
                 type="text"
                 id="username"
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={handleUsernameChange}
                 required
               />
             </div>
@@ -131,7 +150,7 @@ const LoginPage = () => {
                 type={showPassword ? 'text' : 'password'}
                 id="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handlePasswordChange}
                 required
               />
               <button 
