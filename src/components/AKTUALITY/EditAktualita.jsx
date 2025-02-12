@@ -105,6 +105,7 @@ const EditAktualita = ({ aktualita, onUpdate }) => {
       {error && <div className="error-message">{error}</div>}
       {successMessage && <div className="success-message">{successMessage}</div>}
 
+      <div className="formular-pridani-akt">
       <form onSubmit={handleSubmit}>
         <div>
           <label>
@@ -184,6 +185,7 @@ const EditAktualita = ({ aktualita, onUpdate }) => {
 
         <button type="submit">Potrvdit změny</button>
       </form>
+      </div>
     </div>
   );
 };

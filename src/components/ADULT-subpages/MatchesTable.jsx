@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './MatchesTable.css';
 import { jwtDecode } from 'jwt-decode';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrophy, faTimesCircle, faEquals } from "@fortawesome/free-solid-svg-icons";
+
+
 
 const MatchesTable = () => {
   const [matches, setMatches] = useState([]);
@@ -154,6 +158,30 @@ const MatchesTable = () => {
     });
   };
 
+  const getMatchResult = (match) => {
+    if (!match.score || !match.teamDomaci || !match.teamHoste) return '';
+  
+    const scores = match.score.match(/\d+/g);
+    if (!scores || scores.length < 2) return '';
+  
+    const [domaciScore, hosteScore] = scores.map(Number);
+  
+    // Zjistíme, zda je SK Rozhovice domácí tým
+    const isRozhoviceHome = match.teamDomaci === "SK Rozhovice";
+  
+    if (isRozhoviceHome) {
+      if (domaciScore > hosteScore) return 'WIN';
+      if (domaciScore < hosteScore) return 'LOST';
+    } else {
+      if (hosteScore > domaciScore) return 'WIN';
+      if (hosteScore < domaciScore) return 'LOST';
+    }
+  
+    return 'EVEN';
+  };
+  
+  
+
   return (
     <div className="matches-table">
       <h2 className='main-topic-small'>Seznam Zápasů</h2>
@@ -172,6 +200,7 @@ const MatchesTable = () => {
                 <th>Čas Výkopu</th>
                 <th>Zápas</th>
                 <th>Skóre</th>
+                <th>Výsledek</th> 
                 {isLoggedIn && <th>Akce</th>}
               </tr>
             </thead>
@@ -183,6 +212,12 @@ const MatchesTable = () => {
                   <td>{match.kickoffTime}</td>
                   <td>{match.teamDomaci} - {match.teamHoste}</td>
                   <td>{match.score}</td>
+                  <td>
+                    {getMatchResult(match) === "WIN" && <FontAwesomeIcon className='winner-mode' icon={faTrophy} />}
+                    {getMatchResult(match) === "LOST" && <FontAwesomeIcon className='looser-mode' icon={faTimesCircle} />}
+                    {getMatchResult(match) === "EVEN" && <FontAwesomeIcon className='even-mode' icon={faEquals} />}
+                  </td>
+
                   {isLoggedIn && (
                     <td>
                       <div className='buttons-for-editation-match'>
@@ -238,10 +273,11 @@ const MatchesTable = () => {
                 onChange={(e) => setNewMatch({ ...newMatch, score: e.target.value })}
               />
               <select
+                className='vyber-hrace'
                 value={newMatch.mvpPlayer}
                 onChange={(e) => setNewMatch({ ...newMatch, mvpPlayer: e.target.value })}
               >
-                <option value="">Vyberte MVP zápasu</option>
+                <option value="">Vyber MVP zápasu</option>
                 {players.map((player) => (
                   <option key={player._id} value={player.name}>
                     {player.name}
@@ -272,25 +308,29 @@ const MatchesTable = () => {
                 name="teamDomaci"
                 value={editMatch.teamDomaci}
                 onChange={handleEditInputChange}
+                placeholder="Domácí tým"
               />
               <input
                 type="text"
                 name="teamHoste"
                 value={editMatch.teamHoste}
                 onChange={handleEditInputChange}
+                placeholder="Hostující tým"
               />
               <input
                 type="text"
                 name="score"
                 value={editMatch.score}
                 onChange={handleEditInputChange}
+                placeholder="Skóre"
               />
                 <select
                   name="mvpPlayer"
                   value={editMatch.mvpPlayer || ''} // Toto už máme
                   onChange={handleEditInputChange}
+                  className='vyber-hrace'
                 >
-                  <option value="">Vyberte MVP zápasu</option>
+                  <option value="">Vyber MVP zápasu</option>
                   {players.map((player) => (
                     <option 
                       key={player._id} 

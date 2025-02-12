@@ -84,6 +84,10 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 15;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .add-match-form h3, .edit-match-form h3 {
@@ -109,9 +113,10 @@
   padding: 10px 20px;
   margin: 10px 5px;
   font-size: 1rem;
+  width: 100%;
   font-weight: 600;
   color: #fff;
-  background-color: #181818;
+  background-color: #2b771c;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -204,6 +209,44 @@
   margin-bottom: 20px;
 }
 
+.vyber-hrace{
+  background-color: #fff;
+  color: #f181818;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+}
+
+.winner-mode{
+  color: rgb(34, 165, 34);
+  transition: 0.3s ease-out;
+}
+
+.looser-mode{
+  color: rgb(203, 54, 54);
+}
+
+.even-mode{
+  color: rgb(206, 15, 203);
+}
+
+.matches-table tr:hover .winner-mode {
+  -webkit-filter: drop-shadow(1px 1px 10px #2bff00);
+  filter: drop-shadow(1px 1px 10px #2bff00);
+}
+
+.matches-table tr:hover .looser-mode {
+  -webkit-filter: drop-shadow(1px 1px 10px #ff0000);
+  filter: drop-shadow(1px 1px 10px #ff0000);
+}
+
+.matches-table tr:hover .even-mode {
+  -webkit-filter: drop-shadow(1px 1px 10px #ff00e6);
+  filter: drop-shadow(1px 1px 10px #ff00e6);
+}
+
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
@@ -226,6 +269,10 @@
  @media (max-width: 1000px) {
   .matches-table {
     max-width: 900px;
+  }
+
+  .matches-table td{
+    padding: 5px;
   }
 
   .matches-table td:nth-child(5){

@@ -108,6 +108,7 @@ const AddAktualita = ({ onAdd }) => {
       {error && <div className="error-message">{error}</div>}
       {successMessage && <div className="success-message">{successMessage}</div>}
 
+    <div className="formular-pridani-akt">
       <form onSubmit={handleSubmit}>
         <div>
           <label>
@@ -186,6 +187,7 @@ const AddAktualita = ({ onAdd }) => {
 
         <button type="submit">Potvrdit přidání</button>
       </form>
+      </div>
     </div>
   );
 };
