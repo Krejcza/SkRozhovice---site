@@ -73,7 +73,7 @@ const Navbar = () => {
                                 <li key={item.id} className={item.cName} 
                                     onMouseEnter={() => setDropdown(true)} 
                                     onMouseLeave={() => setDropdown(false)}>
-                                    <Link to={item.path}>{item.title.toUpperCase()}</Link>
+                                    <Link to={item.path}>{item.title.toLowerCase()}</Link>
                                     {dropdown && <Dropdown />}
                                 </li>
                             );
@@ -84,7 +84,7 @@ const Navbar = () => {
                                 <li key={item.id} className={item.cName} 
                                     onMouseEnter={() => setYouthDropdown(true)} 
                                     onMouseLeave={() => setYouthDropdown(false)}>
-                                    <Link to={item.path}>{item.title.toUpperCase()}</Link>
+                                    <Link to={item.path}>{item.title.toLowerCase()}</Link>
                                     {youthDropdown && <YouthDropdown />}
                                 </li>
                             );
@@ -92,7 +92,7 @@ const Navbar = () => {
 
                         return (
                             <li key={item.id} className={item.cName}>
-                                <Link to={item.path}>{item.title.toUpperCase()}</Link>
+                                <Link to={item.path}>{item.title.toLowerCase()}</Link>
                             </li>
                         );
                     })}

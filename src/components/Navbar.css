@@ -76,9 +76,10 @@
    text-decoration: none;
    color: #181818;
    font-size: 1.1rem;
-   font-weight: 600;
+   font-weight: 500;
    margin-right: 2rem;
    transition: 0.3s ease-out;
+   text-transform: capitalize;
 }
 
 .nav-item a:hover {
@@ -167,7 +168,7 @@
 
 .bubble-menu-items li a {
    text-decoration: none;
-   text-transform: uppercase;
+   text-transform: capitalize;
    color: #181818;
    font-size: 1rem;
    font-weight: 600;
@@ -273,7 +274,7 @@
 
 .mobile-menu-items li a {
    text-decoration: none;
-   text-transform: uppercase;
+   text-transform: capitalize;
    color: #181818;
    font-size: 1.2rem;
    font-weight: 600;

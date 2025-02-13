@@ -28,7 +28,7 @@ export const navItems = [
    },
    {
       id:5,
-      title: 'O klubu',
+      title: 'O Klubu',
       path: '/OKlubu',
       cName: 'nav-item'
    },

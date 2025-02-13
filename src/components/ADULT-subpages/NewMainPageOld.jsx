@@ -62,7 +62,6 @@ const goalkeepers = [
  ];
 
  const attackers = [
-   { name: 'Bednarz Jakub', image: bednarz },
    { name: 'Voženílek Jakub', image: vozenilek },
    { name: 'Žalud Daniel', image: zalud },
    { name: 'Holý Jakub', image: holy },

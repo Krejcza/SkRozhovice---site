@@ -5,6 +5,9 @@ import './AktualityMain.css';
 import DeleteAktualita from './DeleteAktualita';
 import EditAktualita from './EditAktualita';
 import { motion } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+
 
 const AktualityMain = () => {
   const [news, setNews] = useState([]);
@@ -14,6 +17,8 @@ const AktualityMain = () => {
   const [error, setError] = useState(null);
   const [editingAktualita, setEditingAktualita] = useState(null);
   const [expandedImage, setExpandedImage] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [confirmedQuery, setConfirmedQuery] = useState('');
   const itemsPerPage = 5;
   const pagesToShow = 3;
 
@@ -81,6 +86,43 @@ const AktualityMain = () => {
     setExpandedImage(prev => (prev === imageId ? null : imageId));
   };
 
+  const handleSearchConfirm = () => {
+    setConfirmedQuery(searchQuery); 
+  };
+
+  const isValidDateFormat = (str) => {
+    // Upravený regex aby přijímal i jednociferná čísla pro den a měsíc
+    const dateRegex = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/;
+    if (!dateRegex.test(str)) return false;
+    
+    const [_, day, month, year] = str.match(dateRegex);
+    const date = new Date(year, month - 1, day);
+    return date.getDate() === parseInt(day) && 
+           date.getMonth() === parseInt(month) - 1 && 
+           date.getFullYear() === parseInt(year);
+  };
+
+  // Helper function to format date for comparison
+  const formatDateForComparison = (date) => {
+    const d = new Date(date);
+    return `${d.getDate()}.${d.getMonth() + 1}.${d.getFullYear()}`;  // odstraněno padStart
+  };
+
+  const filteredNews = news.filter(item => {
+    if (!confirmedQuery) return true;  // změněno z searchQuery na confirmedQuery
+  
+    // Pokud je vstup ve formátu data (DD.MM.YYYY)
+    if (isValidDateFormat(confirmedQuery)) {  // změněno z searchQuery na confirmedQuery
+      return formatDateForComparison(item.date) === confirmedQuery;  // změněno z searchQuery na confirmedQuery
+    }
+  
+    // Jinak hledáme v textu a nadpisu
+    return item.headline.toLowerCase().includes(confirmedQuery.toLowerCase()) ||  // změněno z searchQuery na confirmedQuery
+           item.text.toLowerCase().includes(confirmedQuery.toLowerCase());  // změněno z searchQuery na confirmedQuery
+  });
+
+  
+
 
   return (
     <>
@@ -89,7 +131,26 @@ const AktualityMain = () => {
       </div>
 
       <div className='background-linear-deff mappp minhei'>
-        <div className="aktuality-all">
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Hledat aktuality..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button className='magnifying-glass' onClick={handleSearchConfirm}>
+          <FontAwesomeIcon className='magnifying-glass' icon={faMagnifyingGlass} />
+        </button>
+        {searchQuery && (
+          <button className='clear-search' onClick={() => { 
+            setSearchQuery('');
+            setConfirmedQuery('');
+          }}>
+            ✖
+          </button>
+        )}
+      </div>
+      <div className="aktuality-all">
           {loading ? (
             <div className='loaderer-div'>
               <div className='loader-aktall'></div>
@@ -97,8 +158,8 @@ const AktualityMain = () => {
             </div>
           ) : error ? (
             <p className='erorik'>{error}</p>
-          ) : news.length > 0 ? (
-            news.map((item, index) => (
+          ) : filteredNews.length > 0 ? (
+            filteredNews.map((item, index) => (
               <motion.article
                     key={item._id}
                     className="aktualita-wrapper"
@@ -132,7 +193,7 @@ const AktualityMain = () => {
               </motion.article>
             ))
           ) : (
-            <p>Žádné novinky</p>
+            <p className='no-news-today'>Žádné novinky</p>
           )}
         </div>
 

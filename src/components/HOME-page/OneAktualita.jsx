@@ -7,10 +7,13 @@ import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 // Komponenta jedné aktuality, která se ukazuje na hlavní stránce.
 
 const OneAktualita = ({ date, headline, image, text }) => {
+
+  console.log(`SK ROZHOVICEEEEEEEEEEEE!!!!!!!!!!!!!!!!!!`)
   
-  const imageUrl = image && image !== '' 
-    ? image 
-    : 'https://res.cloudinary.com/dirmiqkcn/image/upload/v1731591618/SkRozhovice/ooo6wxdqeuzyybxxcgbx.webp';
+  const imageUrl = image && image.startsWith('http') 
+  ? image 
+  : 'https://res.cloudinary.com/dirmiqkcn/image/upload/v1731591618/SkRozhovice/ooo6wxdqeuzyybxxcgbx.webp';
+
 
   return (
   <>

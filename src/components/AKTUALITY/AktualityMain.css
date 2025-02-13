@@ -41,21 +41,21 @@
   box-shadow: 0px 5px 10px #00000075;
 }
 
-.aktualita-container::before{
+/* .aktualita-container::before{
    content: '';
    position: absolute;
    top: 0;
    left: 0;
    width: 100%;
    height: 100%;
-   background-image: url('../images/texture-aktu.png');
+   background-image: url('../images/dots-back.png');
    background-size: cover;
-   background-position: center;
-   opacity: 0.1;
+   background-position: right;
+   opacity: 0.5;
    background-repeat: no-repeat;
    z-index: 1;
    transform: rotateZ(180deg);
-}
+} */
 
  
 .category-akt{
@@ -138,9 +138,8 @@
 
 .headline-akt{
   font-size: 1.25rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  border-bottom: 5px solid #fff;
+  font-weight: 500;
+  text-transform: capitalize;
   color: #181818;
 }
 
@@ -354,14 +353,13 @@
 }
 
 
-
 .cat-info {
-  background-color: green;
+  background-color: #218838;
   color: #FFFFFF;
 }
 
 .cat-zapas {
-  background-color: red;
+  background-color: #4a90e2;
   color: #FFFFFF;
 }
 
@@ -570,7 +568,80 @@ form button:hover {
 }
 
 
+.search-bar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem ;
+}
 
+.search-bar input[type="text"]{
+  max-width: 500px;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-radius: 10px 0 0 10px;
+  outline: none;
+  border: 1px solid #181818;
+  background-color: #fff;
+  box-shadow: 0px 5px 5px #1818187b;
+  transition: 0.3s ease-out;
+  height: 40px;
+  font-size: 1rem;
+}
+
+.search-bar input[type="text"]:focus {
+  max-width: 510px;
+}
+
+.search-bar input[type="text"]::placeholder {
+  color: #6e6e6e;
+  font-size: 1rem; 
+}
+
+.magnifying-glass{
+  background-color: #181818;
+  color: #fff;
+  outline: none;
+  border: none;
+  height: 40px;
+  border-radius: 0px 10px 10px 0px;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.magnifying-glass svg {
+  width:15px;
+  height: 15px; 
+  background: none;
+  transition: 0.2s ease-out;
+}
+
+.magnifying-glass:hover.magnifying-glass svg{
+  transform: scale(1.2);
+}
+
+.no-news-today{
+  font-size: 1rem;
+  text-align: center;
+  padding: 5rem 1rem;
+}
+
+.clear-search {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  margin-left: 5px;
+  color: #666;
+  transition: 0.3s ease-out;
+}
+
+.clear-search:hover {
+  color: #181818;
+}
 
 @media (max-width: 1450px){
   .aktualita-container {

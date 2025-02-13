@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './AktualityMain.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
 const EditAktualita = ({ aktualita, onUpdate }) => {
+  const editContainerRef = useRef(null);
   const [headline, setHeadline] = useState(aktualita.headline);
   const [text, setText] = useState(aktualita.text);
   const [category, setCategory] = useState(aktualita.category);
@@ -96,10 +97,16 @@ const EditAktualita = ({ aktualita, onUpdate }) => {
     setCategory(aktualita.category);
     setLineup(aktualita.lineup);
     setDate(aktualita.date.split('T')[0]);
+    
+    // Scroll to the container using the ref
+    if (editContainerRef.current) {
+      editContainerRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   }, [aktualita]);
 
+
   return (
-    <div className="edit-aktualita-container">
+    <div className="edit-aktualita-container" ref={editContainerRef}>
       <h2 className='editation-header'>Editovat stávající aktualitu</h2>
       
       {error && <div className="error-message">{error}</div>}
