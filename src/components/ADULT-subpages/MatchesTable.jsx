@@ -236,43 +236,57 @@ const MatchesTable = () => {
           {isLoggedIn && (
             <div className="add-match-form">
               <h3>Přidat nový zápas</h3>
+              <label htmlFor="round-mtch">Kolo:</label>
               <input
+                id='round-mtch'
                 type="text"
                 placeholder="Kolo"
                 value={newMatch.round}
                 onChange={(e) => setNewMatch({ ...newMatch, round: e.target.value })}
               />
+              <label htmlFor="date-mtch">Datum:</label>
               <input
+                id='date-mtch'
                 type="date"
                 placeholder="Datum"
                 value={newMatch.date ? newMatch.date.split('T')[0] : ''}
                 onChange={(e) => setNewMatch({ ...newMatch, date: e.target.value })}
               />
+              <label htmlFor="time-mtch">Čas:</label>
               <input
+                id='time-mtch'
                 type="time"
                 placeholder="Čas Výkopu"
                 value={newMatch.kickoffTime}
                 onChange={(e) => setNewMatch({ ...newMatch, kickoffTime: e.target.value })}
               />
+              <label htmlFor="hometm-mtch">Tým domácí:</label>
               <input
+                id='hometm-mtch'
                 type="text"
                 placeholder="Domácí tým"
                 value={newMatch.teamDomaci}
                 onChange={(e) => setNewMatch({ ...newMatch, teamDomaci: e.target.value })}
               />
+              <label htmlFor="awaytm-mtch">Tým hosté:</label>
               <input
+                id='awaytm-mtch'
                 type="text"
                 placeholder="Hostující tým"
                 value={newMatch.teamHoste}
                 onChange={(e) => setNewMatch({ ...newMatch, teamHoste: e.target.value })}
               />
+              <label htmlFor="score-mtch">Skóre:</label>
               <input
+                id='score-mtch'
                 type="text"
                 placeholder="Skóre"
                 value={newMatch.score}
                 onChange={(e) => setNewMatch({ ...newMatch, score: e.target.value })}
               />
+              <label htmlFor="bestpl-mtch">Nejlepší hráč:</label>
               <select
+                id='bestpl-mtch'
                 className='vyber-hrace'
                 value={newMatch.mvpPlayer}
                 onChange={(e) => setNewMatch({ ...newMatch, mvpPlayer: e.target.value })}
@@ -291,40 +305,52 @@ const MatchesTable = () => {
           {editMatch && (
             <div className="edit-match-form">
               <h3>Upravit zápas - Kolo {editMatch.round}</h3>
+              <label htmlFor="date-mtch">Datum:</label>
               <input
+                id='date-mtch'
                 type="date"
                 name="date"
                 value={editMatch.date ? editMatch.date.split('T')[0] : ''}
                 onChange={handleEditInputChange}
               />
+              <label htmlFor="time-mtch">Čas:</label>
               <input
+                id='time-mtch'
                 type="time"
                 name="kickoffTime"
                 value={editMatch.kickoffTime}
                 onChange={handleEditInputChange}
               />
+              <label htmlFor="hometm-mtch">Tým domácí:</label>
               <input
+                id='hometm-mtch'
                 type="text"
                 name="teamDomaci"
                 value={editMatch.teamDomaci}
                 onChange={handleEditInputChange}
                 placeholder="Domácí tým"
               />
+              <label htmlFor="awaytm-mtch">Tým hosté:</label>
               <input
+                id='awaytm-mtch'
                 type="text"
                 name="teamHoste"
                 value={editMatch.teamHoste}
                 onChange={handleEditInputChange}
                 placeholder="Hostující tým"
               />
+              <label htmlFor="score-mtch">Skóre:</label>
               <input
+                id='score-mtch'
                 type="text"
                 name="score"
                 value={editMatch.score}
                 onChange={handleEditInputChange}
                 placeholder="Skóre"
               />
+              <label htmlFor="bestpl-mtch">Nejlepší hráč:</label>
                 <select
+                  id='bestpl-mtch'
                   name="mvpPlayer"
                   value={editMatch.mvpPlayer || ''} // Toto už máme
                   onChange={handleEditInputChange}
@@ -335,7 +361,7 @@ const MatchesTable = () => {
                     <option 
                       key={player._id} 
                       value={player.name}
-                      selected={editMatch.mvpPlayer === player.name} // Přidáme selected pro aktuální MVP
+                      defaultValue={editMatch.mvpPlayer === player.name} // Přidáme selected pro aktuální MVP
                     >
                       {player.name}
                     </option>

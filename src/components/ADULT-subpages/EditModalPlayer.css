@@ -32,6 +32,11 @@
    color: #181818;
  }
 
+ .selected-burger{
+  text-align: center;
+  font-size: 1.5rem;
+ }
+
  .edit-player-container label {
    display: block;
    margin: 0.5rem 0 0.3rem;

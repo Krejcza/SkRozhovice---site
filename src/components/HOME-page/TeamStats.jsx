@@ -106,7 +106,7 @@ const TeamStats = () => {
         <div className="stats-of-games">
           <div className='stats-loss'>
             <div className='first-stat'>
-              <Odometer value={showStats ? stats.losses : 0} duration={1000} />
+              <Odometer value={showStats ? stats.losses : 9} duration={1000} />
             </div>
             <div className='second-stat'>Prohry</div>
             <span className="icon loss-icon">
@@ -118,7 +118,7 @@ const TeamStats = () => {
           </div>
           <div className='stats-win'>
             <div className='first-stat'>
-              <Odometer value={showStats ? stats.wins : 0} duration={1000} />
+              <Odometer value={showStats ? stats.wins : 32} duration={1200} />
             </div>
             <div className='second-stat'>Výhry</div>
             <span className="icon win-icon">
@@ -130,7 +130,7 @@ const TeamStats = () => {
           </div>
           <div className='stats-draw'>
             <div className='first-stat'>
-              <Odometer value={showStats ? stats.draws : 0} duration={1000} />
+              <Odometer value={showStats ? stats.draws : 7} duration={1400} />
             </div>
             <div className='second-stat'>Remízy</div>
             <span className="icon draw-icon">

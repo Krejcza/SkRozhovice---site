@@ -114,6 +114,7 @@ const AddAktualita = ({ onAdd }) => {
           <label>
             Datum:
             <input
+              className='date-add-form-pc'
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}

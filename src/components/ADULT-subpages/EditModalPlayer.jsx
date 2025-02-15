@@ -132,16 +132,6 @@ const EditModalPlayer = () => {
           <div className="edit-player-form">
             <h3>Upravit údaje u: {selectedPlayer.name}</h3>
             <label>
-              Jméno:
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                className="input-field"
-              />
-            </label>
-            <label>
               Rok narození:
               <input
                 type="number"

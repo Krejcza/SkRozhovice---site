@@ -3,7 +3,7 @@ import './AktualityMain.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
-const EditAktualita = ({ aktualita, onUpdate }) => {
+const EditAktualita = ({ aktualita, onUpdate, onCancel }) => {
   const editContainerRef = useRef(null);
   const [headline, setHeadline] = useState(aktualita.headline);
   const [text, setText] = useState(aktualita.text);
@@ -118,6 +118,7 @@ const EditAktualita = ({ aktualita, onUpdate }) => {
           <label>
             Datum:
             <input
+              className='date-add-form-pc'
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
@@ -190,7 +191,10 @@ const EditAktualita = ({ aktualita, onUpdate }) => {
           </label>
         </div>
 
-        <button type="submit">Potrvdit změny</button>
+        <div className="button-group-aktul">
+          <button type="submit">Potvrdit změny</button>
+          <button type="button" onClick={onCancel} className="cancel-button">Zrušit editaci</button>
+        </div>
       </form>
       </div>
     </div>

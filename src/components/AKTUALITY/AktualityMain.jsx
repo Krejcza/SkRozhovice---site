@@ -6,7 +6,7 @@ import DeleteAktualita from './DeleteAktualita';
 import EditAktualita from './EditAktualita';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 
 const AktualityMain = () => {
@@ -19,30 +19,66 @@ const AktualityMain = () => {
   const [expandedImage, setExpandedImage] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [confirmedQuery, setConfirmedQuery] = useState('');
+  const [allNews, setAllNews] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const itemsPerPage = 5;
   const pagesToShow = 3;
 
   // Načtení aktualit z API
-  const fetchAktuality = useCallback(async () => {
+  const fetchAllAktuality = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`https://backend-rozhovice.onrender.com/api/aktuality/all?page=${currentPage}&limit=${itemsPerPage}`);
+      // Načteme všechny aktuality najednou (bez stránkování)
+      const response = await fetch(`https://backend-rozhovice.onrender.com/api/aktuality/all?limit=1000`);
       if (!response.ok) throw new Error(`Chyba při načítání dat: ${response.status}`);
       const data = await response.json();
-      setNews(data.aktuality || []);
-      setTotal(data.total || 0);
+      setAllNews(data.aktuality || []);
     } catch (err) {
       console.error('Chyba při načítání dat:', err);
       setError('Nepodařilo se načíst zprávy. Zkuste to prosím později.');
     } finally {
       setLoading(false);
     }
-  }, [currentPage, itemsPerPage]);
+  }, []);
 
   useEffect(() => {
-    fetchAktuality();
-  }, [fetchAktuality]);
+    fetchAllAktuality();
+  }, [fetchAllAktuality]);
+
+  const scrollToAddForm = () => {
+    const addFormElement = document.querySelector('.add-aktualita-container');
+    if (addFormElement) {
+      addFormElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    if (allNews.length > 0) {
+      let filteredResults = allNews;
+
+      if (confirmedQuery) {
+        filteredResults = allNews.filter(item => {
+          const matchesText = item.headline.toLowerCase().includes(confirmedQuery.toLowerCase()) ||
+                            item.text.toLowerCase().includes(confirmedQuery.toLowerCase());
+          
+          if (isValidDateFormat(confirmedQuery)) {
+            return formatDateForComparison(item.date) === confirmedQuery;
+          }
+          
+          return matchesText;
+        });
+      }
+
+      setTotal(filteredResults.length);
+      
+      // Aplikujeme stránkování na filtrované výsledky
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      setNews(filteredResults.slice(startIndex, endIndex));
+    }
+  }, [allNews, currentPage, confirmedQuery]);
 
   
   const totalPages = Math.ceil(total / itemsPerPage);
@@ -87,7 +123,23 @@ const AktualityMain = () => {
   };
 
   const handleSearchConfirm = () => {
-    setConfirmedQuery(searchQuery); 
+    setIsSearching(true); // Začátek vyhledávání
+    setConfirmedQuery(searchQuery);
+    setCurrentPage(1);
+    setTimeout(() => {
+      setIsSearching(false); // Konec vyhledávání
+    }, 500);
+  };
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+    window.scrollTo({ top: 0, behavior: 'auto' }); 
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+    setConfirmedQuery('');
+    setCurrentPage(1);
   };
 
   const isValidDateFormat = (str) => {
@@ -102,24 +154,29 @@ const AktualityMain = () => {
            date.getFullYear() === parseInt(year);
   };
 
-  // Helper function to format date for comparison
   const formatDateForComparison = (date) => {
     const d = new Date(date);
     return `${d.getDate()}.${d.getMonth() + 1}.${d.getFullYear()}`;  // odstraněno padStart
   };
 
   const filteredNews = news.filter(item => {
-    if (!confirmedQuery) return true;  // změněno z searchQuery na confirmedQuery
+    if (!confirmedQuery) return true;  
   
     // Pokud je vstup ve formátu data (DD.MM.YYYY)
-    if (isValidDateFormat(confirmedQuery)) {  // změněno z searchQuery na confirmedQuery
-      return formatDateForComparison(item.date) === confirmedQuery;  // změněno z searchQuery na confirmedQuery
+    if (isValidDateFormat(confirmedQuery)) { 
+      return formatDateForComparison(item.date) === confirmedQuery;  
     }
   
-    // Jinak hledáme v textu a nadpisu
-    return item.headline.toLowerCase().includes(confirmedQuery.toLowerCase()) ||  // změněno z searchQuery na confirmedQuery
-           item.text.toLowerCase().includes(confirmedQuery.toLowerCase());  // změněno z searchQuery na confirmedQuery
+    return item.headline.toLowerCase().includes(confirmedQuery.toLowerCase()) ||  
+           item.text.toLowerCase().includes(confirmedQuery.toLowerCase()); 
   });
+
+  const highlightText = (text, query) => {
+    if (!query) return text;
+
+    const regex = new RegExp(`(${query})`, "gi");
+    return text.replace(regex, '<span style="background-color: red; color: white;">$1</span>');
+  };
 
   
 
@@ -132,25 +189,55 @@ const AktualityMain = () => {
 
       <div className='background-linear-deff mappp minhei'>
       <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Hledat aktuality..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+      <input
+            type="text"
+            placeholder="Hledat aktuality..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <button className='magnifying-glass' onClick={handleSearchConfirm}>
-          <FontAwesomeIcon className='magnifying-glass' icon={faMagnifyingGlass} />
-        </button>
-        {searchQuery && (
-          <button className='clear-search' onClick={() => { 
-            setSearchQuery('');
-            setConfirmedQuery('');
-          }}>
-            ✖
+        <button 
+            className={`magnifying-glass ${isSearching ? 'searching' : ''}`} 
+            onClick={handleSearchConfirm}
+            disabled={isSearching}
+          >
+            <FontAwesomeIcon 
+              className='magnifying-glass' 
+              icon={faMagnifyingGlass} 
+              spin={isSearching} 
+            />
           </button>
+          {searchQuery && (
+            <button 
+              className='clear-search' 
+              onClick={handleClearSearch}
+              disabled={isSearching}
+            >
+              ✖
+            </button>
+          )}
+        </div>
+        {isLoggedIn && (
+          <div className="newsPlusButton">  
+            <button 
+              className="add-news-button"
+              onClick={scrollToAddForm}
+            >
+              <p>Přidat aktualitu</p>
+              <FontAwesomeIcon icon={faPlus} />
+            </button>
+          </div>
+          )}
+
+        {confirmedQuery && total > 0 && (
+          <div className="searchResultWrapper">
+            <p className="search-results-info">
+              Nalezeno {total} výsledků pro "{confirmedQuery}"
+            </p>
+          </div>
         )}
-      </div>
-      <div className="aktuality-all">
+
+        
+        <div className="aktuality-all">
           {loading ? (
             <div className='loaderer-div'>
               <div className='loader-aktall'></div>
@@ -158,18 +245,23 @@ const AktualityMain = () => {
             </div>
           ) : error ? (
             <p className='erorik'>{error}</p>
+          ) : isSearching ? (
+            <div className='loaderer-div'>
+              <div className='loader-aktall'></div>
+              <p>Vyhledávání aktualit...</p>
+            </div>
           ) : filteredNews.length > 0 ? (
             filteredNews.map((item, index) => (
               <motion.article
-                    key={item._id}
-                    className="aktualita-wrapper"
-                    initial={{ opacity: 0, x: -50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -50 }}
-                    transition={{
-                      duration: 0.5, 
-                      delay: index * 0.2, 
-                    }}
+                key={item._id}
+                className="aktualita-wrapper"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.2,
+                }}
               >
               <article key={item._id} className="aktualita-wrapper">
                 <OneAktualita
@@ -193,40 +285,50 @@ const AktualityMain = () => {
               </motion.article>
             ))
           ) : (
-            <p className='no-news-today'>Žádné novinky</p>
+            <p className='no-news-today'>Žádné aktuality</p>
           )}
         </div>
 
-        {isLoggedIn && <AddAktualita onAdd={handleAddAktualita} />}
-        {editingAktualita && (
-          <EditAktualita aktualita={editingAktualita} onUpdate={handleEditAktualita} />
+        
+
+        {total > itemsPerPage && (
+          <div className='pagination'>
+            <button
+              disabled={currentPage === 1}
+              onClick={() => handlePageChange(currentPage - 1)} // Upraveno
+            >
+              Předchozí
+            </button>
+
+            {getPageNumbers().map(page => (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={page === currentPage ? 'active' : ''}
+              >
+                {page}
+              </button>
+            ))}
+
+            <button 
+              onClick={() => handlePageChange(currentPage + 1)} 
+              disabled={currentPage === totalPages}
+            >
+              Další
+            </button>
+          </div>
         )}
 
-        <div className='pagination'>
-          <button
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage(currentPage - 1)}
-          >
-            Předchozí
-          </button>
+        {isLoggedIn && <AddAktualita onAdd={handleAddAktualita} />}
+        {editingAktualita && (
+          <EditAktualita 
+            aktualita={editingAktualita} 
+            onUpdate={handleEditAktualita} 
+            onCancel={() => setEditingAktualita(null)}
+          />
+        )}
 
-          {getPageNumbers().map(page => (
-            <button
-              key={page}
-              className={page === currentPage ? 'active' : ''}
-              onClick={() => setCurrentPage(page)}
-            >
-              {page}
-            </button>
-          ))}
-
-          <button
-            disabled={currentPage === totalPages}
-            onClick={() => setCurrentPage(currentPage + 1)}
-          >
-            Další
-          </button>
-        </div>
+        
       </div>
     </>
   );

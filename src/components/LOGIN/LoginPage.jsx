@@ -39,14 +39,23 @@ const LoginPage = () => {
   // Sleduje vypršení platnosti tokenu uživatele. Každou sekundu přepočítává čas, který se nastaví do remainingTime. ClearInterval se ukončí, když už kod není potřeba vykreslovat.
 
   useEffect(() => {
+    let interval;
     if (tokenExpiration) {
-      const interval = setInterval(() => {
+      interval = setInterval(() => {
         const currentTime = Math.floor(Date.now() / 1000);
-        setRemainingTime(tokenExpiration - currentTime);
+        const newRemainingTime = tokenExpiration - currentTime;
+        
+        if (newRemainingTime <= 0) {
+          handleLogout();
+          clearInterval(interval);
+        } else {
+          setRemainingTime(newRemainingTime);
+        }
       }, 1000);
-
-      return () => clearInterval(interval);
     }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
   }, [tokenExpiration]);
 
   // Kontrola uživatelského jména a hesla, kdy pokud sedí tak se nastavít oken a začne se odpočítávat čas. Vyjede alert s úspěšným přihlášením a vymažou se řádky s přihlášením. 
@@ -78,12 +87,9 @@ const LoginPage = () => {
         setPassword('');
       } else {
         const { message } = await response.json();
-        
-        if (message === 'Invalid username or password') {
-          setError('Nesprávné uživatelské jméno nebo heslo.');
-        } else {
-          setError('Chyba při přihlašování.');
-        }
+        setError(message === 'Invalid username or password' 
+          ? 'Nesprávné uživatelské jméno nebo heslo.'
+          : 'Chyba při přihlašování.');
       }
     } catch (error) {
       console.error('Chyba přihlašování:', error);

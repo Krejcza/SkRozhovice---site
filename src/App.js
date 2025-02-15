@@ -1,4 +1,3 @@
-import React from 'react';
 import './App.css';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
@@ -22,7 +21,8 @@ import BottomToTop from './components/BottomToTop';
 import { AnimatePresence } from 'framer-motion';
 import { HelmetProvider } from 'react-helmet-async';
 import CookieConsentBanner from './components/CookieConsentBanner';
-import NewMainPageOld from './components/ADULT-subpages/NewMainPageOld';
+import React, { useState, useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
 
 
 // Složení stránek a odkazů na ně 
@@ -31,6 +31,35 @@ import NewMainPageOld from './components/ADULT-subpages/NewMainPageOld';
 
 const App = () => {
   const location = useLocation();
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [remainingTime, setRemainingTime] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      const currentTime = Math.floor(Date.now() / 1000);
+      const remainingTime = decodedToken.exp - currentTime;
+      
+      if (remainingTime > 0) {
+        setIsLoggedIn(true);
+        setUserInfo(decodedToken.username);
+        setRemainingTime(remainingTime);
+      } else {
+        handleLogout();
+      }
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    setUserInfo(null);
+    setRemainingTime(null);
+    alert('Token vypršel, byli jste odhlášeni.');
+  };
 
   return (
     <HelmetProvider>
