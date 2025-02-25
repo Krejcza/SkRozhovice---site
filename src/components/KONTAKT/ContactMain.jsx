@@ -4,7 +4,8 @@ import OneTrainer from './OneTrainer';
 import refpic from '../images/blank-profile-pic.webp'
 import MapContact from './MapContact';
 import SocialButton from './SocialButton';
-import videoBg from '../videos/fotbal-kontakt_prob3.webm';
+import videoWebm from '../videos/fotbal-kontakt-webp.webm';
+import videoMp4 from '../videos/fotbal-kontakt-mp4.mp4';
 import thumbnail from '../images/thumbnail-kontakt.png'
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -73,9 +74,9 @@ const ContactMain = () => {
  const trainersYoung = [
    {
      image: refpic,
-     name: 'Volejník Martin',
+     name: 'Voženílek Vlastimil',
      position: 'Trenér Ml. žáci',
-     phone: '736 434 004'
+     phone: '739 401 331'
    },
    {
      image: refpic,
@@ -85,14 +86,8 @@ const ContactMain = () => {
    },
    {
      image: refpic,
-     name: 'Stejskal David',
-     position: 'Trenér Ml. přípravka',
-     phone: '723 739 151'
-   },
-   {
-     image: refpic,
      name: 'Denisa Žáková',
-     position: 'Hlavní vedoucí přípravky',
+     position: 'Vedoucí přípravky',
      phone: '728 415 383'
    },
    {
@@ -103,10 +98,23 @@ const ContactMain = () => {
    },
    {
      image: refpic,
-     name: 'Tomčík Michal',
+     name: 'Král Martin',
      position: 'Trenér St. žáci',
-     phone: '775 869 281'
-   }
+     phone: '774 912 913'
+   },
+   {
+    image: refpic,
+    name: 'Čopák Josef',
+    position: 'Trenér Ml. přípravka',
+    phone: '733 192 667'
+  },
+  {
+    image: refpic,
+    name: 'Janouch Jaroslav',
+    position: 'Trenér Ml. přípravka',
+    phone: '--- --- ---'
+  }
+   
  ];
 
  const { ref: socialRef, inView: socialInView } = useInView({
@@ -214,14 +222,20 @@ const { ref: trainersRef, inView: trainersInView } = useInView({
         </div>
 
          <div className="video-playing">
-          <p>Své by k tomu řekl i bývalý kapitán Denis Dvořák.</p>
-            <video 
-            src={videoBg} 
+          <p className='denis-speach'>Své by k tomu řekl i stálice rozhovického kádru Denis Dvořák.</p>
+          <video 
             playsInline 
             controls
             className="video-background"
             poster={thumbnail}
-            ></video>
+            muted
+            preload="auto"
+            disableRemotePlayback
+          >
+            <source src={videoMp4} type="video/mp4" />
+            <source src={videoWebm} type="video/webm" />
+            Tvé zařízení nepodporuje přehrávání videa.
+          </video>
          </div>
 
       </div>

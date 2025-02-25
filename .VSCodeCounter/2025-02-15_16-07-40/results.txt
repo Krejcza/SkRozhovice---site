@@ -1,0 +1,102 @@
+Date : 2025-02-15 16:07:40
+Directory : c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components
+Total : 67 files,  8583 codes, 147 comments, 1473 blanks, all 10203 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| CSS            |         25 |      4,487 |         20 |        835 |      5,342 |
+| JavaScript JSX |         42 |      4,096 |        127 |        638 |      4,861 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                    | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                       |         67 |      8,583 |        147 |      1,473 |     10,203 |
+| . (Files)                                                                                                               |         17 |      1,139 |         22 |        231 |      1,392 |
+| ADULT                                                                                                                   |          2 |        105 |          1 |         18 |        124 |
+| ADULT-subpages                                                                                                          |          8 |      2,164 |         29 |        313 |      2,506 |
+| AKTUALITY                                                                                                               |          6 |      1,567 |         52 |        313 |      1,932 |
+| HOME-page                                                                                                               |         13 |      1,937 |         16 |        322 |      2,275 |
+| KONTAKT                                                                                                                 |          7 |        546 |          6 |         91 |        643 |
+| LOGIN                                                                                                                   |          2 |        313 |          8 |         54 |        375 |
+| OKlubu                                                                                                                  |          6 |        386 |          7 |         57 |        450 |
+| YOUNG-subpages                                                                                                          |          4 |        355 |          5 |         66 |        426 |
+| YOUNGERS                                                                                                                |          2 |         71 |          1 |          8 |         80 |
++-------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                                                | language       | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\ADULT-subpages\AnimatedText.jsx             | JavaScript JSX |         60 |          1 |         11 |         72 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\ADULT-subpages\EditModalPlayer.css          | CSS            |         79 |          0 |         13 |         92 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\ADULT-subpages\EditModalPlayer.jsx          | JavaScript JSX |        188 |          5 |         18 |        211 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\ADULT-subpages\MainPageOld.css              | CSS            |        608 |          1 |        100 |        709 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\ADULT-subpages\MatchesTable.css             | CSS            |        239 |          0 |         60 |        299 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\ADULT-subpages\MatchesTable.jsx             | JavaScript JSX |        342 |          8 |         30 |        380 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\ADULT-subpages\Nepoužívat - MainPageOld.jsx | JavaScript JSX |        298 |         12 |         39 |        349 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\ADULT-subpages\NewMainPageOld.jsx           | JavaScript JSX |        350 |          2 |         42 |        394 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\ADULT\Adult.css                             | CSS            |         72 |          0 |         14 |         86 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\ADULT\Adult.jsx                             | JavaScript JSX |         33 |          1 |          4 |         38 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\AKTUALITY\AddAktualita.jsx                  | JavaScript JSX |        157 |          9 |         30 |        196 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\AKTUALITY\AktualityMain.css                 | CSS            |        703 |         15 |        146 |        864 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\AKTUALITY\AktualityMain.jsx                 | JavaScript JSX |        280 |          7 |         51 |        338 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\AKTUALITY\AktualityONE.jsx                  | JavaScript JSX |        228 |         11 |         46 |        285 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\AKTUALITY\DeleteAktualita.jsx               | JavaScript JSX |         31 |          2 |         11 |         44 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\AKTUALITY\EditAktualita.jsx                 | JavaScript JSX |        168 |          8 |         29 |        205 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\BottomToTop.css                             | CSS            |         42 |          0 |          6 |         48 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\BottomToTop.jsx                             | JavaScript JSX |         36 |          4 |         12 |         52 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\CookieConsentBanner.css                     | CSS            |         70 |          0 |         12 |         82 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\CookieConsentBanner.jsx                     | JavaScript JSX |         59 |          6 |         20 |         85 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\Dropdown.css                                | CSS            |         41 |          0 |          6 |         47 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\Dropdown.jsx                                | JavaScript JSX |         24 |          1 |          8 |         33 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\Footer.css                                  | CSS            |        115 |          1 |         22 |        138 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\Footer.jsx                                  | JavaScript JSX |         50 |          1 |          3 |         54 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\HOME-page\Aktuality.css                     | CSS            |        324 |          1 |         60 |        385 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\HOME-page\Aktuality.jsx                     | JavaScript JSX |         68 |          2 |          9 |         79 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\HOME-page\Contact.css                       | CSS            |         77 |          0 |         14 |         91 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\HOME-page\Contact.jsx                       | JavaScript JSX |         73 |          2 |          9 |         84 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\HOME-page\LastMatch.css                     | CSS            |        575 |          2 |        106 |        683 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\HOME-page\LastMatch.jsx                     | JavaScript JSX |        217 |          2 |         26 |        245 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\HOME-page\Map.css                           | CSS            |         42 |          0 |          6 |         48 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\HOME-page\Map.jsx                           | JavaScript JSX |         38 |          1 |          8 |         47 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\HOME-page\OneAktualita.jsx                  | JavaScript JSX |         38 |          2 |         12 |         52 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\HOME-page\Sponsors.css                      | CSS            |         53 |          0 |          9 |         62 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\HOME-page\Sponsors.jsx                      | JavaScript JSX |        106 |          2 |         11 |        119 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\HOME-page\TeamStats.css                     | CSS            |        199 |          0 |         32 |        231 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\HOME-page\TeamStats.jsx                     | JavaScript JSX |        127 |          2 |         20 |        149 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\KONTAKT\ContactMain.css                     | CSS            |        168 |          0 |         30 |        198 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\KONTAKT\ContactMain.jsx                     | JavaScript JSX |        205 |          2 |         26 |        233 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\KONTAKT\MapContact.jsx                      | JavaScript JSX |         28 |          1 |          8 |         37 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\KONTAKT\OneButton.css                       | CSS            |         99 |          0 |         13 |        112 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\KONTAKT\OneButton.jsx                       | JavaScript JSX |         21 |          1 |          6 |         28 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\KONTAKT\OneTrainer.jsx                      | JavaScript JSX |         15 |          1 |          4 |         20 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\KONTAKT\SocialButton.jsx                    | JavaScript JSX |         10 |          1 |          4 |         15 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\LOGIN\LoginPage.css                         | CSS            |        156 |          0 |         31 |        187 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\LOGIN\LoginPage.jsx                         | JavaScript JSX |        157 |          8 |         23 |        188 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\MainVideo.css                               | CSS            |         57 |          0 |          9 |         66 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\MainVideo.jsx                               | JavaScript JSX |         53 |          0 |          9 |         62 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\NavItems.jsx                                | JavaScript JSX |         78 |          1 |          4 |         83 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\Navbar.css                                  | CSS            |        332 |          0 |         72 |        404 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\Navbar.jsx                                  | JavaScript JSX |        125 |          4 |         21 |        150 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\OKlubu\AboutClub.css                        | CSS            |        106 |          0 |         18 |        124 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\OKlubu\AboutClub.jsx                        | JavaScript JSX |         89 |          1 |          8 |         98 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\OKlubu\ButtonOrganization.jsx               | JavaScript JSX |         17 |          1 |          5 |         23 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\OKlubu\FImages.jsx                          | JavaScript JSX |         66 |          1 |          7 |         74 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\OKlubu\FullGallery.css                      | CSS            |         68 |          0 |          9 |         77 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\OKlubu\FullGallery.jsx                      | JavaScript JSX |         40 |          4 |         10 |         54 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\Overlay.jsx                                 | JavaScript JSX |         11 |          1 |          4 |         16 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\ProtectedRoute.jsx                          | JavaScript JSX |         10 |          1 |          8 |         19 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\ScrollToTop.jsx                             | JavaScript JSX |         17 |          1 |          9 |         27 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\YOUNG-subpages\Gallery.css                  | CSS            |         98 |          0 |         19 |        117 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\YOUNG-subpages\Gallery.jsx                  | JavaScript JSX |         41 |          4 |         11 |         56 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\YOUNG-subpages\MainPageY.css                | CSS            |        143 |          0 |         26 |        169 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\YOUNG-subpages\MainPageY.jsx                | JavaScript JSX |         73 |          1 |         10 |         84 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\YOUNGERS\Young.css                          | CSS            |         21 |          0 |          2 |         23 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\YOUNGERS\Young.jsx                          | JavaScript JSX |         50 |          1 |          6 |         57 |
+| c:\Users\Lukáš Krejčí\Desktop\SKROZHOVICE\SkRozhovice---site\src\components\YouthDropdown.jsx                           | JavaScript JSX |         19 |          1 |          6 |         26 |
+| Total                                                                                                                   |                |      8,583 |        147 |      1,473 |     10,203 |
++-------------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

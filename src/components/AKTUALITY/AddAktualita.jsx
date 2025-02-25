@@ -186,7 +186,7 @@ const AddAktualita = ({ onAdd }) => {
           </label>
         </div>
 
-        <button type="submit">Potvrdit přidání</button>
+        <button className='potvrditpridani' type="submit">Potvrdit přidání</button>
       </form>
       </div>
     </div>

@@ -17,6 +17,7 @@
    display: flex;
    flex-direction: column;
    align-items: center;
+   width: 150px;
  }
  
  .trainer-image {
@@ -27,6 +28,10 @@
     margin-bottom: 2rem;
     transition: 0.3s ease-out;
     box-shadow: 0px 5px 20px #00000075;
+ }
+
+ .denis-speach{
+  padding: 0 1rem;
  }
 
  .trainer-image:hover{
@@ -195,4 +200,11 @@
   margin-bottom: 1rem;
   font-weight: 300;
 }
+}
+
+@media (max-width: 450px){
+  .denis-speach{
+    padding: 0 1rem;
+    text-align: center;
+   }
 }

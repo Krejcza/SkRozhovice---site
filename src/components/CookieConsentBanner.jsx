@@ -46,7 +46,7 @@ const CookieConsentBanner = () => {
     if (!window.gtag) {
       const script = document.createElement('script');
       script.async = true;
-      script.src = `https://www.googletagmanager.com/gtag/js?id=G-12VTRDF3BY`;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=G-V7VEFNEKHK`;
       document.head.appendChild(script);
 
       script.onload = () => {
@@ -55,7 +55,7 @@ const CookieConsentBanner = () => {
         window.gtag = gtag;
 
         window.gtag('js', new Date());
-        window.gtag('config', 'G-12VTRDF3BY');
+        window.gtag('config', 'G-V7VEFNEKHK');
       };
     }
   };

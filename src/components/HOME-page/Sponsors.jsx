@@ -34,6 +34,8 @@ import rigo from '../images/Logos/rigo.jpg'
 import maple from '../images/Logos/maple.jpg' 
 import { motion } from 'framer-motion';
 import { useInView } from "react-intersection-observer";
+import spons1 from '../images/nnn.webp'
+import spons2 from '../images/HHH.webp'
 
 // Komponenta sponzorů, která vypíše jméno a ukáže logo sponzora. Kliknutím na odkaz se převede na stránku. Toto jsou jenom data.
 
@@ -110,6 +112,14 @@ const sponsors = [
               </a>
             </motion.div>
           ))}
+        </div>
+        
+        <div className="pics-wrapper-with-h2-idk-hamburger">
+          <h2 className="main-topic-small bl">Speciální poděkování</h2>
+          <div className="spons-images-two">
+            <img className='sponsor-image-oc jednaz' src={spons1} alt="" />
+            <img className='sponsor-image-oc dvaz' src={spons2} alt="" />
+          </div>
         </div>
       </div>
     );

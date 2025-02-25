@@ -420,13 +420,16 @@ form textarea {
 
 form button {
   background-color: #28a745; 
-  width: 100%;
   color: white; 
   border: none; 
   border-radius: 5px; 
   padding: 10px 15px; 
   cursor: pointer;
   transition: background-color 0.3s; 
+}
+
+.potvrditpridani{
+  width: 100%;
 }
 
 .cancel-button{

@@ -13,7 +13,7 @@ const StarsiZaci = () => {
 
   // Data jsou správná - 19.11.2024
   const treneri = [
-    { jmeno: 'Tomčík Michal', pozice: 'Trenér', obrazek: trenerImg, telefon: '+420 775 869 281'  },
+    { jmeno: 'Král Martin', pozice: 'Trenér', obrazek: trenerImg, telefon: '+420 774 912 913'  },
   ];
 
   const images = [img1, img2];
