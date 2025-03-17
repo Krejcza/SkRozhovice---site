@@ -36,6 +36,8 @@ import { motion } from 'framer-motion';
 import { useInView } from "react-intersection-observer";
 import spons1 from '../images/nnn.webp'
 import spons2 from '../images/HHH.webp'
+import spons3 from '../images/GGG.jpg'
+import chalupanabolkove from '../images/Logos/chalupanabolkove.png'
 
 // Komponenta sponzorů, která vypíše jméno a ukáže logo sponzora. Kliknutím na odkaz se převede na stránku. Toto jsou jenom data.
 
@@ -71,6 +73,7 @@ const sponsors = [
    { id: 29, name: 'RIGO Autodoprava', logo: rigo, url: 'https://autodoprava-kontakt.cz/pardubicky-kraj/josef-rigo-bylany' },
    { id: 30, name: 'Maple restaurant', logo: maple, url: 'https://maplerestaurant.webnode.cz/' },
    { id: 31, name: 'OBEC Jezbořice', logo: jezborice, url: 'https://jezborice.cz/' },
+   { id: 32, name: 'Chalupa na Bolkově', logo: chalupanabolkove, url: 'https://chalupanabolkove.cz/' },
    
  ];
 
@@ -119,6 +122,7 @@ const sponsors = [
           <div className="spons-images-two">
             <img className='sponsor-image-oc jednaz' src={spons1} alt="" />
             <img className='sponsor-image-oc dvaz' src={spons2} alt="" />
+            <img className='sponsor-image-oc dvaz' src={spons3} alt="" />
           </div>
         </div>
       </div>

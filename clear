@@ -1,0 +1,61 @@
+[33m78774d1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m dodělávky
+[33m0caf5fd[m úpravy aktualit, tlačítko na zrušení úpravy aktuality
+[33m1451457[m úpravy pro uživatele
+[33mff61915[m poslední úpravy komponent a přidán výsledek do tabulky
+[33ma42c11d[m zkontrolovány weby na všech zařízeních
+[33m52ac7da[m male změny
+[33m5392750[m loader na hráče a hlavní stránka s odkazy
+[33m014b49f[m upraveny loadery
+[33m39fe287[m přidáno mvp
+[33m56dd26c[m poslední upravy
+[33ma03d01b[m dodělána responzivita a týmu
+[33m4325a3d[m struktura aktualit upravena
+[33mdef63e8[m velké upravy na a-team ..opravena celá komponenta
+[33m338ccb6[m upravy na a tymu a drobné dodělávky v kontaktu a main videu
+[33m00b10fd[m přidání popisků k jsx souborům
+[33mccb23af[m like a dislike funkční
+[33mdb4f5ac[m přidána funkce na like/dislike, nějaké bugy, je potřeba dodělat
+[33mfcaa32c[m upraveny styly na sekci editace
+[33m85530cc[m přidána textura k černému pozadí, opraveny aktuliaty, cookie lišta a fotky v sekci o klubu
+[33mcc321b4[m úprava aktualit a galerie v o klubu
+[33me4b6301[m funkční multer
+[33m2d5da29[m přidány responzivní upravy
+[33md401d18[m uprava packege.json
+[33m31abf1a[m vymazána složka
+[33mcf53e8a[m procfile
+[33m47fc145[m uprava managementu
+[33mea889b3[m uprava hlavních aktualit
+[33m74a7a04[m upravy v package-lock
+[33m129692e[m packege do jednoho
+[33m6378d24[m sever na heroku
+[33m1e2f80a[m vytvořen procfile
+[33mbca40f1[m přidána základna na push backendu na heroku
+[33maded576[m předěláno video v sekci kontakt
+[33m8845e9a[m přidány cookies pro anaylitiku
+[33ma43a084[m databáze předělána na Mongo DB Atlas - cloud
+[33m32f5c0b[m responzivita týmy mládež
+[33mda438e0[m dodělány responzivní upravy na hl stránce, aktualitách, týmech obecně, o klubu a kontaktu
+[33me0ffa46[m úprava aktualit -- provedena aktualizace
+[33m94aa9a9[m nahrávání obrázků zprovozněno
+[33m5f8aa2e[m trochu předělány aktuality..potřebuje dodělat
+[33m81101d4[m změna a zapisování tabulky, reseter přihlášení
+[33m9d46ae8[m přidán to top button, změna hlavního loga a když je pomalý net tak se místo videa ukáže obrázek
+[33ma169f7d[m  přidána struktura pro upravu aktualit - dodělat nahrávání obrázků
+[33mb43e37f[m odstranění env
+[33mbab2ffe[m struktura pro příhlášení
+[33m4839b72[m přidána animace na atym
+[33maabe484[m opraven footer, dodělán A-tym a responzivita
+[33me38f69f[m menší upravy a přidán dorost
+[33me8ffcbb[m čudlíky a zkouška pozadí
+[33m669a64f[m základ modálního okna -styly
+[33m4d4a5dc[m přidána tabulka
+[33m51f306c[m přidán A-tým
+[33m0e36116[m přidán error page
+[33m7dac9f8[m responzivita na main, aktuality a o klubu
+[33mfe82b2f[m přidán framer motion na animace přechodu
+[33m3a02888[m přidána mobilní navigace
+[33m34d330a[m přidána kontakt page
+[33m4eb9a1d[m hambuerg s octem
+[33m83fb0a5[m přidány aktuality s pagination a rozděláno na rozdělení týmů
+[33m6a16145[m základní struktura stránky, footer, navbar + přidána databáze na aktuality
+[33m95ced3b[m základní struktura navbaru
