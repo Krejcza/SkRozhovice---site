@@ -254,6 +254,11 @@
   margin-top: 0.25rem;
 }
 
+.goal-text {
+  font-size: 0.9rem;
+  color: #181818;
+}
+
 .lineup-text {
   font-size: 0.9rem;
   color: #181818;

@@ -11,6 +11,7 @@ const AddAktualita = ({ onAdd }) => {
   const [category, setCategory] = useState('INFO');
   const [lineup, setLineup] = useState('');
   const [date, setDate] = useState('');
+  const [goal,setGoal] = useState('')
   const [selectedFile, setSelectedFile] = useState(null);
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -66,6 +67,7 @@ const AddAktualita = ({ onAdd }) => {
         headline,
         image: imagePath, 
         text,
+        goal,
         category,
         lineup,
       };
@@ -93,6 +95,7 @@ const AddAktualita = ({ onAdd }) => {
       setCategory('INFO');
       setLineup('');
       setDate('');
+      setGoal('');
       setSelectedFile(null);
       document.querySelector('input[type="file"]').value = '';
     } catch (error) {
@@ -161,6 +164,16 @@ const AddAktualita = ({ onAdd }) => {
               onChange={(e) => setText(e.target.value)}
               required
             />
+          </label>
+        </div>
+
+        <div>
+          <label>
+            Góly:
+            <textarea 
+            value={goal} 
+            onChange={(e) => setGoal(e.target.value)}>
+            </textarea>
           </label>
         </div>
 

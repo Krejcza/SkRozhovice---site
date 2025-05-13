@@ -9,6 +9,7 @@ const EditAktualita = ({ aktualita, onUpdate, onCancel }) => {
   const [text, setText] = useState(aktualita.text);
   const [category, setCategory] = useState(aktualita.category);
   const [lineup, setLineup] = useState(aktualita.lineup);
+  const [goal,setGoal] = useState('')
   const [date, setDate] = useState(aktualita.date.split('T')[0]); // Formátování data na 'YYYY-MM-DD'
   const [selectedFile, setSelectedFile] = useState(null);
   const [error, setError] = useState('');
@@ -62,6 +63,7 @@ const EditAktualita = ({ aktualita, onUpdate, onCancel }) => {
         headline,
         image: imagePath,
         text,
+        goal,
         category,
         lineup,
       };
@@ -78,7 +80,7 @@ const EditAktualita = ({ aktualita, onUpdate, onCancel }) => {
 
        // Zpracování odpovědi
       if (!response.ok) {
-        throw new Error('Chyba při přidávání aktuality');
+        throw new Error('Chyba při editování aktuality');
       }
 
       const data = await response.json();
@@ -96,6 +98,7 @@ const EditAktualita = ({ aktualita, onUpdate, onCancel }) => {
     setText(aktualita.text);
     setCategory(aktualita.category);
     setLineup(aktualita.lineup);
+    setGoal(aktualita.goal || '');
     setDate(aktualita.date.split('T')[0]);
     
     // Scroll to the container using the ref
@@ -164,6 +167,18 @@ const EditAktualita = ({ aktualita, onUpdate, onCancel }) => {
               placeholder="Text"
               value={text}
               onChange={(e) => setText(e.target.value)}
+              required
+            />
+          </label>
+        </div>
+
+        <div>
+          <label>
+            Góly:
+            <textarea
+              placeholder="Kdo skóroval?"
+              value={goal}
+              onChange={(e) => setGoal(e.target.value)}
               required
             />
           </label>

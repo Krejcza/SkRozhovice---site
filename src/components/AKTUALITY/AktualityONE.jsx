@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 
 
 // Komponenta pro zobrazení jedné aktuality
-const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => {
+const OneAktualita = ({ id, date, headline, image, text, category, goal, lineup }) => {
   const [imageError, setImageError] = useState(false);
   const [expander, setExpander] = useState(false);
   const [iconDirection, setIconDirection] = useState(faChevronRight);
@@ -249,10 +249,12 @@ const OneAktualita = ({ id, date, headline, image, text, category, lineup }) => 
         <div className="both-fill-like">
         <div className='aktualita-filling'>
           <p className="text-akt">{text}</p>
+          {goal && <p className="goal-text">{goal}</p>}
           {lineup && (
             <div className='lineup-container'>
               <p className='lineup-label'>Sestava:</p>
               <p className='lineup-text'>{lineup}</p>
+              
             </div>
           )}
         </div>
