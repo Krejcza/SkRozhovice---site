@@ -12,7 +12,7 @@ const AboutClub = () => {
    const jmeno = ['Předseda', 'Místopředseda', 'Ekonomka', 'Sekretář klubu']
 
    const selectedImages = [
-      images.image28,images.image1,images.image2,images.image3,images.image4,images.image5,images.image6,images.image7,images.image8,images.image9,images.image10,images.image11,images.image12,images.image13,images.image14,images.image15,images.image16,images.image17,images.image18,images.image19,images.image20,images.image21,
+      images.image29, images.image28,images.image1,images.image2,images.image3,images.image4,images.image5,images.image6,images.image7,images.image8,images.image9,images.image10,images.image11,images.image12,images.image13,images.image14,images.image15,images.image16,images.image17,images.image18,images.image19,images.image20,images.image21,
    ];
 
   return (
@@ -23,7 +23,7 @@ const AboutClub = () => {
       <div className="background-linear-deff">
          <div className="history-cl">
             <div className='text-passage'>
-               <p>Fotbalový klub SK Rozhovice byl založen roku 1920 a momentálně hraje 1.A třídu Pardubického kraje. Klubové barvy jsou modrá, žlutá a červená.</p>
+               <p>Fotbalový klub SK Rozhovice byl založen roku 1920 a momentálně hraje 5. ligu krajského přeboru. Klubové barvy jsou modrá, žlutá a červená.</p>
             </div>
             <div className='text-passage'>
                <p>První zmínka o klubu pochází z roku 1920. Mužstvo dříve dosahovalo velmi dobrých výsledků, vyhrávalo se nad kluby, které byly založeny mnohem dříve, například AFK Chrudim (dnes MFK), Slovan Pardubice (dnes FK) atd.  Bohužel v roce 1929 musela být činnost klubu ukončena z důvodu nedostatku hráčů.</p>

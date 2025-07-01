@@ -27,6 +27,7 @@ import image25 from '../images/AboutClub/team25.webp';
 import image26 from '../images/AboutClub/team26.webp';
 import image27 from '../images/AboutClub/team27.webp';
 import image28 from '../images/AboutClub/team28.webp';
+import image29 from '../images/AboutClub/team29.webp';
 
 import droneF1 from '../images/AboutClub/DJI_0763.webp'
 import droneF2 from '../images/AboutClub/DJI_0767.webp'
@@ -67,6 +68,7 @@ export default {
   image26,
   image27,
   image28,
+  image29,
   droneF1,
   droneF2,
   droneF3,
