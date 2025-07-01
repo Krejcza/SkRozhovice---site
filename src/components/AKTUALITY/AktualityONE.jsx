@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './AktualityMain.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight, faChevronLeft, faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight, faChevronLeft, faThumbsUp, faThumbsDown, faFutbol } from '@fortawesome/free-solid-svg-icons';
 import Cookies from 'js-cookie';
 
 
@@ -16,6 +16,7 @@ const OneAktualita = ({ id, date, headline, image, text, category, goal, lineup 
   const [dislikeCount, setDislikeCount] = useState(0);
   const [userStatus, setUserStatus] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
 
   // Defaultní obrázek pro případ chyby
   const defaultImage = 'https://res.cloudinary.com/dirmiqkcn/image/upload/v1731591618/SkRozhovice/ooo6wxdqeuzyybxxcgbx.webp';
@@ -249,7 +250,12 @@ const OneAktualita = ({ id, date, headline, image, text, category, goal, lineup 
         <div className="both-fill-like">
         <div className='aktualita-filling'>
           <p className="text-akt">{text}</p>
-          {goal && <p className="goal-text">{goal}</p>}
+          {(category === "ZÁPAS") && (
+            <div className='goal-score-ing'>
+              <FontAwesomeIcon icon={faFutbol} className='futbolka' />
+              <p className="goal-text">{goal ? goal : "Neskórovali jsme.."}</p>
+            </div>
+          )}
           {lineup && (
             <div className='lineup-container'>
               <p className='lineup-label'>Sestava:</p>

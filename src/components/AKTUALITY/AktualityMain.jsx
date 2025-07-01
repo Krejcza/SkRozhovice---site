@@ -270,6 +270,7 @@ const AktualityMain = () => {
                   headline={item.headline}
                   image={item.image}
                   text={item.text}
+                  goal={item.goal}
                   category={item.category}
                   lineup={item.lineup}
                   onImageClick={() => handleImageClick(item._id)}

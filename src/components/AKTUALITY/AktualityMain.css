@@ -241,7 +241,7 @@
   display: flex;
   flex-direction: column;
   row-gap: 0.5rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
   border-top: 3px dotted #fff;
 }
@@ -257,6 +257,18 @@
 .goal-text {
   font-size: 0.9rem;
   color: #181818;
+}
+
+.goal-score-ing{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.futbolka{
+  margin-right: 10px;
 }
 
 .lineup-text {

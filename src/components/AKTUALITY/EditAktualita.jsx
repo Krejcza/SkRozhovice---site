@@ -179,7 +179,6 @@ const EditAktualita = ({ aktualita, onUpdate, onCancel }) => {
               placeholder="Kdo skóroval?"
               value={goal}
               onChange={(e) => setGoal(e.target.value)}
-              required
             />
           </label>
         </div>
